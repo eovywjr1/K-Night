@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,56 +11,93 @@ public class BossScript : MonoBehaviour
     public int moveSpeed;
     public int moveDelaytime;
     public int juniorcallDelaytime;
+    public int dashToplayerDelaytime;
     public bool ismoveDelay;
     public bool isjunorcallDelay;
+    public bool isdashToplayerDelay;
     public Vector2 direction;
+    public Vector2 dashDirection;
     public Rigidbody2D rigidBody;
-    public Transform transform;
+    public Transform transForm;
+    public Transform playerTrasnform; //í”Œë ˆì´ì–´ ìœ„ì¹˜ ì €ì¥ ë³€ìˆ˜(ì„ì‹œ)
     public GameObject junior;
 
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
-        transform = GetComponent<Transform>();
+        transForm = GetComponent<Transform>();
+
         junior = Resources.Load<GameObject>("Prefabs/Junior");
+
         ismoveDelay = true;
         isjunorcallDelay = true;
+        isdashToplayerDelay = true;
+
         hp = 3;
 
         StartCoroutine(RandomMove());
+        StartCoroutine(callJunior());
+        StartCoroutine(dashToplayer());
+
+        
     }
 
     void Update()
     {
-        /*if (!isjunorcallDelay)
+        //ì¡ëª¹ ì†Œí™˜
+        if (!isjunorcallDelay)
         {
-            Debug.Log("1");
-            Instantiate(junior, new Vector2(transform.position.x, transform.position.y),
+            Instantiate(junior, new Vector2(transForm.position.x, transForm.position.y),
                 Quaternion.identity);
+
             isjunorcallDelay = true;
+
+            StartCoroutine(callJunior());
         }
-        else
-            StartCoroutine(callJunior());*/
     }
 
     void FixedUpdate()
     {
+        //ë³´ìŠ¤ ì´ë™
         if (!ismoveDelay)
         {
-            //ÀÌµ¿ ÈÄ µô·¹ÀÌ
             rigidBody.AddForce(direction * moveSpeed * Time.deltaTime, ForceMode2D.Impulse);
+
             ismoveDelay = true;
 
             StartCoroutine(RandomMove());
         }
+
+        //ë³´ìŠ¤ ëŒì§„
+        if (!isdashToplayerDelay)
+        {
+            playerTrasnform.position = new Vector2(3, 2);
+
+            if (playerTrasnform.position.x >= 0)
+                dashDirection = Vector2.right;
+            else
+                dashDirection = Vector2.left;
+
+            while (transForm.position == playerTrasnform.position)
+            {
+                if (rigidBody.velocity.x < dashSpeed && rigidBody.velocity.x > dashSpeed * (-1))
+                    rigidBody.AddForce(dashDirection * dashSpeed * Time.deltaTime, ForceMode2D.Impulse);
+            }
+
+            rigidBody.velocity = new Vector2(0,0);
+
+            isdashToplayerDelay = true;
+
+            StartCoroutine(dashToplayer());
+        }
     }
 
-    //º¸½º ÀÌµ¿ °áÁ¤
+    //ë³´ìŠ¤ ì´ë™ ë”œë ˆì´
     IEnumerator RandomMove()
     {
         yield return new WaitForSecondsRealtime(moveDelaytime);
 
-        //ÁÂ¿ì ¹æÇâ °áÁ¤
+        //ì¢Œìš° ë°©í–¥ ê²°ì •
         if (Random.Range(-1, 1) < 0)
             direction = Vector2.left;
         else
@@ -69,12 +106,19 @@ public class BossScript : MonoBehaviour
         ismoveDelay = false;
     }
 
-    //Àâ¸÷ ¼ÒÈ¯ °áÁ¤
+    //ì¡ëª¹ ì†Œí™˜ ë”œë ˆì´
     IEnumerator callJunior()
     {
         yield return new WaitForSecondsRealtime(juniorcallDelaytime);
 
         isjunorcallDelay = false;
-        Debug.Log("2");
+    }
+
+    //í”Œë ˆì´ì–´ë¡œ ëŒì§„ ë”œë ˆì´
+    IEnumerator dashToplayer()
+    {
+        yield return new WaitForSecondsRealtime(dashToplayerDelaytime);
+
+        isdashToplayerDelay = false;
     }
 }
