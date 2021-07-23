@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,7 +19,7 @@ public class BossScript : MonoBehaviour
     public Vector2 dashDirection;
     public Rigidbody2D rigidBody;
     public Transform transForm;
-    public Transform playerTrasnform; //ÇÃ·¹ÀÌ¾î À§Ä¡ ÀúÀå º¯¼ö(ÀÓ½Ã)
+    public Transform playerTrasnform; //í”Œë ˆì´ì–´ ìœ„ì¹˜ ì €ì¥ ë³€ìˆ˜(ì„ì‹œ)
     public GameObject junior;
 
     void Start()
@@ -44,7 +44,7 @@ public class BossScript : MonoBehaviour
 
     void Update()
     {
-        //Àâ¸÷ ¼ÒÈ¯
+        //ì¡ëª¹ ì†Œí™˜
         if (!isjunorcallDelay)
         {
             Instantiate(junior, new Vector2(transForm.position.x, transForm.position.y),
@@ -58,7 +58,7 @@ public class BossScript : MonoBehaviour
 
     void FixedUpdate()
     {
-        //º¸½º ÀÌµ¿
+        //ë³´ìŠ¤ ì´ë™
         if (!ismoveDelay)
         {
             rigidBody.AddForce(direction * moveSpeed * Time.deltaTime, ForceMode2D.Impulse);
@@ -68,7 +68,7 @@ public class BossScript : MonoBehaviour
             StartCoroutine(RandomMove());
         }
 
-        //º¸½º µ¹Áø
+        //ë³´ìŠ¤ ëŒì§„
         if (!isdashToplayerDelay)
         {
             playerTrasnform.position = new Vector2(3, 2);
@@ -92,12 +92,12 @@ public class BossScript : MonoBehaviour
         }
     }
 
-    //º¸½º ÀÌµ¿ µô·¹ÀÌ
+    //ë³´ìŠ¤ ì´ë™ ë”œë ˆì´
     IEnumerator RandomMove()
     {
         yield return new WaitForSecondsRealtime(moveDelaytime);
 
-        //ÁÂ¿ì ¹æÇâ °áÁ¤
+        //ì¢Œìš° ë°©í–¥ ê²°ì •
         if (Random.Range(-1, 1) < 0)
             direction = Vector2.left;
         else
@@ -106,7 +106,7 @@ public class BossScript : MonoBehaviour
         ismoveDelay = false;
     }
 
-    //Àâ¸÷ ¼ÒÈ¯ µô·¹ÀÌ
+    //ì¡ëª¹ ì†Œí™˜ ë”œë ˆì´
     IEnumerator callJunior()
     {
         yield return new WaitForSecondsRealtime(juniorcallDelaytime);
@@ -114,7 +114,7 @@ public class BossScript : MonoBehaviour
         isjunorcallDelay = false;
     }
 
-    //ÇÃ·¹ÀÌ¾î·Î µ¹Áø µô·¹ÀÌ
+    //í”Œë ˆì´ì–´ë¡œ ëŒì§„ ë”œë ˆì´
     IEnumerator dashToplayer()
     {
         yield return new WaitForSecondsRealtime(dashToplayerDelaytime);
