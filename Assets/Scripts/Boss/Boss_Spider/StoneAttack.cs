@@ -9,18 +9,26 @@ public class StoneAttack : MonoBehaviour
     private bool onGround;
     private string LR;
     private float rnd;//던지는 돌의 속력을 랜덤하게
+    private float delay;//좀 있다가 던져!
 
     public Rigidbody2D rigid;
     private void Awake()
     {
-        throwSpeed = GameObject.Find(nameof(Boss)).GetComponent<Boss>().throwSpeed;
-        LR = GameObject.Find(nameof(Boss)).GetComponent<Boss>().LR;
+        throwSpeed = GameObject.Find("Boss").GetComponent<Boss_Spider>().throwSpeed;
+        LR = GameObject.Find("Boss").GetComponent<Boss_Spider>().LR;
         rigid = GetComponent<Rigidbody2D>();
     }
     private void Start()
     {
+        StartCoroutine(nameof(Throw));
+    }
+    IEnumerator Throw()
+    {
+        rnd = Random.Range(1f, 2f);
+        rigid.gravityScale = 0;
+        yield return new WaitForSeconds(rnd);
+        rigid.gravityScale = 1;
         onGround = false;
-        rnd = Random.Range(1, 2);
         if (LR == "left")
             rigid.AddForce(Vector2.left * throwSpeed * rnd, ForceMode2D.Impulse);
         else if (LR == "right")
