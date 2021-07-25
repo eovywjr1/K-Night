@@ -1,32 +1,32 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Boss_form : LivingEntity
 {
-    public GameObject player; //ÇÃ·¹ÀÌ¾î
-    public GameObject stonePrefab; //½ºÅ³(µ¹) Prefab
-    public GameObject energyBallPrefab; //½ºÅ³(¿¡³ÊÁöº¼) Prefab
+    public GameObject player; //í”Œë ˆì´ì–´
+    public GameObject stonePrefab; //ìŠ¤í‚¬(ëŒ) Prefab
+    public GameObject energyBallPrefab; //ìŠ¤í‚¬(ì—ë„ˆì§€ë³¼) Prefab
 
-    protected Rigidbody2D rigid; //º¸½º ¸®Áöµå¹Ùµğ
-    private Rigidbody2D stoneRigid; //½ºÅ³(µ¹)ÀÇ ¸®Áöµå ¹Ùµğ
-    private SpriteRenderer spriteRenderer; //ÁÂ¿ì µÚÁı±â À§ÇØ // ÀÓ½Ã
-    private new Transform transform; //º¸½ºÀÇ À§Ä¡
-    private Animator animator; //º¸½º ¾Ö´Ï¸ŞÀÌÅÍ
+    protected Rigidbody2D rigid; //ë³´ìŠ¤ ë¦¬ì§€ë“œë°”ë””
+    private Rigidbody2D stoneRigid; //ìŠ¤í‚¬(ëŒ)ì˜ ë¦¬ì§€ë“œ ë°”ë””
+    private SpriteRenderer spriteRenderer; //ì¢Œìš° ë’¤ì§‘ê¸° ìœ„í•´ // ì„ì‹œ
+    private new Transform transform; //ë³´ìŠ¤ì˜ ìœ„ì¹˜
+    private Animator animator; //ë³´ìŠ¤ ì• ë‹ˆë©”ì´í„°
 
 
-    private float floatRnd; //½Ç¼öÇü ³­¼ö
-    private int intRnd; //Á¤¼öÇü ³­¼ö
+    private float floatRnd; //ì‹¤ìˆ˜í˜• ë‚œìˆ˜
+    private int intRnd; //ì •ìˆ˜í˜• ë‚œìˆ˜
     public string LR = ""; // "left" or "right"
 
-    public int damage_Dash; //´ë½¬ µ¥¹ÌÁö
-    public int damage_Throw; //´øÁö±â µ¥¹ÌÁö
-    public float dashSpeed; //´ë½¬ ¼Óµµ
-    public float throwSpeed; //´øÁö±â °ø°İ ¼Óµµ
+    public int damage_Dash; //ëŒ€ì‰¬ ë°ë¯¸ì§€
+    public int damage_Throw; //ë˜ì§€ê¸° ë°ë¯¸ì§€
+    public float dashSpeed; //ëŒ€ì‰¬ ì†ë„
+    public float throwSpeed; //ë˜ì§€ê¸° ê³µê²© ì†ë„
 
-    private float lastDamagedTime; //¸¶Áö¸· µ¥¹ÌÁö ¹ŞÀº ½ÃÁ¡
-    public float damagedDelay;//ÇÃ·¹ÀÌ¾î ¹«Àû½Ã°£ //¿©±â ÀÖÀ»°Ç ¾Æ´Ñµí
-    private bool canDamaged; //ÇÃ·¹ÀÌ¾î ÇÇ°İ °¡´ÉÇÑ°¡?
+    private float lastDamagedTime; //ë§ˆì§€ë§‰ ë°ë¯¸ì§€ ë°›ì€ ì‹œì 
+    public float damagedDelay;//í”Œë ˆì´ì–´ ë¬´ì ì‹œê°„ //ì—¬ê¸° ìˆì„ê±´ ì•„ë‹Œë“¯
+    private bool canDamaged; //í”Œë ˆì´ì–´ í”¼ê²© ê°€ëŠ¥í•œê°€?
 
     /////////////////////////////////////
     ////////////////SETTING//////////////
@@ -37,7 +37,7 @@ public class Boss_form : LivingEntity
         spriteRenderer = GetComponent<SpriteRenderer>();
         transform = GetComponent<Transform>();
     }
-    public void FindPlayer() //ÇÃ·¹ÀÌ¾îÀÇ À§Ä¡ ÆÄ¾Ç
+    public void FindPlayer() //í”Œë ˆì´ì–´ì˜ ìœ„ì¹˜ íŒŒì•…
     {
         player = GameObject.Find("Player");
         LR = player.transform.position.x <= base.transform.position.x ? "left" : "right";
@@ -77,7 +77,7 @@ public class Boss_form : LivingEntity
     /////////////////////////////////////
     protected void GetDamage(float damage)
     {
-        //ÇÃ·¹ÀÌ¾î ¹«Àû½Ã°£ °í·Á
+        //í”Œë ˆì´ì–´ ë¬´ì ì‹œê°„ ê³ ë ¤
         if (lastDamagedTime + damagedDelay <= Time.time)
         {
             canDamaged = true;
@@ -87,10 +87,10 @@ public class Boss_form : LivingEntity
         {
             canDamaged = false;
         }
-        //µ¥¹ÌÁö
+        //ë°ë¯¸ì§€
         if (canDamaged)
         {
-            Debug.Log("ºÎµúÈû");
+            Debug.Log("ë¶€ë”ªí˜");
         }
     }
 }
