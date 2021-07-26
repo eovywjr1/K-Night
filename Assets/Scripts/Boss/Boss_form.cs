@@ -9,15 +9,13 @@ public class Boss_form : LivingEntity
     public GameObject energyBallPrefab; //스킬(에너지볼) Prefab
 
     protected Rigidbody2D rigid; //보스 리지드바디
-    private Rigidbody2D stoneRigid; //스킬(돌)의 리지드 바디
     private SpriteRenderer spriteRenderer; //좌우 뒤집기 위해 // 임시
     private new Transform transform; //보스의 위치
     private Animator animator; //보스 애니메이터
 
 
     private float floatRnd; //실수형 난수
-    private int intRnd; //정수형 난수
-    public string LR = ""; // "left" or "right"
+    public Vector3 direction;
 
     public int damage_Dash; //대쉬 데미지
     public int damage_Throw; //던지기 데미지
@@ -37,40 +35,34 @@ public class Boss_form : LivingEntity
         spriteRenderer = GetComponent<SpriteRenderer>();
         transform = GetComponent<Transform>();
     }
-    public void FindPlayer() //플레이어의 위치 파악
+    public void FindPlayer() //플레이어의 위치 파악 (좌, 우)
     {
         player = GameObject.Find("Player");
-        LR = player.transform.position.x <= base.transform.position.x ? "left" : "right";
+        direction = player.transform.position.x <= base.transform.position.x ? Vector3.left : Vector3.right;
     }
     /////////////////////////////////////
     ////////////////SKILLS///////////////
     /////////////////////////////////////
     protected void Dash()
     {
-        if (LR == "left")
-            rigid.AddForce(Vector2.left* dashSpeed, ForceMode2D.Impulse);
-        else if (LR == "right")
-            rigid.AddForce(Vector2.right* dashSpeed, ForceMode2D.Impulse);
+        rigid.AddForce(direction* dashSpeed, ForceMode2D.Impulse);
     }
     protected void ThrowStones()
     {
         floatRnd = Random.Range(-1f, 1.1f);
-        GameObject stoneClone = Instantiate(stonePrefab, base.transform.position + Vector3.up * 2 + Vector3.up * floatRnd + Vector3.right * floatRnd, base.transform.rotation);
+        GameObject stoneClone = Instantiate(stonePrefab, transform.position + Vector3.up * (2 + floatRnd) + Vector3.right * floatRnd, base.transform.rotation);
     }
     protected void EnergyBall()
     {
-        if (LR == "left")
-        {
-            GameObject stoneClone = Instantiate(energyBallPrefab, base.transform.position + Vector3.left * 0.5f, base.transform.rotation);
-        }
-        else if (LR == "right")
-        {
-            GameObject stoneClone = Instantiate(energyBallPrefab, base.transform.position + Vector3.left * 0.5f, base.transform.rotation);
-        }
+        GameObject energyBallClone = Instantiate(energyBallPrefab, transform.position + direction * 0.5f, transform.rotation);
     }
-    protected void Meteo()
+    protected void Meteo(Vector3 pos)
     {
-
+        GameObject MeteoClone = Instantiate(energyBallPrefab, pos, transform.rotation);
+    }
+    protected void MeteoWarning(Vector3 pos)
+    {
+        GameObject MeteoWarningClone = Instantiate(energyBallPrefab, pos, transform.rotation);
     }
     /////////////////////////////////////
     ////////////////OTHERS///////////////

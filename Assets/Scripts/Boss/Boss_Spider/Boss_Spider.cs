@@ -7,6 +7,7 @@ public class Boss_Spider: Boss_form
     public float attackDelay; //공격 딜레이
     public float attackDelay_Dash; //공격 딜레이
     public float attackDelay_Throw; //공격 딜레이
+    public float RangeDistance;
 
     public bool inRange; //범위 안 or 밖?
     public bool canAttack_Dash; //공격 가능 여부(스킬 쿨타임)
@@ -18,7 +19,6 @@ public class Boss_Spider: Boss_form
     private void Start()
     {
         inRange = false;
-        lastAttackTime_Dash = 0f;
         lastAttackTime_Throw = 0f;
         Skills();
         Invoke(nameof(Skills),attackDelay);
@@ -58,26 +58,26 @@ public class Boss_Spider: Boss_form
         }
         Invoke(nameof(Skills),attackDelay);
     }
-    
-    //플레이어가 범위안에 있는가?
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.tag == "Player")
-            inRange = true;
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.tag == "Player")
-            inRange = false;
-    }
-
     private void FixedUpdate()
-    {//부딪혔을때 데미지
-        //Collision으로 했을 경우 inRange에 영향이 가서 Ray로 했음
-        Debug.DrawRay(rigid.position + Vector2.left/4, Vector3.right/2, new Color(0, 1, 0));
-        RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector3.down, 1, LayerMask.GetMask("Player"));
+    {
+        InRange();
+        Physics2D.IgnoreLayerCollision(6, 7);
+    }
 
-        if (rayHit.collider != null)
+    //플레이어가 범위안에 있는가?
+    private void InRange()
+    {
+        if (CalculateDistance(transform.position, player.GetComponent<Transform>().position) < RangeDistance)
+            inRange = true;
+        else inRange = false;
+    }
+    private float CalculateDistance(Vector2 pos1, Vector2 pos2)
+    {
+        return Vector2.Distance(pos1,pos2);
+    }
+    private void OnCollisionEnter2D (Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Player")
         {
             GetDamage(damage_Dash);
         }
