@@ -12,20 +12,25 @@ public class BossScript : MonoBehaviour
     public int moveDelaytime;
     public int juniorcallDelaytime;
     public int dashToplayerDelaytime;
+
     public bool ismoveDelay;
     public bool isjunorcallDelay;
     public bool isdashToplayerDelay;
+
     public Vector2 direction;
     public Vector2 dashDirection;
+
     public Rigidbody2D rigidBody;
     public Transform transForm;
-    public Transform playerTrasnform; //플레이어 위치 저장 변수(임시)
+    //public Transform playerTransform; //플레이어 위치 저장 변수(임시), 플레이어 구현 후 다시
     public GameObject junior;
+    public SpriteRenderer spriteRenderer;
 
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
         transForm = GetComponent<Transform>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
         junior = Resources.Load<GameObject>("Prefabs/Junior");
 
@@ -38,8 +43,6 @@ public class BossScript : MonoBehaviour
         StartCoroutine(RandomMove());
         StartCoroutine(callJunior());
         StartCoroutine(dashToplayer());
-
-        
     }
 
     void Update()
@@ -49,11 +52,21 @@ public class BossScript : MonoBehaviour
         {
             Instantiate(junior, new Vector2(transForm.position.x, transForm.position.y),
                 Quaternion.identity);
-
             isjunorcallDelay = true;
-
             StartCoroutine(callJunior());
         }
+
+        //죽었을 때
+        if (hp <= 0)
+        {
+            this.gameObject.SetActive(false);
+        }
+
+        //애니메이션 방향 전환
+        if (rigidBody.velocity.x >= 0)
+            spriteRenderer.flipX = false;
+        else
+            spriteRenderer.flipX = true;
     }
 
     void FixedUpdate()
@@ -62,34 +75,30 @@ public class BossScript : MonoBehaviour
         if (!ismoveDelay)
         {
             rigidBody.AddForce(direction * moveSpeed * Time.deltaTime, ForceMode2D.Impulse);
-
             ismoveDelay = true;
-
             StartCoroutine(RandomMove());
         }
 
         //보스 돌진
-        if (!isdashToplayerDelay)
+        /*if (!isdashToplayerDelay)
         {
-            playerTrasnform.position = new Vector2(3, 2);
-
-            if (playerTrasnform.position.x >= 0)
+            playerTransform.position = new Vector2(3, 2); //임시, 나중에 플레이어 transform
+            if (playerTransform.position.x >= 0)
                 dashDirection = Vector2.right;
             else
                 dashDirection = Vector2.left;
 
-            while (transForm.position == playerTrasnform.position)
+            this.gameObject.layer = 9;
+            while (transForm.position != playerTransform.position)
             {
                 if (rigidBody.velocity.x < dashSpeed && rigidBody.velocity.x > dashSpeed * (-1))
-                    rigidBody.AddForce(dashDirection * dashSpeed * Time.deltaTime, ForceMode2D.Impulse);
+                    rigidBody.AddForce(dashDirection * Time.deltaTime, ForceMode2D.Impulse);
             }
-
             rigidBody.velocity = new Vector2(0,0);
-
+            this.gameObject.layer = 7;
             isdashToplayerDelay = true;
-
             StartCoroutine(dashToplayer());
-        }
+        }*/
     }
 
     //보스 이동 딜레이
@@ -110,7 +119,6 @@ public class BossScript : MonoBehaviour
     IEnumerator callJunior()
     {
         yield return new WaitForSecondsRealtime(juniorcallDelaytime);
-
         isjunorcallDelay = false;
     }
 
@@ -118,7 +126,11 @@ public class BossScript : MonoBehaviour
     IEnumerator dashToplayer()
     {
         yield return new WaitForSecondsRealtime(dashToplayerDelaytime);
-
         isdashToplayerDelay = false;
+    }
+
+    public void Ondamaged()
+    {
+        hp--;
     }
 }

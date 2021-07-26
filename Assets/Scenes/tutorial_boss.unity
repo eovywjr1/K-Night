@@ -306,11 +306,14 @@ MonoBehaviour:
   moveSpeed: 5
   moveDelaytime: 5
   juniorcallDelaytime: 5
+  dashToplayerDelaytime: 0
   ismoveDelay: 0
   isjunorcallDelay: 0
+  isdashToplayerDelay: 0
   direction: {x: 0, y: 0}
+  dashDirection: {x: 0, y: 0}
   rigidBody: {fileID: 0}
-  transform: {fileID: 0}
+  transForm: {fileID: 0}
   junior: {fileID: 0}
 --- !u!1 &1397576364
 GameObject:
@@ -557,10 +560,6 @@ PrefabInstance:
     - target: {fileID: 4596541593900640030, guid: da73be11bac4b4c48b45b8b533d9050a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4596541593900640031, guid: da73be11bac4b4c48b45b8b533d9050a, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da73be11bac4b4c48b45b8b533d9050a, type: 3}
