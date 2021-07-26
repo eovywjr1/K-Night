@@ -7,6 +7,8 @@ public class Boss_form : LivingEntity
     public GameObject player; //플레이어
     public GameObject stonePrefab; //스킬(돌) Prefab
     public GameObject energyBallPrefab; //스킬(에너지볼) Prefab
+    public GameObject meteoPrefab; //스킬(메테오) prefab
+    public GameObject meteoWarningPrefab; //스킬(메테오 경고) prefab
 
     protected Rigidbody2D rigid; //보스 리지드바디
     private SpriteRenderer spriteRenderer; //좌우 뒤집기 위해 // 임시
@@ -58,11 +60,11 @@ public class Boss_form : LivingEntity
     }
     protected void Meteo(Vector3 pos)
     {
-        GameObject MeteoClone = Instantiate(energyBallPrefab, pos, transform.rotation);
+        GameObject MeteoClone = Instantiate(meteoPrefab, pos, transform.rotation);
     }
     protected void MeteoWarning(Vector3 pos)
     {
-        GameObject MeteoWarningClone = Instantiate(energyBallPrefab, pos, transform.rotation);
+        GameObject MeteoWarningClone = Instantiate(meteoWarningPrefab, pos, transform.rotation);
     }
     /////////////////////////////////////
     ////////////////OTHERS///////////////
