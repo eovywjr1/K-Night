@@ -75,11 +75,12 @@ public class Boss_Spider: Boss_form
     {
         return Vector2.Distance(pos1,pos2);
     }
-    private void OnCollisionEnter2D (Collider2D collision)
+   /* private void OnCollisionEnter2D (Collider2D collision)
     {
         if(collision.gameObject.tag == "Player")
         {
             GetDamage(damage_Dash);
         }
     }
+   */
 }
