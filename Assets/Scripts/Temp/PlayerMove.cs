@@ -10,6 +10,11 @@ public class PlayerMove : MonoBehaviour
 
     private Rigidbody2D rigid;
     private SpriteRenderer spriteRenderer;
+
+    private Vector3 directionPlayerLooksAt;
+    private GameObject scannedTalker;
+    public TalkManager talkManager;
+
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -37,6 +42,9 @@ public class PlayerMove : MonoBehaviour
         //Direction Sprite
         if (Input.GetButtonDown("Horizontal"))
             spriteRenderer.flipX = Input.GetAxisRaw("Horizontal") == -1;
+
+        // NPC 대화 (임시).
+        TalkerFinder();
 
     }
     //꾹누르기
@@ -76,5 +84,80 @@ public class PlayerMove : MonoBehaviour
                     isJumping = false;
             }
         }
+
+        FindingTalker();
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    void TalkerFinder()
+    {
+        
+        // 플레이어가 발사하는 Ray의 벡터 조절.
+        if (Input.GetAxisRaw("Horizontal") == 1)
+        {
+            directionPlayerLooksAt = new Vector3(1, 0, 0);
+        }
+        else if(Input.GetAxisRaw("Horizontal") == -1)
+        {
+            directionPlayerLooksAt = new Vector3(-1, 0, 0);
+        }
+
+        if  (
+            (Input.GetButtonDown("Vertical") && Input.GetAxisRaw("Vertical") == 1 && scannedTalker != null)
+            ||
+            ( talkManager.talkIndex >= 1 && (Input.GetButtonDown("Horizontal") || Input.GetButtonDown("Jump")) )
+            )
+        {
+            talkManager.TriggerTalks(scannedTalker);
+        }
+
+    }
+
+    void FindingTalker()
+    {
+        // 이 함수를 통해서 Player는 "Talker" 레이어의 오브젝트를 감지합니다.
+        float rayLenOfLooking = 0.5f;
+
+        // Ray.
+        Debug.DrawRay(rigid.position, directionPlayerLooksAt * rayLenOfLooking, new Color(0, 255/255f, 0, 255/255f));
+        RaycastHit2D rayHit
+            = Physics2D.Raycast(rigid.position, directionPlayerLooksAt, rayLenOfLooking, LayerMask.GetMask("Talker"));
+
+        if(rayHit.collider != null)
+        {
+            scannedTalker = rayHit.collider.gameObject;
+        }
+        else
+        {
+            scannedTalker = null;
+        }
+
+
+    }
+
+
+
+
+
+
 }
