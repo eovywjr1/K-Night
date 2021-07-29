@@ -296,17 +296,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 607910458}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f30a821b83b60c4488d3329560e2db7, type: 3}
+  m_Script: {fileID: 11500000, guid: 55ca483a2e1bf974b8cb8c22d6381374, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 3
+  hp: 10
   power: 0
   defensePower: 0
-  dashSpeed: 0
-  moveSpeed: 200
+  dashSpeed: 10
+  moveSpeed: 50
   moveDelaytime: 5
   juniorcallDelaytime: 5
-  dashToplayerDelaytime: 0
+  dashToplayerDelaytime: 5
   ismoveDelay: 1
   isjunorcallDelay: 1
   isdashToplayerDelay: 1
@@ -316,7 +316,78 @@ MonoBehaviour:
   transForm: {fileID: 0}
   playerTransform: {fileID: 0}
   spriteRenderer: {fileID: 0}
-  junior: {fileID: 0}
+  junior: {fileID: 4596541593900640029, guid: 29ebc5ebb2cca1d45b6fd9fc5f70a70d, type: 3}
+--- !u!1 &1390777003
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1390777005}
+  - component: {fileID: 1390777006}
+  - component: {fileID: 1390777004}
+  m_Layer: 0
+  m_Name: TransferToCave
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1390777004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1390777003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d727f102e8adceb479d6d7629c3093b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapName: Cave
+--- !u!4 &1390777005
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1390777003}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.6640711, y: -1.6156132, z: -1.6999512}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1390777006
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1390777003}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &1397576364
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,6 +398,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1397576365}
   - component: {fileID: 1397576366}
+  - component: {fileID: 1397576367}
   m_Layer: 7
   m_Name: Square
   m_TagString: Untagged
@@ -399,6 +471,32 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &1397576367
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1397576364}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &1473070173
 GameObject:
   m_ObjectHideFlags: 0

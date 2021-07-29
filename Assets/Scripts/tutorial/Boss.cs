@@ -33,11 +33,9 @@ public class Boss : MonoBehaviour
         transForm = GetComponent<Transform>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        junior = Resources.Load<GameObject>("Prefabs/Tutorial/BossJunior");
-
         StartCoroutine(RandomMove());
         StartCoroutine(JuniorCalldelay());
-        StartCoroutine(dashToplayer());
+        StartCoroutine(DashToplayer());
     }
 
     void Update()
@@ -65,24 +63,7 @@ public class Boss : MonoBehaviour
 
         //보스 돌진
         /*if (!isdashToplayerDelay)
-        {
-            playerTransform.position = new Vector2(3, 2); //임시, 플레이어 position 변수
-            if (playerTransform.position.x >= 0)
-                dashDirection = Vector2.right;
-            else
-                dashDirection = Vector2.left;
-
-            this.gameObject.layer = 9;
-            while (transForm.position != playerTransform.position)
-            {
-                if (rigidBody.velocity.x < dashSpeed && rigidBody.velocity.x > dashSpeed * (-1))
-                    rigidBody.AddForce(dashDirection * Time.deltaTime, ForceMode2D.Impulse);
-            }
-            rigidBody.velocity = new Vector2(0,0);
-            this.gameObject.layer = 7;
-            isdashToplayerDelay = true;
-            StartCoroutine(dashToplayer());
-        }*/
+            Dash();*/
     }
 
     //보스 이동 함수
@@ -107,17 +88,45 @@ public class Boss : MonoBehaviour
         hp--;
     }
 
+    void Dash()
+    {
+        //플레이어 위치 및 방향 저장
+        playerTransform.position = new Vector2(3, 2); //임시, 플레이어 position 변수
+        if (playerTransform.position.x >= 0)
+            dashDirection = Vector2.right;
+        else
+            dashDirection = Vector2.left;
+
+        this.gameObject.layer = 9;
+
+        //위치까지 속도 추가
+        while (transForm.position != playerTransform.position)
+        {
+            if (rigidBody.velocity.x < dashSpeed && rigidBody.velocity.x > dashSpeed * (-1))
+                rigidBody.AddForce(dashDirection * Time.deltaTime, ForceMode2D.Impulse);
+        }
+
+        //위치 도착 후
+        rigidBody.velocity = new Vector2(0, 0);
+        this.gameObject.layer = 7;
+
+        isdashToplayerDelay = true;
+        StartCoroutine(DashToplayer());
+    }
+
     //잡몹 소환 딜레이
     IEnumerator JuniorCalldelay()
     {
         yield return new WaitForSecondsRealtime(juniorcallDelaytime);
+
         isjunorcallDelay = false;
     }
 
     //플레이어로 돌진 딜레이
-    IEnumerator dashToplayer()
+    IEnumerator DashToplayer()
     {
         yield return new WaitForSecondsRealtime(dashToplayerDelaytime);
+
         isdashToplayerDelay = false;
     }
 
@@ -133,5 +142,17 @@ public class Boss : MonoBehaviour
             direction = Vector2.right;
 
         ismoveDelay = false;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        //대쉬 중 플레이어 피격 시
+        if(this.gameObject.layer == 9)
+        {
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                //player hp 감소
+            }
+        }
     }
 }

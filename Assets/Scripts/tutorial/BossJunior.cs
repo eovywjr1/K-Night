@@ -73,4 +73,12 @@ public class BossJunior : MonoBehaviour
         yield return new WaitForSecondsRealtime(moveDelaytime);
         ismoveDelay = false;
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            //플레이어 hp 감소
+        }
+    }
 }
