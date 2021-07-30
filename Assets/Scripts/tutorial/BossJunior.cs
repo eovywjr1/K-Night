@@ -4,39 +4,30 @@ using UnityEngine;
 
 public class BossJunior : MonoBehaviour
 {
-    public GameManager gameManager;
-    public GameObject player;
-    public Transform transForm;
-    public Transform transformPlayer;
+    public Player player;
+
     public Rigidbody2D rigidBody;
     public SpriteRenderer spriteRenderer;
+
     public Vector2 moveDirection;
-    public int defensPower; // 밸런스 필요할 경우
+    public Vector2 playerPosition;
+
     public int hp;
     public int moveSpeed;
     public int moveDelaytime;
 
-    public bool ismoveDelay;
+    public bool isMoveDelay;
 
     void Start()
     {
-        transForm = GetComponent<Transform>();
         rigidBody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        //player = gameManager.getPlayer(); // 플레이어 구현 후 다시
+        player = FindObjectOfType<Player>();
     }
 
     void Update()
     {
-        //플레이어로 이동
-        /*if (!ismoveDelay) // 플레이어 구현 후 다시
-        { 
-            transformPlayer = player.transform;
-            Movetoplayer(transformPlayer);
-            ismoveDelay = true;
-        }*/
-
         //죽었을 때
         if (hp <= 0)
             Destroy(this.gameObject);
@@ -48,18 +39,36 @@ public class BossJunior : MonoBehaviour
             spriteRenderer.flipX = true;
     }
 
-    //이동
-    void Movetoplayer(Transform playerTransform)
+    void FixedUpdate()
     {
+        //플레이어로 이동
+        if (!isMoveDelay)
+            Movetoplayer();
+    }
+
+    //이동
+    void Movetoplayer()
+    {
+        //플레이어 위치 저장
+        playerPosition = player.GetTransform().position;
+
         //방향 설정
-        if (playerTransform.position.x > transForm.position.x)
+        if (playerPosition.x > this.gameObject.transform.position.x)
             moveDirection = Vector2.right;
         else
             moveDirection = Vector2.left;
 
-        //속도제한
-        if ((moveDirection == Vector2.right && rigidBody.velocity.x < moveSpeed) || (moveDirection == Vector2.left && rigidBody.velocity.x > moveSpeed))
-            rigidBody.AddForce(moveDirection * Time.deltaTime, ForceMode2D.Impulse);
+        //속도 추가, 제한
+        if ((moveDirection == Vector2.right && rigidBody.velocity.x < moveSpeed) || (moveDirection == Vector2.left && rigidBody.velocity.x > moveSpeed * (-1)))
+            rigidBody.AddForce(moveDirection * moveSpeed * Time.deltaTime, ForceMode2D.Impulse);
+
+        //플레이어를 지나칠 경우 딜레이
+        if ((rigidBody.velocity.x > 0 && this.transform.position.x > playerPosition.x) || (rigidBody.velocity.x < 0 && this.transform.position.x < playerPosition.x))
+        {
+            rigidBody.velocity = new Vector2(0, 0);
+            isMoveDelay = true;
+            StartCoroutine(MoveDelay());
+        }
     }
 
     public void Ondagamaed()
@@ -67,18 +76,11 @@ public class BossJunior : MonoBehaviour
         hp--;
     }
 
-    //이동딜레이(임시)
-    IEnumerator Changedirection()
+    //이동딜레이
+    IEnumerator MoveDelay()
     {
         yield return new WaitForSecondsRealtime(moveDelaytime);
-        ismoveDelay = false;
-    }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            //플레이어 hp 감소
-        }
+        isMoveDelay = false;
     }
 }

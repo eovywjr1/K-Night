@@ -147,6 +147,13 @@ public class Player : MonoBehaviour
 
     }
 
+    public Transform GetTransform()
+    {
+        return this.gameObject.transform;
+    }
 
-
+    public void SetHp()
+    {
+        hp--;
+    }
 }

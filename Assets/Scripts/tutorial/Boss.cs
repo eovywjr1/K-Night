@@ -6,7 +6,6 @@ public class Boss : MonoBehaviour
 {
     public int hp;
     public int power;
-    public int defensePower;
     public int dashSpeed;
     public int moveSpeed;
     public int moveDelaytime;
@@ -19,18 +18,19 @@ public class Boss : MonoBehaviour
 
     public Vector2 direction;
     public Vector2 dashDirection;
+    public Vector3 playerPosition;
 
     public Rigidbody2D rigidBody;
-    public Transform transForm;
-    public Transform playerTransform;
     public SpriteRenderer spriteRenderer;
 
     public GameObject junior;
+    public Player player;
 
     void Start()
     {
+        player = FindObjectOfType<Player>();
+
         rigidBody = GetComponent<Rigidbody2D>();
-        transForm = GetComponent<Transform>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         StartCoroutine(RandomMove());
@@ -62,10 +62,10 @@ public class Boss : MonoBehaviour
             Move();
 
         //보스 돌진
-        /*if (!isdashToplayerDelay)
-            Dash();*/
+        if (!isdashToplayerDelay)
+            Dash();
     }
-
+    
     //보스 이동 함수
     void Move()
     {
@@ -77,7 +77,7 @@ public class Boss : MonoBehaviour
     //잡몹 소환 함수
     void JuniorCall()
     {
-        Instantiate(junior, new Vector2(transForm.position.x + 1, transForm.position.y), Quaternion.identity); 
+        Instantiate(junior, new Vector2(this.gameObject.transform.position.x + 2, this.gameObject.transform.position.y), Quaternion.identity); 
         isjunorcallDelay = true;
         StartCoroutine(JuniorCalldelay());
     }
@@ -90,28 +90,25 @@ public class Boss : MonoBehaviour
 
     void Dash()
     {
-        //플레이어 위치 및 방향 저장
-        playerTransform.position = new Vector2(3, 2); //임시, 플레이어 position 변수
-        if (playerTransform.position.x >= 0)
-            dashDirection = Vector2.right;
-        else
-            dashDirection = Vector2.left;
-
-        this.gameObject.layer = 9;
+        //Move 코루틴 중단
+        StopCoroutine(RandomMove());
 
         //위치까지 속도 추가
-        while (transForm.position != playerTransform.position)
-        {
-            if (rigidBody.velocity.x < dashSpeed && rigidBody.velocity.x > dashSpeed * (-1))
-                rigidBody.AddForce(dashDirection * Time.deltaTime, ForceMode2D.Impulse);
+        if ((dashDirection == Vector2.right && playerPosition.x > this.gameObject.transform.position.x) || (dashDirection == Vector2.left && playerPosition.x < this.gameObject.transform.position.x)) {
+            //속도 제한
+            if ((dashDirection == Vector2.right && rigidBody.velocity.x < dashSpeed) || (dashDirection == Vector2.left && rigidBody.velocity.x > dashSpeed * (-1)))
+                rigidBody.AddForce(dashDirection * dashSpeed * Time.deltaTime, ForceMode2D.Impulse);
         }
-
         //위치 도착 후
-        rigidBody.velocity = new Vector2(0, 0);
-        this.gameObject.layer = 7;
+        else
+        {
+            rigidBody.velocity = new Vector2(0, 0);
+            this.gameObject.layer = 7;
 
-        isdashToplayerDelay = true;
-        StartCoroutine(DashToplayer());
+            isdashToplayerDelay = true;
+            StartCoroutine(DashToplayer());
+            StartCoroutine(RandomMove());
+        }
     }
 
     //잡몹 소환 딜레이
@@ -126,6 +123,15 @@ public class Boss : MonoBehaviour
     IEnumerator DashToplayer()
     {
         yield return new WaitForSecondsRealtime(dashToplayerDelaytime);
+
+        //플레이어 위치 및 방향 저장
+        playerPosition = new Vector3(player.GetTransform().position.x, this.gameObject.transform.position.y);
+        if (playerPosition.x >= this.transform.position.x)
+            dashDirection = Vector2.right;
+        else
+            dashDirection = Vector2.left;
+
+        this.gameObject.layer = 9;
 
         isdashToplayerDelay = false;
     }
@@ -142,17 +148,5 @@ public class Boss : MonoBehaviour
             direction = Vector2.right;
 
         ismoveDelay = false;
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        //대쉬 중 플레이어 피격 시
-        if(this.gameObject.layer == 9)
-        {
-            if (collision.gameObject.CompareTag("Player"))
-            {
-                //player hp 감소
-            }
-        }
     }
 }
