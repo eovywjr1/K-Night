@@ -7,14 +7,14 @@ public class Boss_form : LivingEntity
     public GameObject player; //플레이어
     public GameObject stonePrefab; //스킬(돌) Prefab
     public GameObject energyBallPrefab; //스킬(에너지볼) Prefab
+    public GameObject meteoPrefab; //스킬(메테오) prefab
+    public GameObject meteoWarningPrefab; //스킬(메테오 경고) prefab
 
     protected Rigidbody2D rigid; //보스 리지드바디
     private SpriteRenderer spriteRenderer; //좌우 뒤집기 위해 // 임시
     private new Transform transform; //보스의 위치
     private Animator animator; //보스 애니메이터
 
-
-    private float floatRnd; //실수형 난수
     public Vector3 direction;
 
     public int damage_Dash; //대쉬 데미지
@@ -22,9 +22,11 @@ public class Boss_form : LivingEntity
     public float dashSpeed; //대쉬 속도
     public float throwSpeed; //던지기 공격 속도
 
+    private float floatRnd; //실수형 난수
     private float lastDamagedTime; //마지막 데미지 받은 시점
     public float damagedDelay;//플레이어 무적시간 //여기 있을건 아닌듯
     private bool canDamaged; //플레이어 피격 가능한가?
+    private Vector3 pos;
 
     /////////////////////////////////////
     ////////////////SETTING//////////////
@@ -50,7 +52,8 @@ public class Boss_form : LivingEntity
     protected void ThrowStones()
     {
         floatRnd = Random.Range(-1f, 1.1f);
-        GameObject stoneClone = Instantiate(stonePrefab, transform.position + Vector3.up * (2 + floatRnd) + Vector3.right * floatRnd, base.transform.rotation);
+        pos = transform.position + Vector3.up * (4 + floatRnd) + Vector3.right * floatRnd;
+        GameObject stoneClone = Instantiate(stonePrefab, pos, base.transform.rotation);
     }
     protected void EnergyBall()
     {
@@ -58,11 +61,11 @@ public class Boss_form : LivingEntity
     }
     protected void Meteo(Vector3 pos)
     {
-        GameObject MeteoClone = Instantiate(energyBallPrefab, pos, transform.rotation);
+        GameObject MeteoClone = Instantiate(meteoPrefab, pos, transform.rotation);
     }
     protected void MeteoWarning(Vector3 pos)
     {
-        GameObject MeteoWarningClone = Instantiate(energyBallPrefab, pos, transform.rotation);
+        GameObject MeteoWarningClone = Instantiate(meteoWarningPrefab, pos, transform.rotation);
     }
     /////////////////////////////////////
     ////////////////OTHERS///////////////
