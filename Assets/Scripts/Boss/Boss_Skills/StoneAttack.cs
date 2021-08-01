@@ -5,13 +5,13 @@ using UnityEngine;
 //생성되는 프리팹에 적용
 public class StoneAttack : MonoBehaviour
 {
-    public float throwSpeed;
+    private float throwSpeed;
     private bool onGround;
     private Vector3 direction;
     private float rnd;//던지는 돌의 속력을 랜덤하게
     private float delay;//좀 있다가 던져!
 
-    public Rigidbody2D rigid;
+    private Rigidbody2D rigid;
     private void Awake()
     {
         throwSpeed = GameObject.Find("Boss").GetComponent<Boss_Spider>().throwSpeed;

@@ -17,11 +17,6 @@ public class Boss_form : LivingEntity
 
     public Vector3 direction;
 
-    public int damage_Dash; //대쉬 데미지
-    public int damage_Throw; //던지기 데미지
-    public float dashSpeed; //대쉬 속도
-    public float throwSpeed; //던지기 공격 속도
-
     private float floatRnd; //실수형 난수
     private float lastDamagedTime; //마지막 데미지 받은 시점
     public float damagedDelay;//플레이어 무적시간 //여기 있을건 아닌듯
@@ -45,7 +40,7 @@ public class Boss_form : LivingEntity
     /////////////////////////////////////
     ////////////////SKILLS///////////////
     /////////////////////////////////////
-    protected void Dash()
+    protected void Dash(float dashSpeed)
     {
         rigid.AddForce(direction* dashSpeed, ForceMode2D.Impulse);
     }
