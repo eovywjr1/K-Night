@@ -14,8 +14,12 @@ public class Boss_Magician : Boss_form
     public int meteoPosY;
     public float warningTime;
     public int numOfMeteo;
-    public float meteoGravity;
     public int numOfTorchOff;
+
+    public int damage_EnergyBall; //에너지 볼 데미지
+    public int damage_Meteo; //메테오 데미지
+    public float energyBallSpeed; //에너지 볼 속도
+    public float meteoGravity; //메테오 중력
 
     private int[] xList = new int[5];
     private Vector3[] posList = new Vector3[5];

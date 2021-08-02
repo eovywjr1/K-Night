@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class Boss_Spider: Boss_form
 {
+
+
+    public int damage_Dash; //대쉬 데미지
+    public int damage_Throw; //던지기 데미지
+    public float dashSpeed; //대쉬 속도
+    public float throwSpeed; //던지기 공격 속도
+
     public float attackDelay; //공격 딜레이
     public float attackDelay_Dash; //공격 딜레이
     public float attackDelay_Throw; //공격 딜레이
     public float RangeDistance;
 
-    public bool inRange; //범위 안 or 밖?
+    private bool inRange; //범위 안 or 밖?
     public bool canAttack_Dash; //공격 가능 여부(스킬 쿨타임)
     public bool canAttack_Throw; //공격 가능 여부(스킬 쿨타임)
     private float lastAttackTime_Dash; //마지막 공격 시점
@@ -46,7 +53,7 @@ public class Boss_Spider: Boss_form
         //범위 체크
         if (inRange && canAttack_Dash)
         {
-            Dash();
+            Dash(dashSpeed);
             attackDelay = attackDelay_Dash;
         }
         else if(!inRange && canAttack_Throw)

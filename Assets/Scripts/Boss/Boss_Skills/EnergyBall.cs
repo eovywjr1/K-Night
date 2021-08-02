@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class EnergyBall : MonoBehaviour
 {
-    public float throwSpeed;
+    private float throwSpeed;
     private Vector3 direction;
+    private Rigidbody2D rigid;
 
-    public Rigidbody2D rigid;
     private void Awake()
     {
-        throwSpeed = GameObject.Find("Boss").GetComponent<Boss_Magician>().throwSpeed;
+        throwSpeed = GameObject.Find("Boss").GetComponent<Boss_Magician>().energyBallSpeed;
         direction = GameObject.Find("Boss").GetComponent<Boss_Magician>().direction;
         rigid = GetComponent<Rigidbody2D>();
     }
