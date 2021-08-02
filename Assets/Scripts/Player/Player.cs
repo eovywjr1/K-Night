@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-
+    static public Player instance;
     /* 
     C: dash 
     X: attack 
@@ -15,11 +15,11 @@ public class Player : MonoBehaviour
     public int hp; // 체력
     public int power; // attack power
 
+    public string mapName;
 
     public float moveSpeed = 4f; // 이동속도
     public float jumpSpeed = 4f; // 점프속도
     public float dashSpeed = 30f; // 대쉬속도
-
 
     public int jumpCount = 1; // 점프 횟수 (2단점프x)
 
@@ -35,9 +35,17 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        if (instance == null) // 씬 이동하면서 캐릭터 복사하지 않기 위해 static 선언 후 대입
+        {
+            DontDestroyOnLoad(this.gameObject);
 
-        rigid = gameObject.GetComponent<Rigidbody2D>();
-        jumpCount = 0;
+            rigid = gameObject.GetComponent<Rigidbody2D>();
+            jumpCount = 0;
+
+            instance = this;
+        }
+        else
+            Destroy(this.gameObject);
     }
 
 
@@ -156,4 +164,6 @@ public class Player : MonoBehaviour
     {
         hp--;
     }
+
+
 }
