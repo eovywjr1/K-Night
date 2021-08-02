@@ -6,12 +6,20 @@ using UnityEngine.SceneManagement;
 public class MapManager : MonoBehaviour
 {
     public string mapName;
+    public string thisSceneName;
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public Player player;
+
+    private void Start()
     {
-        //캐릭터가 맵이동 오브젝트에 닿았을 때
-        if (collision.gameObject.CompareTag("Player"))
+        player = FindObjectOfType<Player>();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
         {
+            player.mapName = thisSceneName + "To" + mapName + "StartPoint";
             SceneManager.LoadScene(mapName);
         }
     }
