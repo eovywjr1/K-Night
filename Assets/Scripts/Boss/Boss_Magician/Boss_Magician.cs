@@ -21,8 +21,9 @@ public class Boss_Magician : Boss_form
     public float energyBallSpeed; //에너지 볼 속도
     public float meteoGravity; //메테오 중력
 
-    private int[] xList = new int[5];
-    private Vector3[] posList = new Vector3[5];
+    private int[] xList = new int[5]; //numOfMeteo
+    private Vector3[] posList = new Vector3[5]; //numOfMeteo
+
 
     private bool canAttack; //공격 가능 여부(스킬 쿨타임)
     private float lastAttackTime; //마지막 공격 시점
@@ -33,9 +34,12 @@ public class Boss_Magician : Boss_form
         numOfTorchOff = 0;
         lastAttackTime = 0f;
         Skills();
-        Invoke(nameof(Skills), attackDelay);
     }
-    void Skills() //스킬 사용
+
+    /////////////////////////////////////
+    /////////////USING SKILLS////////////
+    /////////////////////////////////////
+    void Skills() // 스킬 사용
     {
         //쿨타임 여부
         if (lastAttackTime + attackDelay <= Time.time)
@@ -63,6 +67,7 @@ public class Boss_Magician : Boss_form
         }
         Invoke(nameof(Skills), attackDelay);
     }
+    //메테오
     private void UseMeteo()
     {
         StartCoroutine(CoMeteo(warningTime));
@@ -83,6 +88,7 @@ public class Boss_Magician : Boss_form
             Meteo(posList[i] + new Vector3(0, meteoWarningPrefab.transform.localScale.y/2, 0));
         }
     }
+    // 메테오 위치 설정
     void makeVec()
     {
         GetRandomInt(numOfMeteo, -8, 9);
@@ -116,14 +122,20 @@ public class Boss_Magician : Boss_form
             }
         }
     }
-    //torch 여부
+    /////////////////////////////////////
+    /////////////보스 특징 관련//////////
+    /////////////////////////////////////
+    public GameObject Timer;
     private void Update()
     {
-        if(numOfTorchOff == 6)
+        //torch 여부
+        if (numOfTorchOff == 6)
         {
             Debug.Log("15초간 보스에게 타격 가능");
-            numOfTorchOff = 0;
+            Timer.SetActive(true);
+            //타이머가 꺼지면 초기화
+            if (Timer.GetComponent<SettingTimer>().isEnded)
+                numOfTorchOff = 0;
         }
     }
-
 }

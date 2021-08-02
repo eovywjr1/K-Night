@@ -1107,18 +1107,14 @@ MonoBehaviour:
   meteoPrefab: {fileID: 0}
   meteoWarningPrefab: {fileID: 0}
   direction: {x: 0, y: 0, z: 0}
+  damagedDelay: 2
   damage_Dash: 0
   damage_Throw: 0
-  dashSpeed: 15
+  dashSpeed: 30
   throwSpeed: 15
-  damagedDelay: 2
-  attackDelay: 0
   attackDelay_Dash: 2
   attackDelay_Throw: 3
   RangeDistance: 10
-  inRange: 0
-  canAttack_Dash: 0
-  canAttack_Throw: 0
 --- !u!70 &2068786714
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -1132,8 +1128,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0011186443, y: -0.000341392}
-  m_Size: {x: 0.18093455, y: 0.17762397}
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.18, y: 0.18}
   m_Direction: 1
 --- !u!50 &2068786716
 Rigidbody2D:

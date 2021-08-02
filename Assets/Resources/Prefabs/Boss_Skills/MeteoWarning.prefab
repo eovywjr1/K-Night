@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5381885716784984125}
   - component: {fileID: 3658038563238319913}
   - component: {fileID: 8691051895161462992}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: MeteoWarning
   m_TagString: Untagged
   m_Icon: {fileID: 0}

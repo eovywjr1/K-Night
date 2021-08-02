@@ -11,14 +11,14 @@ public class Boss_Spider: Boss_form
     public float dashSpeed; //대쉬 속도
     public float throwSpeed; //던지기 공격 속도
 
-    public float attackDelay; //공격 딜레이
-    public float attackDelay_Dash; //공격 딜레이
-    public float attackDelay_Throw; //공격 딜레이
-    public float RangeDistance;
+    private float attackDelay; //공격 딜레이
+    public float attackDelay_Dash; //대쉬공격 딜레이
+    public float attackDelay_Throw; //던지기공격 딜레이
+    public float RangeDistance; //범위 거리
 
     private bool inRange; //범위 안 or 밖?
-    public bool canAttack_Dash; //공격 가능 여부(스킬 쿨타임)
-    public bool canAttack_Throw; //공격 가능 여부(스킬 쿨타임)
+    private bool canAttack_Dash; //공격 가능 여부(스킬 쿨타임)
+    private bool canAttack_Throw; //공격 가능 여부(스킬 쿨타임)
     private float lastAttackTime_Dash; //마지막 공격 시점
     private float lastAttackTime_Throw; //마지막 공격 시점
 
@@ -30,7 +30,9 @@ public class Boss_Spider: Boss_form
         Skills();
         Invoke(nameof(Skills),attackDelay);
     }
-    void Skills() //스킬 사용
+
+    //스킬 사용
+    void Skills() 
     {
         //쿨타임 여부(Dash)
         if (lastAttackTime_Dash + attackDelay_Dash <= Time.time)
@@ -69,6 +71,7 @@ public class Boss_Spider: Boss_form
     {
         InRange();
         Physics2D.IgnoreLayerCollision(6, 7);
+        Debug.DrawRay(transform.position, direction*RangeDistance, Color.red);
     }
 
     //플레이어가 범위안에 있는가?
@@ -78,10 +81,12 @@ public class Boss_Spider: Boss_form
             inRange = true;
         else inRange = false;
     }
+    //거리계산
     private float CalculateDistance(Vector2 pos1, Vector2 pos2)
     {
         return Vector2.Distance(pos1,pos2);
     }
+    
    /* private void OnCollisionEnter2D (Collider2D collision)
     {
         if(collision.gameObject.tag == "Player")
