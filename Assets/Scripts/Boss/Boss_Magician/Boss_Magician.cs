@@ -12,6 +12,8 @@ public class Boss_Magician : Boss_form
     /// 특정 시간마다 랜덤한 스킬 사용
     public float attackDelay; //공격 딜레이
     public int meteoPosY;
+    public int meteoPosX_min;
+    public int meteoPosX_max;
     public float warningTime;
     public int numOfMeteo;
     public int numOfTorchOff;
@@ -21,8 +23,8 @@ public class Boss_Magician : Boss_form
     public float energyBallSpeed; //에너지 볼 속도
     public float meteoGravity; //메테오 중력
 
-    private int[] xList = new int[5]; //numOfMeteo
-    private Vector3[] posList = new Vector3[5]; //numOfMeteo
+    private int[] xList = new int[8]; //numOfMeteo
+    private Vector3[] posList = new Vector3[8]; //numOfMeteo
 
 
     private bool canAttack; //공격 가능 여부(스킬 쿨타임)
@@ -78,23 +80,21 @@ public class Boss_Magician : Boss_form
         makeVec();
         for (int i = 0; i < numOfMeteo; i++)
         {
-            rnd = Random.Range(-10, -11);
             MeteoWarning(posList[i]);
         }
         yield return new WaitForSeconds(warningTime);
         for (int i = 0; i < numOfMeteo; i++)
         {
-            rnd = Random.Range(-10, -11);
             Meteo(posList[i] + new Vector3(0, meteoWarningPrefab.transform.localScale.y/2, 0));
         }
     }
     // 메테오 위치 설정
     void makeVec()
     {
-        GetRandomInt(numOfMeteo, -8, 9);
+        GetRandomInt(numOfMeteo, meteoPosX_min/3, meteoPosX_max/3);
         for (int i = 0; i < numOfMeteo; i++)
         {
-            posList[i] = new Vector3(xList[i], 0, 0);
+            posList[i] = new Vector3(xList[i]*3, meteoPosY, 1);
         }
     }
 
@@ -132,10 +132,14 @@ public class Boss_Magician : Boss_form
         if (numOfTorchOff == 6)
         {
             Debug.Log("15초간 보스에게 타격 가능");
-            Timer.SetActive(true);
+            if(Timer.GetComponent<TimeCountdown>().TimeEnd == false) Timer.SetActive(true);
             //타이머가 꺼지면 초기화
-            if (Timer.GetComponent<SettingTimer>().isEnded)
+            if (numOfTorchOff == 6 && Timer.GetComponent<TimeCountdown>().TimeEnd)
+            {
+                Timer.GetComponent<TimeCountdown>().TimeEnd = false;
+                Timer.GetComponent<TimeCountdown>().TimeCost = 15f;
                 numOfTorchOff = 0;
+            }
         }
     }
 }

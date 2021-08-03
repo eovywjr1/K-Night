@@ -8,6 +8,7 @@ public class Torch : MonoBehaviour
     public Sprite torchOn;
 
     public GameObject Boss;
+    public GameObject Timer;
 
     private bool on;
 
@@ -30,10 +31,10 @@ public class Torch : MonoBehaviour
     {
         if(Boss.GetComponent<Boss_Magician>().numOfTorchOff == 6)
         {
-            //15초 후 횃불 켜짐
-            this.gameObject.GetComponent<SpriteRenderer>().sprite = torchOn;
-            on = true;
-
+            if (Timer.GetComponent<TimeCountdown>().TimeEnd){
+                this.gameObject.GetComponent<SpriteRenderer>().sprite = torchOn;
+                on = true;
+            }
         }
     }
 }
