@@ -15,6 +15,7 @@ public class Boss : MonoBehaviour
     public bool ismoveDelay;
     public bool isjunorcallDelay;
     public bool isdashToplayerDelay;
+    public bool isattack;
 
     public Vector2 direction;
     public Vector2 dashDirection;
@@ -83,9 +84,9 @@ public class Boss : MonoBehaviour
     }
 
     //공격받았을 때
-    public void Ondamaged()
+    public void Ondamaged(int quantity)
     {
-        hp--;
+        hp -= quantity;
     }
 
     void Dash()
@@ -102,10 +103,16 @@ public class Boss : MonoBehaviour
         //위치 도착 후
         else
         {
+            //속도 제거
             rigidBody.velocity = new Vector2(0, 0);
+
             this.gameObject.layer = 7;
 
+            //딜레이, 공격 플래그 초기화
             isdashToplayerDelay = true;
+            isattack = false;
+
+            //딜레이 시작
             StartCoroutine(DashToplayer());
             StartCoroutine(RandomMove());
         }
@@ -148,5 +155,15 @@ public class Boss : MonoBehaviour
             direction = Vector2.right;
 
         ismoveDelay = false;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        //대쉬 중 처음 플레이어가 공격받았을 때 플레이어 피 감소
+        if (collision.gameObject.CompareTag("Player") && !isattack && this.gameObject.layer == 9)
+        {
+            player.HpDecrease(power);
+            isattack = true;
+        }
     }
 }

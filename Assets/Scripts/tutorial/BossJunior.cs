@@ -13,6 +13,7 @@ public class BossJunior : MonoBehaviour
     public Vector2 playerPosition;
 
     public int hp;
+    public int power;
     public int moveSpeed;
     public int moveDelaytime;
 
@@ -71,9 +72,10 @@ public class BossJunior : MonoBehaviour
         }
     }
 
-    public void Ondagamaed()
+    //피격 받았을 때 피 감소
+    public void Ondagamaed(int quantitiy)
     {
-        hp--;
+        hp -= quantitiy;
     }
 
     //이동딜레이
@@ -82,5 +84,12 @@ public class BossJunior : MonoBehaviour
         yield return new WaitForSecondsRealtime(moveDelaytime);
 
         isMoveDelay = false;
+    }
+
+    //플레이어 충돌 시 플레이어 피 감소
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+            player.HpDecrease(power);
     }
 }

@@ -19,7 +19,7 @@ public class MapManager : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            player.mapName = thisSceneName + "To" + mapName + "StartPoint";
+            player.mapName = thisSceneName + '_' + mapName + "StartPoint";
             SceneManager.LoadScene(mapName);
         }
     }

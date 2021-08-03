@@ -243,7 +243,7 @@ GameObject:
   - component: {fileID: 578743288}
   - component: {fileID: 578743289}
   m_Layer: 0
-  m_Name: TutorialBossToTestStartPoint
+  m_Name: TutorialBoss_TestStartPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -289,7 +289,7 @@ GameObject:
   - component: {fileID: 759810186}
   - component: {fileID: 759810188}
   m_Layer: 0
-  m_Name: TestToTutorialBoss
+  m_Name: Test_TutorialBoss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
