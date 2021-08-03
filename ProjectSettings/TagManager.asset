@@ -7,6 +7,7 @@ TagManager:
   - Boss
   - Junior
   - Platform
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -43,4 +44,19 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: 
+    uniqueID: 353088677
+    locked: 0
+  - name: Background
+    uniqueID: 1486143061
+    locked: 0
+  - name: Between
+    uniqueID: 830763211
+    locked: 0
+  - name: Boss
+    uniqueID: 463538443
+    locked: 0
+  - name: Player
+    uniqueID: 4166322469
     locked: 0
