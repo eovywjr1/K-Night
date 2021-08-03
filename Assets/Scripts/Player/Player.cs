@@ -160,9 +160,9 @@ public class Player : MonoBehaviour
         return this.gameObject.transform;
     }
 
-    public void SetHp()
+    public void HpDecrease(int quantity)
     {
-        hp--;
+        hp -= quantity;
     }
 
 
