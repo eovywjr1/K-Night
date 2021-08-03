@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4559031448411058977}
   - component: {fileID: 3372859486333084681}
   - component: {fileID: 112672283388519071}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Stone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,8 +113,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3c5873d27a07bd4cb3397d072fd017e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  throwSpeed: 0
-  rigid: {fileID: 112672283388519071}
 --- !u!50 &112672283388519071
 Rigidbody2D:
   serializedVersion: 4

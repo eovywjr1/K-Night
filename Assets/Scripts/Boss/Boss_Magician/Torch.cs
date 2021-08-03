@@ -28,7 +28,7 @@ public class Torch : MonoBehaviour
     }
     private void Update()
     {
-        if(Boss.GetComponent<Boss_Magician>().numOfTorchOff++ == 6)
+        if(Boss.GetComponent<Boss_Magician>().numOfTorchOff == 6)
         {
             //15초 후 횃불 켜짐
             this.gameObject.GetComponent<SpriteRenderer>().sprite = torchOn;
