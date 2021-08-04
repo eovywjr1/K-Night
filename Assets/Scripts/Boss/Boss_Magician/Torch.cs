@@ -9,12 +9,14 @@ public class Torch : MonoBehaviour
 
     public GameObject Boss;
     public GameObject Timer;
+    private GameObject child;
 
     private bool on;
 
     private void Awake()
     {
         Boss = GameObject.Find(nameof(Boss));
+        child = transform.Find("Light").gameObject;
         on = true;
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -22,7 +24,8 @@ public class Torch : MonoBehaviour
         //플레이어가 횃불을 공격한다면
         if (collision.gameObject.tag == "Player" && on)
         {
-            this.gameObject.GetComponent<SpriteRenderer>().sprite = torchOff;
+            gameObject.GetComponent<SpriteRenderer>().sprite = torchOff;
+            child.SetActive(false);
             Boss.GetComponent<Boss_Magician>().numOfTorchOff++;
             on = false;
         }
@@ -33,6 +36,7 @@ public class Torch : MonoBehaviour
         {
             if (Timer.GetComponent<TimeCountdown>().TimeEnd){
                 this.gameObject.GetComponent<SpriteRenderer>().sprite = torchOn;
+                child.SetActive(true);
                 on = true;
             }
         }
