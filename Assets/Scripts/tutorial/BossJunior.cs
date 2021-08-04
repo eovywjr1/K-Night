@@ -90,6 +90,14 @@ public class BossJunior : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
+        {
+            //플레이어 피 감소
             player.HpDecrease(power);
+
+            //충돌 시 멈춤
+            rigidBody.velocity = new Vector2(0, 0);
+            isMoveDelay = true;
+            StartCoroutine(MoveDelay());
+        }
     }
 }

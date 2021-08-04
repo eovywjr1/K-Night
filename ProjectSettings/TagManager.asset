@@ -3,11 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Boss
-  - Junior
-  - Platform
-  - Ground
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -15,10 +11,6 @@ TagManager:
   - 
   - Water
   - UI
-  - Player
-  - Boss
-  - 
-  - Damaged
   - 
   - 
   - 
@@ -29,9 +21,13 @@ TagManager:
   - 
   - 
   - 
-  - Talker
   - 
   - 
+  - 
+  - 
+  - Layer 1
+  - Layer 2
+  - Layer 3
   - 
   - 
   - 
@@ -45,18 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: 
-    uniqueID: 353088677
+  - name: Layer 1
+    uniqueID: 2425651459
     locked: 0
-  - name: Background
-    uniqueID: 1486143061
+  - name: Layer 2
+    uniqueID: 4250941897
     locked: 0
-  - name: Between
-    uniqueID: 830763211
-    locked: 0
-  - name: Boss
-    uniqueID: 463538443
-    locked: 0
-  - name: Player
-    uniqueID: 4166322469
+  - name: Layer 3
+    uniqueID: 4189426099
     locked: 0
