@@ -53,3 +53,24 @@ TagManager:
   - name: Layer 3
     uniqueID: 4189426099
     locked: 0
+  - name: 
+    uniqueID: 2420365867
+    locked: 0
+  - name: Background
+    uniqueID: 65691861
+    locked: 0
+  - name: Wall
+    uniqueID: 548291875
+    locked: 0
+  - name: Ground
+    uniqueID: 475014943
+    locked: 0
+  - name: Boss
+    uniqueID: 3100349189
+    locked: 0
+  - name: Player
+    uniqueID: 2258260917
+    locked: 0
+  - name: Boss Skills
+    uniqueID: 2576540001
+    locked: 0
