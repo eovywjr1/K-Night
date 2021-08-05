@@ -4,31 +4,36 @@ using UnityEngine;
 
 public class Boss_Magician : Boss_form
 {
-    // Start is called before the first frame update
     /// 설명
     /// 보스는 가운데에 위치함
     /// 에너지볼 : 플레이어의 방향으로 발사
     /// 메테오 : 랜덤한 위치에 5개 생성
     /// 특정 시간마다 랜덤한 스킬 사용
-    public float attackDelay; //공격 딜레이
+     
+    //보스의 공격 딜레이
+    public float attackDelay; //보스의 공격 딜레이
+    private bool canAttack; //보스의 공격 가능 여부(스킬 쿨타임)
+    private float lastAttackTime; //보스의 마지막 공격 시점
+
+    //메테오 관련 변수들
     public int meteoPosY;
     public int meteoPosX_min;
     public int meteoPosX_max;
     public float warningTime;
     public int numOfMeteo;
-    public int numOfTorchOff;
-
-    public int damage_EnergyBall; //에너지 볼 데미지
-    public int damage_Meteo; //메테오 데미지
-    public float energyBallSpeed; //에너지 볼 속도
-    public float meteoGravity; //메테오 중력
-
     private int[] xList = new int[8]; //numOfMeteo
     private Vector3[] posList = new Vector3[8]; //numOfMeteo
 
+    public int numOfTorchOff;
 
-    private bool canAttack; //공격 가능 여부(스킬 쿨타임)
-    private float lastAttackTime; //마지막 공격 시점
+    //데미지
+    public int damage_EnergyBall; //에너지 볼 데미지
+    public int damage_Meteo; //메테오 데미지
+
+    //스킬 속도
+    public float energyBallSpeed; //에너지 볼 속도
+    public float meteoGravity; //메테오 중력
+
     private int rnd;
 
     void Start()
@@ -43,29 +48,17 @@ public class Boss_Magician : Boss_form
     /////////////////////////////////////
     void Skills() // 스킬 사용
     {
-        //쿨타임 여부
-        if (lastAttackTime + attackDelay <= Time.time)
+        
+        rnd = Random.Range(1, 3);
+        switch (rnd)
         {
-            canAttack = true;
-            lastAttackTime = Time.time;
-        }
-        else canAttack = false;
-
-        if (canAttack)
-        {
-            //랜덤으로 스킬 사용
-            // 1 : 에너지볼, 2 : 메테오
-            rnd = Random.Range(1, 3);
-            switch (rnd)
-            {
-                case 1:
-                    FindPlayer();//좌우 확인
-                    EnergyBall();
-                    break;
-                case 2:
-                    UseMeteo();
-                    break;
-            }
+        case 1:
+            FindPlayer();//좌우 확인
+            EnergyBall();
+            break;
+        case 2:
+            UseMeteo();
+            break;
         }
         Invoke(nameof(Skills), attackDelay);
     }
@@ -94,7 +87,7 @@ public class Boss_Magician : Boss_form
         GetRandomInt(numOfMeteo, meteoPosX_min/3, meteoPosX_max/3);
         for (int i = 0; i < numOfMeteo; i++)
         {
-            posList[i] = new Vector3(xList[i]*3, meteoPosY, 1);
+            posList[i] = new Vector3(xList[i]*3, meteoPosY, -1);
         }
     }
 

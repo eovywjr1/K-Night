@@ -4,27 +4,37 @@ using UnityEngine;
 
 public class Boss_Spider: Boss_form
 {
-
-
+    //데미지
     public int damage_Dash; //대쉬 데미지
     public int damage_Throw; //던지기 데미지
+
+    //스킬의 속도
     public float dashSpeed; //대쉬 속도
     public float throwSpeed; //던지기 공격 속도
 
+    //보스의 공격 딜레이
     private float attackDelay; //공격 딜레이
     public float attackDelay_Dash; //대쉬공격 딜레이
     public float attackDelay_Throw; //던지기공격 딜레이
-    public float RangeDistance; //범위 거리
-
-    private bool inRange; //범위 안 or 밖?
     private bool canAttack_Dash; //공격 가능 여부(스킬 쿨타임)
     private bool canAttack_Throw; //공격 가능 여부(스킬 쿨타임)
     private float lastAttackTime_Dash; //마지막 공격 시점
     private float lastAttackTime_Throw; //마지막 공격 시점
 
+    //범위
+    public float RangeDistance; //범위 거리
+    private bool inRange; //범위 안 or 밖?
 
+    //상태
+    private bool doDash;
+
+    //레이어
+    int playerLayer, bossLayer;
     private void Start()
     {
+        playerLayer = LayerMask.NameToLayer("Player");
+        bossLayer = LayerMask.NameToLayer("Boss");
+
         inRange = false;
         lastAttackTime_Throw = 0f;
         Skills();
@@ -69,9 +79,15 @@ public class Boss_Spider: Boss_form
     }
     private void FixedUpdate()
     {
+        if (rigid.velocity == Vector2.zero) doDash = false;
+        else doDash = true;
         InRange();
         Physics2D.IgnoreLayerCollision(6, 7);
         Debug.DrawRay(transform.position, direction*RangeDistance, Color.red);
+
+        //충돌 무시
+        Physics2D.IgnoreLayerCollision(playerLayer, bossLayer,true);
+
     }
 
     //플레이어가 범위안에 있는가?
@@ -87,12 +103,12 @@ public class Boss_Spider: Boss_form
         return Vector2.Distance(pos1,pos2);
     }
     
-   /* private void OnCollisionEnter2D (Collider2D collision)
+    private void OnCollisionEnter2D (Collider2D collision)
     {
         if(collision.gameObject.tag == "Player")
         {
             GetDamage(damage_Dash);
         }
     }
-   */
+   
 }

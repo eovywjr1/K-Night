@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Boss
+  - Platform
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -11,8 +14,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Boss
+  - Player
   - 
   - 
   - 
@@ -49,4 +52,34 @@ TagManager:
     locked: 0
   - name: Layer 3
     uniqueID: 4189426099
+    locked: 0
+  - name: 
+    uniqueID: 3332568427
+    locked: 0
+  - name: 
+    uniqueID: 2563859693
+    locked: 0
+  - name: 
+    uniqueID: 3864962621
+    locked: 0
+  - name: Background
+    uniqueID: 1477343439
+    locked: 0
+  - name: Wall
+    uniqueID: 2114011313
+    locked: 0
+  - name: Ground
+    uniqueID: 4130605809
+    locked: 0
+  - name: 
+    uniqueID: 2669296745
+    locked: 0
+  - name: Boss&Player
+    uniqueID: 4060670885
+    locked: 0
+  - name: 
+    uniqueID: 3965484501
+    locked: 0
+  - name: Boss Skills
+    uniqueID: 1069657437
     locked: 0

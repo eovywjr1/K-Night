@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 84647911}
   m_Layer: 0
   m_Name: Platform
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -255,7 +255,7 @@ GameObject:
   - component: {fileID: 1208389094}
   m_Layer: 0
   m_Name: Platform (2)
-  m_TagString: Platform
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -364,7 +364,7 @@ GameObject:
   - component: {fileID: 1304697371}
   m_Layer: 0
   m_Name: Platform (1)
-  m_TagString: Platform
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -473,7 +473,7 @@ GameObject:
   - component: {fileID: 1312932635}
   m_Layer: 0
   m_Name: Platform
-  m_TagString: Platform
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -582,7 +582,7 @@ GameObject:
   - component: {fileID: 1501363663}
   m_Layer: 0
   m_Name: Platform (4)
-  m_TagString: Platform
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -691,7 +691,7 @@ GameObject:
   - component: {fileID: 1567243785}
   m_Layer: 0
   m_Name: Platform (3)
-  m_TagString: Platform
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -800,7 +800,7 @@ GameObject:
   - component: {fileID: 1670575281}
   m_Layer: 0
   m_Name: Platform (5)
-  m_TagString: Platform
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -910,7 +910,7 @@ GameObject:
   - component: {fileID: 1767705703}
   - component: {fileID: 1767705702}
   - component: {fileID: 1767705701}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -949,13 +949,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myName: 
-  hp: 0
-  power: 0
+  atkDamage: 0
+  mapName: 
   moveSpeed: 4
   jumpSpeed: 6
   dashSpeed: 80
   jumpCount: 1
+  isJumping: 0
   isdash: 0
+  isattack: 0
 --- !u!61 &1767705703
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1040,8 +1042,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -234296411
+  m_SortingLayer: 11
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b81c0390b21597c45840cc7b37d6fb23, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1081,7 +1083,7 @@ GameObject:
   - component: {fileID: 2068786716}
   - component: {fileID: 2068786713}
   - component: {fileID: 2068786714}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Boss
   m_TagString: Boss
   m_Icon: {fileID: 0}
@@ -1102,15 +1104,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingHealth: 100
   player: {fileID: 0}
-  stonePrefab: {fileID: 8028114399661856254, guid: 668681b333ac98c4cac4d118ff90e399, type: 3}
-  energyBallPrefab: {fileID: 8610591327006740468, guid: 7732b5584dd80314ca7fc44600d73c41, type: 3}
+  stonePrefab: {fileID: 8028114399661856254, guid: 668681b333ac98c4cac4d118ff90e399,
+    type: 3}
+  energyBallPrefab: {fileID: 8610591327006740468, guid: 7732b5584dd80314ca7fc44600d73c41,
+    type: 3}
   meteoPrefab: {fileID: 0}
   meteoWarningPrefab: {fileID: 0}
   direction: {x: 0, y: 0, z: 0}
   damagedDelay: 2
   damage_Dash: 0
   damage_Throw: 0
-  dashSpeed: 30
+  dashSpeed: 20
   throwSpeed: 15
   attackDelay_Dash: 2
   attackDelay_Throw: 3
@@ -1189,8 +1193,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -234296411
+  m_SortingLayer: 11
   m_SortingOrder: 0
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 1}

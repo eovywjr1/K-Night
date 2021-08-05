@@ -13,11 +13,11 @@ public class Meteo : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //땅(Platform과 접촉시 오브젝트 제거)
-        if (collision.gameObject.tag == "Platform")
+        //땅(Ground과 접촉시 오브젝트 제거)
+        if (collision.gameObject.tag == "Ground")
         {
             onGround = true;
-            rigid.velocity = Vector2.zero;
+            rigid.velocity = Vector3.zero;
             rigid.gravityScale = 0;
             Invoke(nameof(DestroyMeteo), 1f);
         }
