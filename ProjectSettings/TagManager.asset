@@ -3,20 +3,23 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Boss
+  - Junior
+  - Ground
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
+  - Monster
+  - Boss
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - TutorialBossDash
+  - PlayerKinematic
+  - BossKinematic
   - 
   - 
   - 

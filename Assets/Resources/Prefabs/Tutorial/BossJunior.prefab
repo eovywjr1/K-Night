@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4596541593900640028}
   - component: {fileID: -2245058906280521334}
   - component: {fileID: 1322701496208028398}
-  m_Layer: 9
+  m_Layer: 6
   m_Name: BossJunior
   m_TagString: Junior
   m_Icon: {fileID: 0}
@@ -121,7 +121,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -151,7 +151,8 @@ MonoBehaviour:
   moveDirection: {x: 0, y: 0}
   playerPosition: {x: 0, y: 0}
   hp: 3
-  moveSpeed: 10
+  power: 0
+  moveSpeed: 5
   moveDelaytime: 2
   isMoveDelay: 0
 --- !u!1 &4596541594102135345
@@ -164,7 +165,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4596541594102135344}
   - component: {fileID: 4596541594102135347}
-  m_Layer: 9
+  m_Layer: 6
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -225,7 +226,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
+  m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
