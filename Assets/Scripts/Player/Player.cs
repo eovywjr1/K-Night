@@ -12,8 +12,10 @@ public class Player : MonoBehaviour
 
     public string myName; // player 이름 (만약 게임 시작시 입력받는다면)
 
-    public int hp; // 체력
-    public int power; // attack power
+    private int hp; // 체력
+
+    
+    public int atkDamage; // player가 가하는 damage
 
     public string mapName;
 
@@ -21,15 +23,16 @@ public class Player : MonoBehaviour
     public float jumpSpeed = 4f; // 점프속도
     public float dashSpeed = 30f; // 대쉬속도
 
-    public int jumpCount = 1; // 점프 횟수 (2단점프x)
+    public int jumpCount = 1; // 점프 가능 횟수 
 
-    /*private bool isGrounded = false; */
-    private bool isJumping = false; // 점프상태
+    public bool isJumping = false; // 점프상태
     public bool isdash = false; // 대쉬상태
+    public bool isattack = false; // 공격상태
 
     Rigidbody2D rigid;
 
     Vector3 movement;
+    private Animator animator; 
 
 
 
@@ -39,8 +42,10 @@ public class Player : MonoBehaviour
         {
             DontDestroyOnLoad(this.gameObject);
 
+            
             rigid = gameObject.GetComponent<Rigidbody2D>();
-            jumpCount = 0;
+            animator = GetComponent<Animator>();
+            jumpCount = 1;
 
             instance = this;
         }
@@ -49,43 +54,54 @@ public class Player : MonoBehaviour
     }
 
 
-    /* private void OnCollsionEnter2D(Collider2D col)   // Ground tag에 닿으면 점프횟수 초기화 (다시 점프 가능하도록)
-    {
-        
-
-        if (col.gameObject.tag == "Ground")
-        {
-
-            Debug.Log("isGrounded!");
-
-
-            isGrounded = true;
-            jumpCount--;
-            
-        }
-    } */
+    
 
     private void Update()
     {
+
+
+
+
         if (Input.GetButtonDown("Jump"))
         {
-            if (jumpCount == 0)
+            if (jumpCount == 1)
             {
-                if (isJumping == false)
-                {
-                    isJumping = true;
-                    /*jumpCount++;*/
+                isJumping = true;
+
+                
+                jumpCount = 0;
 
 
-                }
             }
         }
+
 
         if (Input.GetKeyDown(KeyCode.C))
 
         {
             isdash = true;
         }
+        
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            isattack = true;
+        }
+
+    }
+
+    void OnCollisionEnter2D(Collision2D col)   // Ground tag에 닿으면 점프횟수 초기화 (다시 점프 가능하도록)
+    { 
+
+        if (col.gameObject.CompareTag("Ground"))
+        {
+
+            Debug.Log("isGround!");
+
+            jumpCount = 1;
+
+        }
+
+
 
     }
 
@@ -94,6 +110,7 @@ public class Player : MonoBehaviour
         Move();
         Jump();
         Dash();
+        Attack();
 
     }
 
@@ -137,7 +154,11 @@ public class Player : MonoBehaviour
 
 
         if (!isdash)
+        {
+            
             return;
+        }
+
         // 캐릭터가 좌측을 보고 있을 때
         if (this.gameObject.GetComponent<SpriteRenderer>().flipX == false)
         {
@@ -151,8 +172,21 @@ public class Player : MonoBehaviour
 
         transform.position += moveVelocity * dashSpeed * Time.deltaTime;
 
+        animator.SetBool("isdash", true);
+
         isdash = false;
 
+    }
+
+    void Attack() // 공격
+    {
+        if (!isattack)
+            return;
+
+        animator.SetBool("isattack", true);
+
+
+        isattack = false;
     }
 
     public Transform GetTransform()
@@ -165,5 +199,7 @@ public class Player : MonoBehaviour
         hp -= quantity;
     }
 
+
+   
 
 }
