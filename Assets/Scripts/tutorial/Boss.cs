@@ -23,6 +23,7 @@ public class Boss : MonoBehaviour
 
     public Rigidbody2D rigidBody;
     public SpriteRenderer spriteRenderer;
+    public BoxCollider2D boxCollider;
 
     public GameObject junior;
     public Player player;
@@ -33,6 +34,7 @@ public class Boss : MonoBehaviour
 
         rigidBody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        boxCollider = GetComponent<BoxCollider2D>();
 
         StartCoroutine(RandomMove());
         StartCoroutine(JuniorCalldelay());
@@ -50,10 +52,10 @@ public class Boss : MonoBehaviour
             this.gameObject.SetActive(false);
 
         //애니메이션 방향 전환
-        if (rigidBody.velocity.x >= 0)
-            spriteRenderer.flipX = false;
-        else
+        if (rigidBody.velocity.x > 0)
             spriteRenderer.flipX = true;
+        else if (rigidBody.velocity.x < 0)
+            spriteRenderer.flipX = false;
     }
 
     void FixedUpdate()
@@ -94,6 +96,9 @@ public class Boss : MonoBehaviour
         //Move 코루틴 중단
         StopCoroutine(RandomMove());
 
+        //자식 오브젝트 레이어 변경
+        transform.GetChild(0).gameObject.layer = 7;
+
         //위치까지 속도 추가
         if ((dashDirection == Vector2.right && playerPosition.x > this.gameObject.transform.position.x) || (dashDirection == Vector2.left && playerPosition.x < this.gameObject.transform.position.x)) {
             //속도 제한
@@ -106,7 +111,9 @@ public class Boss : MonoBehaviour
             //속도 제거
             rigidBody.velocity = new Vector2(0, 0);
 
+            //레이어 초기화
             this.gameObject.layer = 7;
+            transform.GetChild(0).gameObject.layer = 11;
 
             //딜레이, 공격 플래그 초기화
             isdashToplayerDelay = true;
@@ -157,7 +164,7 @@ public class Boss : MonoBehaviour
         ismoveDelay = false;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         //대쉬 중 처음 플레이어가 공격받았을 때 플레이어 피 감소
         if (collision.gameObject.CompareTag("Player") && !isattack && this.gameObject.layer == 9)
