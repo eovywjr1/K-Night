@@ -7,7 +7,7 @@ public class MeteoWarning : MonoBehaviour
     private float warningTime;
     private void Awake()
     {
-        warningTime = GameObject.Find("Boss").GetComponent<Boss_Magician>().warningTime;
+        warningTime = GameObject.Find("Boss").GetComponent<Boss_form>().warningTime;
     }
     void Start()
     {

@@ -302,7 +302,7 @@ GameObject:
   - component: {fileID: 74355534}
   - component: {fileID: 74355535}
   - component: {fileID: 74355536}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: torch (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -317,7 +317,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 74355532}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.3, y: 0, z: 0}
+  m_LocalPosition: {x: 8, y: 0, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_Children:
   - {fileID: 1975555118}
@@ -502,7 +502,7 @@ GameObject:
   - component: {fileID: 107436975}
   - component: {fileID: 107436976}
   - component: {fileID: 107436977}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: torch (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -517,7 +517,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 107436973}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12, y: 0, z: 0}
+  m_LocalPosition: {x: 16, y: 0, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_Children:
   - {fileID: 1104048829}
@@ -702,7 +702,7 @@ GameObject:
   - component: {fileID: 125469404}
   - component: {fileID: 125469405}
   - component: {fileID: 125469406}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: torch (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -717,7 +717,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 125469402}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.3, y: 0, z: 0}
+  m_LocalPosition: {x: -8, y: 0, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_Children:
   - {fileID: 1663573972}
@@ -1233,7 +1233,7 @@ GameObject:
   - component: {fileID: 250600879}
   - component: {fileID: 250600881}
   - component: {fileID: 250600882}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: torch (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1299,7 +1299,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 250600878}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -20, y: 0, z: 0}
+  m_LocalPosition: {x: -24, y: 0, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_Children:
   - {fileID: 1867061401}
@@ -2011,7 +2011,7 @@ GameObject:
   - component: {fileID: 350787126}
   - component: {fileID: 350787127}
   - component: {fileID: 350787128}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: torch (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2026,7 +2026,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 350787124}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 20, y: 0, z: 0}
+  m_LocalPosition: {x: 24, y: 0, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_Children:
   - {fileID: 1203503048}
@@ -2974,7 +2974,7 @@ GameObject:
   - component: {fileID: 482623400}
   - component: {fileID: 482623401}
   - component: {fileID: 482623402}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: torch (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2989,7 +2989,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 482623398}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12, y: 0, z: 0}
+  m_LocalPosition: {x: -16, y: 0, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_Children:
   - {fileID: 1213420849}
@@ -6115,7 +6115,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1104048829}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6654,7 +6654,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1203503048}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6774,7 +6774,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1213420849}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7315,6 +7315,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1786064215}
   moveSpeed: 2
+  leftEnd: -22
+  rightEnd: 22
 --- !u!1 &1311229214
 GameObject:
   m_ObjectHideFlags: 0
@@ -9880,17 +9882,18 @@ MonoBehaviour:
     type: 3}
   direction: {x: 0, y: 0, z: 0}
   damagedDelay: 3
+  warningTime: 1
+  meteoGravity: 8
+  energyBallSpeed: 20
+  timerStartTime: 15
   attackDelay: 5
   meteoPosY: 1
   meteoPosX_min: -25
   meteoPosX_max: 25
-  warningTime: 1
   numOfMeteo: 8
   numOfTorchOff: 0
   damage_EnergyBall: 0
   damage_Meteo: 0
-  energyBallSpeed: 20
-  meteoGravity: 8
   Timer: {fileID: 794464969}
 --- !u!50 &1653532899
 Rigidbody2D:
@@ -9987,7 +9990,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1663573972}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10984,7 +10987,7 @@ GameObject:
   - component: {fileID: 1786064218}
   - component: {fileID: 1786064217}
   - component: {fileID: 1786064216}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -11116,8 +11119,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -2036706379
-  m_SortingLayer: 9
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b81c0390b21597c45840cc7b37d6fb23, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -11270,7 +11273,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1814152186}
   - component: {fileID: 1814152187}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Torch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11285,7 +11288,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1814152185}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2, z: -1}
+  m_LocalPosition: {x: 0, y: -1.5, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 250600880}
@@ -11334,8 +11337,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1718427295
-  m_SortingLayer: 10
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -11688,7 +11691,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1867061401}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12386,7 +12389,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1975555118}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}

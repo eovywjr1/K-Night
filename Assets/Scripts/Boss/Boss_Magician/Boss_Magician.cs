@@ -12,14 +12,12 @@ public class Boss_Magician : Boss_form
      
     //보스의 공격 딜레이
     public float attackDelay; //보스의 공격 딜레이
-    private bool canAttack; //보스의 공격 가능 여부(스킬 쿨타임)
     private float lastAttackTime; //보스의 마지막 공격 시점
 
     //메테오 관련 변수들
     public int meteoPosY;
     public int meteoPosX_min;
     public int meteoPosX_max;
-    public float warningTime;
     public int numOfMeteo;
     private int[] xList = new int[8]; //numOfMeteo
     private Vector3[] posList = new Vector3[8]; //numOfMeteo
@@ -29,10 +27,6 @@ public class Boss_Magician : Boss_form
     //데미지
     public int damage_EnergyBall; //에너지 볼 데미지
     public int damage_Meteo; //메테오 데미지
-
-    //스킬 속도
-    public float energyBallSpeed; //에너지 볼 속도
-    public float meteoGravity; //메테오 중력
 
     private int rnd;
 
@@ -130,7 +124,7 @@ public class Boss_Magician : Boss_form
             if (numOfTorchOff == 6 && Timer.GetComponent<TimeCountdown>().TimeEnd)
             {
                 Timer.GetComponent<TimeCountdown>().TimeEnd = false;
-                Timer.GetComponent<TimeCountdown>().TimeCost = 15f;
+                Timer.GetComponent<TimeCountdown>().TimeCost = timerStartTime;
                 numOfTorchOff = 0;
             }
         }

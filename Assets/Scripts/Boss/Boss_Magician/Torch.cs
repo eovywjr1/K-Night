@@ -32,12 +32,16 @@ public class Torch : MonoBehaviour
     }
     private void Update()
     {
-        if(Boss.GetComponent<Boss_Magician>().numOfTorchOff == 6)
+        if (Timer != null)
         {
-            if (Timer.GetComponent<TimeCountdown>().TimeEnd){
-                this.gameObject.GetComponent<SpriteRenderer>().sprite = torchOn;
-                child.SetActive(true);
-                on = true;
+            if (Boss.GetComponent<Boss_Magician>().numOfTorchOff == 6)
+            {
+                if (Timer.GetComponent<TimeCountdown>().TimeEnd)
+                {
+                    this.gameObject.GetComponent<SpriteRenderer>().sprite = torchOn;
+                    child.SetActive(true);
+                    on = true;
+                }
             }
         }
     }

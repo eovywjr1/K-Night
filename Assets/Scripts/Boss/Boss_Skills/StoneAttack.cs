@@ -6,7 +6,7 @@ using UnityEngine;
 public class StoneAttack : MonoBehaviour
 {
     private float throwSpeed;
-    private bool onGround;
+    private bool onGround = false;
     private Vector3 direction;
     private float rnd;//던지는 돌의 속력을 랜덤하게
     private float delay;//좀 있다가 던져!
@@ -14,8 +14,8 @@ public class StoneAttack : MonoBehaviour
     private Rigidbody2D rigid;
     private void Awake()
     {
-        throwSpeed = GameObject.Find("Boss").GetComponent<Boss_Spider>().throwSpeed;
-        direction = GameObject.Find("Boss").GetComponent<Boss_Spider>().direction;
+        throwSpeed = GameObject.Find("Boss").GetComponent<Boss_form>().throwSpeed;
+        direction = GameObject.Find("Boss").GetComponent<Boss_form>().direction;
         rigid = GetComponent<Rigidbody2D>();
     }
     private void Start()
@@ -34,7 +34,7 @@ public class StoneAttack : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //땅(Platform과 접촉시 오브젝트 제거)
-        if (collision.gameObject.tag == "Platform")
+        if (collision.gameObject.tag == "Ground")
         {
             onGround = true;
             rigid.velocity = Vector2.zero;

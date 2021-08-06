@@ -7880,6 +7880,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 478914667}
   moveSpeed: 2
+  leftEnd: -22
+  rightEnd: 22
 --- !u!81 &1802381799
 AudioListener:
   m_ObjectHideFlags: 0

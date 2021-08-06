@@ -23,6 +23,18 @@ public class Boss_form : LivingEntity
     private bool canDamaged; //플레이어 피격 가능한가?
     private Vector3 pos;
 
+    //메테오 관련 변수들
+    public float warningTime; // 메테오 경고 시간
+    public float meteoGravity; // 메테오 속도
+
+    //스킬 속도
+    public float energyBallSpeed; //에너지 볼 속도
+    public float dashSpeed; //대쉬 속도
+    public float throwSpeed; //던지기 공격 속도
+
+    //TIMER
+    public float timerStartTime;
+
     /////////////////////////////////////
     ////////////////SETTING//////////////
     /////////////////////////////////////
@@ -30,7 +42,7 @@ public class Boss_form : LivingEntity
     {
         rigid = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        transform = GetComponent<Transform>();
+        transform = gameObject.GetComponent<Transform>();
     }
     public void FindPlayer() //플레이어의 위치 파악 (좌, 우)
     {
@@ -52,7 +64,7 @@ public class Boss_form : LivingEntity
     }
     protected void EnergyBall()
     {
-        GameObject energyBallClone = Instantiate(energyBallPrefab, transform.position + direction * 0.5f, transform.rotation);
+        GameObject energyBallClone = Instantiate(energyBallPrefab, transform.position + (direction * 0.5f), transform.rotation);
     }
     protected void Meteo(Vector3 pos)
     {

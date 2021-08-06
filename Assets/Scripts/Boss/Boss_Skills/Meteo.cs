@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Meteo : MonoBehaviour
 {
-    private bool onGround;
+    private bool onGround = false;
     private Rigidbody2D rigid;
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
-        rigid.gravityScale = GameObject.Find(nameof(Boss)).GetComponent<Boss_Magician>().meteoGravity;
+        rigid.gravityScale = GameObject.Find(nameof(Boss)).GetComponent<Boss_form>().meteoGravity;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

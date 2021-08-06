@@ -10,8 +10,8 @@ public class EnergyBall : MonoBehaviour
 
     private void Awake()
     {
-        throwSpeed = GameObject.Find("Boss").GetComponent<Boss_Magician>().energyBallSpeed;
-        direction = GameObject.Find("Boss").GetComponent<Boss_Magician>().direction;
+        throwSpeed = GameObject.Find("Boss").GetComponent<Boss_form>().energyBallSpeed;
+        direction = GameObject.Find("Boss").GetComponent<Boss_form>().direction;
         rigid = GetComponent<Rigidbody2D>();
     }
     void Start()
@@ -22,7 +22,7 @@ public class EnergyBall : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         rigid.AddForce(direction * throwSpeed, ForceMode2D.Impulse);
-        Destroy(gameObject, 4f);
+        Destroy(gameObject, 3f);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

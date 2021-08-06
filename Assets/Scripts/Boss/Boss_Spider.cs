@@ -1,16 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Boss_Spider: Boss_form
 {
     //데미지
     public int damage_Dash; //대쉬 데미지
     public int damage_Throw; //던지기 데미지
-
-    //스킬의 속도
-    public float dashSpeed; //대쉬 속도
-    public float throwSpeed; //던지기 공격 속도
 
     //보스의 공격 딜레이
     private float attackDelay; //공격 딜레이
@@ -32,9 +26,10 @@ public class Boss_Spider: Boss_form
     int playerLayer, bossLayer;
     private void Start()
     {
+        /*
         playerLayer = LayerMask.NameToLayer("Player");
         bossLayer = LayerMask.NameToLayer("Boss");
-
+        */
         inRange = false;
         lastAttackTime_Throw = 0f;
         Skills();
@@ -85,9 +80,10 @@ public class Boss_Spider: Boss_form
         Physics2D.IgnoreLayerCollision(6, 7);
         Debug.DrawRay(transform.position, direction*RangeDistance, Color.red);
 
+        /*
         //충돌 무시
         Physics2D.IgnoreLayerCollision(playerLayer, bossLayer,true);
-
+        */
     }
 
     //플레이어가 범위안에 있는가?
