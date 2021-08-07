@@ -18,7 +18,6 @@ public class Boss : MonoBehaviour
     public bool isattack;
 
     public Vector2 direction;
-    public Vector2 dashDirection;
     public Vector3 playerPosition;
 
     public Rigidbody2D rigidBody;
@@ -26,18 +25,20 @@ public class Boss : MonoBehaviour
     public BoxCollider2D boxCollider;
 
     public GameObject junior;
+    public GameObject childBoxCollider;
     public Player player;
 
     void Start()
     {
         player = FindObjectOfType<Player>();
+        childBoxCollider = this.gameObject.transform.GetChild(0).gameObject;
 
         rigidBody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         boxCollider = GetComponent<BoxCollider2D>();
 
         StartCoroutine(RandomMove());
-        StartCoroutine(JuniorCalldelay());
+        //StartCoroutine(JuniorCalldelay());
         StartCoroutine(DashToplayer());
     }
 
@@ -52,9 +53,9 @@ public class Boss : MonoBehaviour
             this.gameObject.SetActive(false);
 
         //애니메이션 방향 전환
-        if (rigidBody.velocity.x > 0)
+        if (direction == Vector2.right)
             spriteRenderer.flipX = true;
-        else if (rigidBody.velocity.x < 0)
+        else if (direction == Vector2.left)
             spriteRenderer.flipX = false;
     }
 
@@ -97,13 +98,13 @@ public class Boss : MonoBehaviour
         StopCoroutine(RandomMove());
 
         //자식 오브젝트 레이어 변경
-        transform.GetChild(0).gameObject.layer = 7;
+        childBoxCollider.layer = 9;
 
         //위치까지 속도 추가
-        if ((dashDirection == Vector2.right && playerPosition.x > this.gameObject.transform.position.x) || (dashDirection == Vector2.left && playerPosition.x < this.gameObject.transform.position.x)) {
+        if ((direction == Vector2.right && playerPosition.x > this.gameObject.transform.position.x) || (direction == Vector2.left && playerPosition.x < this.gameObject.transform.position.x)) {
             //속도 제한
-            if ((dashDirection == Vector2.right && rigidBody.velocity.x < dashSpeed) || (dashDirection == Vector2.left && rigidBody.velocity.x > dashSpeed * (-1)))
-                rigidBody.AddForce(dashDirection * dashSpeed * Time.deltaTime, ForceMode2D.Impulse);
+            if ((direction == Vector2.right && rigidBody.velocity.x < dashSpeed) || (direction == Vector2.left && rigidBody.velocity.x > dashSpeed * (-1)))
+                rigidBody.AddForce(direction * dashSpeed * Time.deltaTime, ForceMode2D.Impulse);
         }
         //위치 도착 후
         else
@@ -113,7 +114,7 @@ public class Boss : MonoBehaviour
 
             //레이어 초기화
             this.gameObject.layer = 7;
-            transform.GetChild(0).gameObject.layer = 11;
+            childBoxCollider.layer = 11;
 
             //딜레이, 공격 플래그 초기화
             isdashToplayerDelay = true;
@@ -141,9 +142,9 @@ public class Boss : MonoBehaviour
         //플레이어 위치 및 방향 저장
         playerPosition = new Vector3(player.GetTransform().position.x, this.gameObject.transform.position.y);
         if (playerPosition.x >= this.transform.position.x)
-            dashDirection = Vector2.right;
+            direction = Vector2.right;
         else
-            dashDirection = Vector2.left;
+            direction = Vector2.left;
 
         this.gameObject.layer = 9;
 
