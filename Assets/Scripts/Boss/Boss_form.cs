@@ -5,7 +5,7 @@ using UnityEngine;
 public class Boss_form : LivingEntity
 {
     //PLAYER
-    public GameObject player;
+    public Player player;
 
     //스킬 PREFAB
     public GameObject stonePrefab; //스킬(돌)
@@ -46,13 +46,13 @@ public class Boss_form : LivingEntity
     /////////////////////////////////////
     private void Awake()
     {
+        player = FindObjectOfType<Player>();
         rigid = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         transform = gameObject.GetComponent<Transform>();
     }
     public void FindPlayer() //플레이어의 위치 파악 (좌, 우)
     {
-        player = GameObject.Find("Player");
         direction = player.transform.position.x <= base.transform.position.x ? Vector3.left : Vector3.right;
     }
     /////////////////////////////////////

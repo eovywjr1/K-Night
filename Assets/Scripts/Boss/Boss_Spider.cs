@@ -96,16 +96,12 @@ public class Boss_Spider: Boss_form
         return Vector2.Distance(pos1,pos2);
     }
 
-    //부딪혔을때 데미지
-    /*
-    private void OnCollisionEnter2D (Collider2D collision)
+    private void OnCollisionEnter2D (Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            //damage to player
-            Debug.Log("대쉬 맞음");
+            player.HpDecrease(damage_Dash);
         }
     }
-    */
    
 }

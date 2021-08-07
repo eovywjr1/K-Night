@@ -5403,7 +5403,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1210298161}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2, z: -1}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1130315001}
@@ -5807,21 +5807,21 @@ MonoBehaviour:
     type: 3}
   direction: {x: 0, y: 0, z: 0}
   damagedDelay: 3
-  warningTime: 1
-  meteoGravity: 8
-  energyBallSpeed: 20
+  damage_EnergyBall: 0
+  damage_Meteo: 0
+  damage_Dash: 0
+  damage_Stone: 0
   dashSpeed: 50
   throwSpeed: 20
+  energyBallSpeed: 20
+  meteoGravity: 8
+  warningTime: 1
   timerStartTime: 30
   attackDelay: 5
-  spawnDelay: 3
-  meteoDelay: 5
   meteoPosY: 1
   meteoPosX_min: -25
   meteoPosX_max: 25
   numOfMeteo: 10
-  damage_EnergyBall: 0
-  damage_Meteo: 0
   RangeDistance: 20
   inRange: 0
 --- !u!50 &1272977221

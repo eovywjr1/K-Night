@@ -36,7 +36,6 @@ public class LivingEntity : MonoBehaviour
     //사망 처리
     public virtual void Die()
     {
-        
         dead = true;
     }
 
