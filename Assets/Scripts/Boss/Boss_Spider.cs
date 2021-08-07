@@ -2,9 +2,6 @@
 
 public class Boss_Spider: Boss_form
 {
-    //데미지
-    public int damage_Dash; //대쉬 데미지
-    public int damage_Throw; //던지기 데미지
 
     //보스의 공격 딜레이
     private float attackDelay; //공격 딜레이
@@ -20,7 +17,7 @@ public class Boss_Spider: Boss_form
     private bool inRange; //범위 안 or 밖?
 
     //상태
-    private bool doDash;
+    //private bool doDash;
 
     //레이어
     int playerLayer, bossLayer;
@@ -74,10 +71,10 @@ public class Boss_Spider: Boss_form
     }
     private void FixedUpdate()
     {
-        if (rigid.velocity == Vector2.zero) doDash = false;
-        else doDash = true;
+        //if (rigid.velocity == Vector2.zero) doDash = false;
+        //else doDash = true;
         InRange();
-        Physics2D.IgnoreLayerCollision(6, 7);
+        //Physics2D.IgnoreLayerCollision(6, 7);
         Debug.DrawRay(transform.position, direction*RangeDistance, Color.red);
 
         /*
@@ -98,13 +95,17 @@ public class Boss_Spider: Boss_form
     {
         return Vector2.Distance(pos1,pos2);
     }
-    
+
+    //부딪혔을때 데미지
+    /*
     private void OnCollisionEnter2D (Collider2D collision)
     {
-        if(collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player")
         {
-            GetDamage(damage_Dash);
+            //damage to player
+            Debug.Log("대쉬 맞음");
         }
     }
+    */
    
 }

@@ -7295,7 +7295,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1261678195}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -22, y: 0, z: -10}
+  m_LocalPosition: {x: -2, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -9882,9 +9882,15 @@ MonoBehaviour:
     type: 3}
   direction: {x: 0, y: 0, z: 0}
   damagedDelay: 3
-  warningTime: 1
-  meteoGravity: 8
+  damage_EnergyBall: 0
+  damage_Meteo: 0
+  damage_Dash: 0
+  damage_Stone: 0
+  dashSpeed: 0
+  throwSpeed: 0
   energyBallSpeed: 20
+  meteoGravity: 8
+  warningTime: 1
   timerStartTime: 15
   attackDelay: 5
   meteoPosY: 1
@@ -9892,8 +9898,6 @@ MonoBehaviour:
   meteoPosX_max: 25
   numOfMeteo: 8
   numOfTorchOff: 0
-  damage_EnergyBall: 0
-  damage_Meteo: 0
   Timer: {fileID: 794464969}
 --- !u!50 &1653532899
 Rigidbody2D:
@@ -11141,7 +11145,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1786064215}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -30, y: -2.6, z: -4}
+  m_LocalPosition: {x: -2, y: -2.6, z: -4}
   m_LocalScale: {x: 0.5902213, y: 0.5703898, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

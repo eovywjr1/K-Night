@@ -10,13 +10,6 @@ public class Boss_Spider_Reprise : Boss_form
 
     //보스의 공격 딜레이
     public float attackDelay; //보스의 공격 딜레이
-    private float lastAttackTime; //보스의 마지막 공격 시점
-    public float spawnDelay;
-
-    //메테오 딜레이
-    public float meteoDelay = 5f;
-    private float lastMeteoTime;
-    private bool canMeteo;
 
     //메테오 관련 변수들
     public int meteoPosY;
@@ -26,9 +19,6 @@ public class Boss_Spider_Reprise : Boss_form
     private int[] xList = new int[10]; //numOfMeteo
     private Vector3[] posList = new Vector3[10]; //numOfMeteo
 
-    //데미지
-    public int damage_EnergyBall; //에너지 볼 데미지
-    public int damage_Meteo; //메테오 데미지
 
     //범위
     public float RangeDistance; //범위 거리
@@ -38,8 +28,6 @@ public class Boss_Spider_Reprise : Boss_form
 
     void Start()
     {
-        lastAttackTime = 0f;
-        lastMeteoTime = 0f;
         Skills();
     }
     ///////////////

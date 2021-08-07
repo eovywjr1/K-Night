@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //생성되는 프리팹에 적용
-public class StoneAttack : MonoBehaviour
+public class Stone : MonoBehaviour
 {
-    private float throwSpeed;
-    private bool onGround = false;
-    private Vector3 direction;
     private float rnd;//던지는 돌의 속력을 랜덤하게
+    private bool onGround = false;
     private float delay;//좀 있다가 던져!
 
+    private float damage;
+    private float throwSpeed;
+    private Vector3 direction;
     private Rigidbody2D rigid;
+
     private void Awake()
     {
+        damage = GameObject.Find("Boss").GetComponent<Boss_form>().damage_Stone;
         throwSpeed = GameObject.Find("Boss").GetComponent<Boss_form>().throwSpeed;
         direction = GameObject.Find("Boss").GetComponent<Boss_form>().direction;
         rigid = GetComponent<Rigidbody2D>();
@@ -24,7 +27,7 @@ public class StoneAttack : MonoBehaviour
     }
     IEnumerator Throw()
     {
-        rnd = Random.Range(1f, 2f);
+        rnd = Random.Range(0.5f, 1.3f);
         rigid.gravityScale = 0;
         yield return new WaitForSeconds(rnd);
         rigid.gravityScale = 1;
