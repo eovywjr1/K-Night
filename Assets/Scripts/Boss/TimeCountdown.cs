@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class TimeCountdown: MonoBehaviour
 {
-    public Text TimeCount;
-    public float TimeCost;
+    public Text TimeCount; // 타이머 텍스트
+    public float TimeCost; // 시작 시간
 
-    public bool TimeEnd;
+    public bool TimeEnd; // 끝났나?
 
     private void Awake()
     {
@@ -20,7 +20,7 @@ public class TimeCountdown: MonoBehaviour
     {
         TimeCost -= Time.deltaTime;
         TimeCount.text = $"{TimeCost:N2}";
-        if (TimeCost <= 0.1)
+        if (TimeCost <= 0.01)
         {
             TimeEnd = true;
             this.gameObject.SetActive(false);

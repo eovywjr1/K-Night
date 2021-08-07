@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class Boss_form : LivingEntity
 {
-    public GameObject player; //플레이어
-    public GameObject stonePrefab; //스킬(돌) Prefab
-    public GameObject energyBallPrefab; //스킬(에너지볼) Prefab
-    public GameObject meteoPrefab; //스킬(메테오) prefab
-    public GameObject meteoWarningPrefab; //스킬(메테오 경고) prefab
+    //PLAYER
+    public GameObject player;
+
+    //스킬 PREFAB
+    public GameObject stonePrefab; //스킬(돌)
+    public GameObject energyBallPrefab; //스킬(에너지볼)
+    public GameObject meteoPrefab; //스킬(메테오)
+    public GameObject meteoWarningPrefab; //스킬(메테오 경고)
 
     protected Rigidbody2D rigid; //보스 리지드바디
     private SpriteRenderer spriteRenderer; //좌우 뒤집기 위해 // 임시
     private new Transform transform; //보스의 위치
-    private Animator animator; //보스 애니메이터
 
     public Vector3 direction;
 
@@ -23,14 +25,18 @@ public class Boss_form : LivingEntity
     private bool canDamaged; //플레이어 피격 가능한가?
     private Vector3 pos;
 
-    //메테오 관련 변수들
-    public float warningTime; // 메테오 경고 시간
-    public float meteoGravity; // 메테오 속도
+    //데미지
+    public int damage_EnergyBall; //에너지 볼 데미지
+    public int damage_Meteo; //메테오 데미지
+    public int damage_Dash; //대쉬 데미지
+    public int damage_Stone; //던지기 데미지
 
-    //스킬 속도
-    public float energyBallSpeed; //에너지 볼 속도
+    //스킬 관련
     public float dashSpeed; //대쉬 속도
     public float throwSpeed; //던지기 공격 속도
+    public float energyBallSpeed; //에너지 볼 속도
+    public float meteoGravity; // 메테오 속도
+    public float warningTime; // 메테오 경고 시간
 
     //TIMER
     public float timerStartTime;
@@ -74,6 +80,9 @@ public class Boss_form : LivingEntity
     {
         GameObject MeteoWarningClone = Instantiate(meteoWarningPrefab, pos, transform.rotation);
     }
+
+
+    /*
     /////////////////////////////////////
     ////////////////OTHERS///////////////
     /////////////////////////////////////
@@ -94,6 +103,6 @@ public class Boss_form : LivingEntity
         {
             Debug.Log("부딪힘");
         }
-    }
+    }*/
 }
 

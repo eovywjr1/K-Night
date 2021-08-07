@@ -9,10 +9,14 @@ public class Boss_Magician : Boss_form
     /// 에너지볼 : 플레이어의 방향으로 발사
     /// 메테오 : 랜덤한 위치에 5개 생성
     /// 특정 시간마다 랜덤한 스킬 사용
-     
+    /// 멀어질수록 보스의 공격 속도 증가
+    /// 시간이 지날수록 보스의 공격 속도 증가
+
     //보스의 공격 딜레이
-    public float attackDelay; //보스의 공격 딜레이
-    private float lastAttackTime; //보스의 마지막 공격 시점
+    [SerializeField]
+    private float attackDelay; //보스의 공격 딜레이
+    [SerializeField]
+    private float tempDelay; //현재 적용되는 딜레이
 
     //메테오 관련 변수들
     public int meteoPosY;
@@ -24,16 +28,11 @@ public class Boss_Magician : Boss_form
 
     public int numOfTorchOff;
 
-    //데미지
-    public int damage_EnergyBall; //에너지 볼 데미지
-    public int damage_Meteo; //메테오 데미지
-
     private int rnd;
 
     void Start()
     {
         numOfTorchOff = 0;
-        lastAttackTime = 0f;
         Skills();
     }
 
@@ -54,7 +53,13 @@ public class Boss_Magician : Boss_form
             UseMeteo();
             break;
         }
-        Invoke(nameof(Skills), attackDelay);
+        //멀어질수록 스킬 딜레이 감소
+        tempDelay = attackDelay - Mathf.Abs(player.transform.position.x/40*attackDelay);
+        if (tempDelay < 0.5f)
+            tempDelay = 0.5f;
+        Invoke(nameof(Skills), tempDelay);
+        if(attackDelay >= 0.5f)
+            attackDelay -= 0.1f;
     }
     //메테오
     private void UseMeteo()
