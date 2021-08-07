@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnergyBall : MonoBehaviour
+public class EnergyBall : Boss_Skills
 {
-    private float damage;
     private float throwSpeed;
     private Vector3 direction;
     private Rigidbody2D rigid;
@@ -32,8 +31,8 @@ public class EnergyBall : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            //damage to player
             Debug.Log("에너지 볼 맞음");
+            player.HpDecrease(damage);
         }
     }
 }

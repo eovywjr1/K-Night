@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //생성되는 프리팹에 적용
-public class Stone : MonoBehaviour
+public class Stone : Boss_Skills
 {
     private float rnd;//던지는 돌의 속력을 랜덤하게
     private bool onGround = false;
     private float delay;//좀 있다가 던져!
 
-    private float damage;
     private float throwSpeed;
     private Vector3 direction;
     private Rigidbody2D rigid;
@@ -47,8 +46,8 @@ public class Stone : MonoBehaviour
         //플레이어와 접촉시 데미지
         else if (collision.gameObject.tag == "Player" && !onGround)
         {
-            //damage to player
             Debug.Log("돌맞음");
+            player.HpDecrease(damage);
         }
     }
     private void DestroyStone()

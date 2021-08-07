@@ -26,6 +26,8 @@ public class Boss_Magician : Boss_form
     private int[] xList = new int[8]; //numOfMeteo
     private Vector3[] posList = new Vector3[8]; //numOfMeteo
 
+    private bool playerCanAttack;// 보스를 때릴수 있다!
+
     public int numOfTorchOff;
 
     private int rnd;
@@ -124,6 +126,7 @@ public class Boss_Magician : Boss_form
         if (numOfTorchOff == 6)
         {
             Debug.Log("15초간 보스에게 타격 가능");
+            playerCanAttack = true;
             if(Timer.GetComponent<TimeCountdown>().TimeEnd == false) Timer.SetActive(true);
             //타이머가 꺼지면 초기화
             if (numOfTorchOff == 6 && Timer.GetComponent<TimeCountdown>().TimeEnd)
@@ -131,6 +134,7 @@ public class Boss_Magician : Boss_form
                 Timer.GetComponent<TimeCountdown>().TimeEnd = false;
                 Timer.GetComponent<TimeCountdown>().TimeCost = timerStartTime;
                 numOfTorchOff = 0;
+                playerCanAttack = false;
             }
         }
     }

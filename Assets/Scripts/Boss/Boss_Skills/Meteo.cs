@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Meteo : MonoBehaviour
+public class Meteo : Boss_Skills
 {
-    private float damage;
     private bool onGround = false;
     private Rigidbody2D rigid;
 
@@ -28,8 +27,8 @@ public class Meteo : MonoBehaviour
         //플레이어와 접촉시 데미지
         else if (collision.gameObject.tag == "Player" && !onGround)
         {
-            //damage to player
-            Debug.Log("메테오맞음");
+            Debug.Log("메테오 맞음");
+            player.HpDecrease(damage);
         }
     }
     private void DestroyMeteo()

@@ -9890,9 +9890,10 @@ MonoBehaviour:
   throwSpeed: 0
   energyBallSpeed: 20
   meteoGravity: 8
-  warningTime: 1
+  warningTime: 0.5
   timerStartTime: 15
   attackDelay: 5
+  tempDelay: 0
   meteoPosY: 1
   meteoPosX_min: -25
   meteoPosX_max: 25
