@@ -335,26 +335,26 @@ public class TalkManager : MonoBehaviour
     {
         if(lastTalkID == 0)
         {
-            nextQuestText.text = " ";
+            nextQuestText.text = "아직 받은 퀘스트가 없습니다.";
         }
-        if(lastTalkID == 100)
+        else if(lastTalkID == 100)
         {
             nextQuestText.text = "마을 서쪽에 나타난 괴물을 처치하자!";
         }
-        if(lastTalkID == 200)
+        else if(lastTalkID == 200)
         {
             nextQuestText.text = "마을 동쪽의 동굴을 통해 과거로 가서, 괴물의 원한을 잠재우자!";
             RemoveCaveBarricade();
         }
-        if(lastTalkID == 250)
+        else if(lastTalkID == 250)
         {
             nextQuestText.text = "괴물에게 왕에 대한 이야기를 물어보자.";
         }
-        if(lastTalkID == 310)
+        else if(lastTalkID == 310)
         {
             nextQuestText.text = "포탈을 타고 현재로 돌아가자!";
         }
-        if(lastTalkID == 370)
+        else if(lastTalkID == 370)
         {
             nextQuestText.text = "포탈을 타고 숲으로 가서 주술사로부터 부적을 받자.";
         }
