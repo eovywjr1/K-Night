@@ -37,12 +37,15 @@ public class Player : MonoBehaviour
 
     // npc 대사.
     private Vector3 directionPlayerLooksAt;
-    private GameObject scannedTalker;
+    public GameObject scannedTalker;
     public TalkManager talkManager;
+
+    // YesNo 관련 변수.
+    public bool isYesNoOn;
 
     private void Awake()
     {
-        
+        isYesNoOn = false;
         
 
     }
@@ -237,13 +240,23 @@ public class Player : MonoBehaviour
             directionPlayerLooksAt = new Vector3(-1, 0, 0);
         }
 
-        if ( // npc에게 말 걸기.
-            (Input.GetButtonDown("Vertical") && Input.GetAxisRaw("Vertical") == 1 && scannedTalker != null)
-            ||
-            (talkManager.talkIndex >= 1 && (Input.GetButtonDown("Horizontal") || Input.GetButtonDown("Jump")))
-           )
+        if (
+            ( // npc에게 말 걸기.
+             (Input.GetKeyDown(KeyCode.UpArrow) && scannedTalker != null)
+             ||
+             (talkManager.talkIndex >= 1 && (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) )  )
+            ) && (isYesNoOn == false) )
         {
             talkManager.TriggerTalks(scannedTalker);
+        }
+        else if (
+            ( // npc에게 말 걸기.
+             (Input.GetKeyDown(KeyCode.UpArrow) && scannedTalker != null)
+             ||
+             (talkManager.talkIndex >= 1 && (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow)))
+            ) && (isYesNoOn == true) )
+        {
+
         }
     }
 
