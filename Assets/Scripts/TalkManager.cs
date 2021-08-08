@@ -14,13 +14,16 @@ public class TalkManager : MonoBehaviour
     bool talkIsActive;
     public int talkIndex;
 
+    // ESC.
     bool escMenuPanelIsActive;
-
     public GameObject escMenuPanel;
+    public Text nextQuestText;
 
+    // 대사 딕셔너리.
     Dictionary<int, string[]> talkData;
 
-    public GameObject firstTalkingNPCInStory; // ?!
+    public int lastTalkID;
+
 
     private void Awake()
     {
@@ -28,6 +31,9 @@ public class TalkManager : MonoBehaviour
         escMenuPanelIsActive = false;
         talkData = new Dictionary<int, string[]>();
         GenerateTalkData();
+
+        // For nextQuest.
+        lastTalkID = 0;
     }
 
     private void Start()
@@ -39,6 +45,8 @@ public class TalkManager : MonoBehaviour
 
     private void Update()
     {
+        TextQuestInEscAndTriggerStoryEvent();
+
         if (Input.GetKeyDown("escape"))
         {
             ActivateEscMenuPanel();
@@ -228,6 +236,8 @@ public class TalkManager : MonoBehaviour
         ObjTalkData objTalkData = ObjectForTalkId.GetComponent<ObjTalkData>();
         Talk(objTalkData.talkId);
 
+        SetLastTalkID(objTalkData.talkId);
+
         talkPanel.SetActive(talkIsActive);
         
     }
@@ -251,6 +261,58 @@ public class TalkManager : MonoBehaviour
             escMenuPanel.SetActive(false);
         }
 
+    }
+
+    
+    private void SetLastTalkID(int id)
+    {
+        if(id > lastTalkID)
+        {
+            lastTalkID = id;
+        }
+
+    }
+
+   
+    private void TextQuestInEscAndTriggerStoryEvent()
+    {
+        if(lastTalkID == 0)
+        {
+            nextQuestText.text = " ";
+        }
+        if(lastTalkID == 100)
+        {
+            nextQuestText.text = "마을 서쪽에 나타난 괴물을 처치하자!";
+        }
+        if(lastTalkID == 200)
+        {
+            nextQuestText.text = "마을 동쪽의 동굴을 통해 과거로 가서, 괴물의 원한을 잠재우자!";
+            RemoveCaveBarricade();
+        }
+        if(lastTalkID == 300)
+        {
+
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
+    // 스토리 상의 함수. (npc 움직임, 오브젝트 제거 or 변경 등..)
+    public void RemoveCaveBarricade()
+    {
+        GameObject caveBarricade = GameObject.Find("CaveBarricade");
+        if (caveBarricade != null)
+        {
+            Destroy(caveBarricade);
+        }
     }
 
 }
