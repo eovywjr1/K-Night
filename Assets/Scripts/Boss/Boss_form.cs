@@ -20,9 +20,6 @@ public class Boss_form : LivingEntity
     public Vector3 direction;
 
     private float floatRnd; //실수형 난수
-    private float lastDamagedTime; //마지막 데미지 받은 시점
-    public float damagedDelay;//플레이어 무적시간 //여기 있을건 아닌듯
-    private bool canDamaged; //플레이어 피격 가능한가?
     private Vector3 pos;
 
     //데미지

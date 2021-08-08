@@ -7,7 +7,7 @@ TagManager:
   - Boss
   - Junior
   - Ground
-  - Platform
+  - Wall
   layers:
   - Default
   - TransparentFX

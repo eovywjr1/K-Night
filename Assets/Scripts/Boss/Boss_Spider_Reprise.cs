@@ -22,7 +22,7 @@ public class Boss_Spider_Reprise : Boss_form
 
     void Start()
     {
-        limitMagicSkills = true;
+        limitMagicSkills = false;
         numOfTorchOff = 0;
         Skills();
     }
@@ -114,7 +114,7 @@ public class Boss_Spider_Reprise : Boss_form
         if (numOfTorchOff == 6)
         {
             Debug.Log("마법 스킬 사용 불가!");
-            limitMagicSkills = false;
+            limitMagicSkills = true;
             if (Timer.GetComponent<TimeCountdown>().TimeEnd == false) Timer.SetActive(true);
             //타이머가 꺼지면 초기화
             if (numOfTorchOff == 6 && Timer.GetComponent<TimeCountdown>().TimeEnd)
@@ -122,7 +122,7 @@ public class Boss_Spider_Reprise : Boss_form
                 Timer.GetComponent<TimeCountdown>().TimeEnd = false;
                 Timer.GetComponent<TimeCountdown>().TimeCost = timerStartTime;
                 numOfTorchOff = 0;
-                limitMagicSkills = true;
+                limitMagicSkills = false;
             }
         }
     }

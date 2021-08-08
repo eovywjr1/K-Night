@@ -6,6 +6,5 @@ public class Boss_Skills_Figures : MonoBehaviour
     protected int damage;
     void Start()
     {
-        player = FindObjectOfType<Player>();
     }
 }

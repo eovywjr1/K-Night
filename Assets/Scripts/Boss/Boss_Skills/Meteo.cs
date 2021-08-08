@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Meteo : Boss_Skills_Figures
 {
@@ -9,6 +7,7 @@ public class Meteo : Boss_Skills_Figures
 
     private void Awake()
     {
+        player = FindObjectOfType<Player>();
         damage = GameObject.Find("Boss").GetComponent<Boss_form>().damage_Meteo;
         rigid = GetComponent<Rigidbody2D>();
         rigid.gravityScale = GameObject.Find(nameof(Boss)).GetComponent<Boss_form>().meteoGravity;
@@ -16,8 +15,8 @@ public class Meteo : Boss_Skills_Figures
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //땅(Ground과 접촉시 오브젝트 제거)
-        if (collision.gameObject.tag == "Ground")
+        //땅(Ground와 접촉시 오브젝트 제거)
+        if (collision.CompareTag("Ground"))
         {
             onGround = true;
             rigid.velocity = Vector3.zero;
@@ -25,7 +24,7 @@ public class Meteo : Boss_Skills_Figures
             Invoke(nameof(DestroyMeteo), 0.3f);
         }
         //플레이어와 접촉시 데미지
-        else if (collision.gameObject.tag == "Player" && !onGround)
+        else if (collision.CompareTag("Player") && !onGround)
         {
             Debug.Log("메테오 맞음");
             player.HpDecrease(damage);
