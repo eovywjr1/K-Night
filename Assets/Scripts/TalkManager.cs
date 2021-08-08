@@ -2,21 +2,55 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class TalkManager : MonoBehaviour
 {
+    public GameObject player;
+
     public GameObject talkPanel;
     public Text talkText;
     GameObject ObjectForTalkId;
     bool talkIsActive;
     public int talkIndex;
 
+    // ESC.
+    bool escMenuPanelIsActive;
+    public GameObject escMenuPanel;
+    public Text nextQuestText;
+
+    // 대사 딕셔너리.
     Dictionary<int, string[]> talkData;
+
+    public int lastTalkID;
+
 
     private void Awake()
     {
+        talkIsActive = false;
+        escMenuPanelIsActive = false;
         talkData = new Dictionary<int, string[]>();
         GenerateTalkData();
+
+        // For nextQuest.
+        lastTalkID = 0;
+    }
+
+    private void Start()
+    {
+        
+
+
+    }
+
+    private void Update()
+    {
+        TextQuestInEscAndTriggerStoryEvent();
+
+        if (Input.GetKeyDown("escape"))
+        {
+            ActivateEscMenuPanel();
+        }
     }
 
     // ---------------------------------------------------------
@@ -34,7 +68,7 @@ public class TalkManager : MonoBehaviour
      * 21: "INFO"
      */
 
-    // GenerateTalkData()에 대본 적용.
+    // GenerateTalkData()에 대본 적용되어 있음.
     void GenerateTalkData()
     {
         // 게임 시작 직후, 어떤 마을 NPC가 플레이어에게. (100).
@@ -202,8 +236,83 @@ public class TalkManager : MonoBehaviour
         ObjTalkData objTalkData = ObjectForTalkId.GetComponent<ObjTalkData>();
         Talk(objTalkData.talkId);
 
+        SetLastTalkID(objTalkData.talkId);
+
         talkPanel.SetActive(talkIsActive);
         
+    }
+
+    
+
+
+
+    public void ActivateEscMenuPanel()
+    {
+        if(escMenuPanelIsActive == false)
+        {
+            Time.timeScale = 0;
+            escMenuPanelIsActive = true;
+            escMenuPanel.SetActive(true);
+        }
+        else
+        {
+            Time.timeScale = 1;
+            escMenuPanelIsActive = false;
+            escMenuPanel.SetActive(false);
+        }
+
+    }
+
+    
+    private void SetLastTalkID(int id)
+    {
+        if(id > lastTalkID)
+        {
+            lastTalkID = id;
+        }
+
+    }
+
+   
+    private void TextQuestInEscAndTriggerStoryEvent()
+    {
+        if(lastTalkID == 0)
+        {
+            nextQuestText.text = " ";
+        }
+        if(lastTalkID == 100)
+        {
+            nextQuestText.text = "마을 서쪽에 나타난 괴물을 처치하자!";
+        }
+        if(lastTalkID == 200)
+        {
+            nextQuestText.text = "마을 동쪽의 동굴을 통해 과거로 가서, 괴물의 원한을 잠재우자!";
+            RemoveCaveBarricade();
+        }
+        if(lastTalkID == 300)
+        {
+
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
+    // 스토리 상의 함수. (npc 움직임, 오브젝트 제거 or 변경 등..)
+    public void RemoveCaveBarricade()
+    {
+        GameObject caveBarricade = GameObject.Find("CaveBarricade");
+        if (caveBarricade != null)
+        {
+            Destroy(caveBarricade);
+        }
     }
 
 }

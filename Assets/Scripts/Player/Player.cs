@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -32,12 +33,26 @@ public class Player : MonoBehaviour
     Rigidbody2D rigid;
 
     Vector3 movement;
-    private Animator animator; 
+    private Animator animator;
 
+    // npc 대사.
+    private Vector3 directionPlayerLooksAt;
+    private GameObject scannedTalker;
+    public TalkManager talkManager;
 
+    private void Awake()
+    {
+        
+        
 
+    }
     void Start()
     {
+        if (SceneManager.GetActiveScene().name == "Village_Present")
+        {
+            
+        }
+
         if (instance == null) // 씬 이동하면서 캐릭터 복사하지 않기 위해 static 선언 후 대입
         {
             DontDestroyOnLoad(this.gameObject);
@@ -58,7 +73,8 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-
+        TalkerFinder();
+        
 
 
 
@@ -112,6 +128,7 @@ public class Player : MonoBehaviour
         Dash();
         Attack();
 
+        TalkerFinderInAwakeAndFixedUpdate();
     }
 
     void Move() // 좌우 움직임 
@@ -200,6 +217,58 @@ public class Player : MonoBehaviour
     }
 
 
+
+
+
+
+
+
+
+
+    void TalkerFinder()
+    {
+        // 플레이어가 발사하는 Ray의 벡터 조절.
+        if (Input.GetAxisRaw("Horizontal") == 1)
+        {
+            directionPlayerLooksAt = new Vector3(1, 0, 0);
+        }
+        else if (Input.GetAxisRaw("Horizontal") == -1)
+        {
+            directionPlayerLooksAt = new Vector3(-1, 0, 0);
+        }
+
+        if ( // npc에게 말 걸기.
+            (Input.GetButtonDown("Vertical") && Input.GetAxisRaw("Vertical") == 1 && scannedTalker != null)
+            ||
+            (talkManager.talkIndex >= 1 && (Input.GetButtonDown("Horizontal") || Input.GetButtonDown("Jump")))
+           )
+        {
+            talkManager.TriggerTalks(scannedTalker);
+        }
+    }
+
+    // 이 함수를 통해서 Player는 "Talker" 레이어의 오브젝트를 감지합니다.
+    void TalkerFinderInAwakeAndFixedUpdate()
+    {
+        
+        float rayLenOfLooking = 0.5f;
+
+        // Ray.
+        Debug.DrawRay(rigid.position, directionPlayerLooksAt * rayLenOfLooking, new Color(0, 255 / 255f, 0, 255 / 255f));
+        RaycastHit2D rayHit
+            = Physics2D.Raycast(rigid.position, directionPlayerLooksAt, rayLenOfLooking, LayerMask.GetMask("Talker"));
+
+        if (rayHit.collider != null)
+        {
+            scannedTalker = rayHit.collider.gameObject;
+        }
+        else if(rayHit.collider == null)
+        {
+            scannedTalker = null;
+        }
+    }
+
+    
    
 
 }
