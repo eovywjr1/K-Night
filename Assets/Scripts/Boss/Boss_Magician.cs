@@ -19,21 +19,15 @@ public class Boss_Magician : Boss_form
     private float tempDelay; //현재 적용되는 딜레이
 
     //메테오 관련 변수들
-    public int meteoPosY;
-    public int meteoPosX_min;
-    public int meteoPosX_max;
-    public int numOfMeteo;
     private int[] xList = new int[8]; //numOfMeteo
     private Vector3[] posList = new Vector3[8]; //numOfMeteo
 
+    //보스 특징 관련 변수
     private bool playerCanAttack;// 보스를 때릴수 있다!
-
-    public int numOfTorchOff;
-
-    private int rnd;
 
     void Start()
     {
+        playerCanAttack = false;
         numOfTorchOff = 0;
         Skills();
     }
@@ -41,12 +35,10 @@ public class Boss_Magician : Boss_form
     /////////////////////////////////////
     /////////////USING SKILLS////////////
     /////////////////////////////////////
-    void Skills() // 스킬 사용
-    {
-        
+    private int rnd;
+    void Skills(){ // 스킬 사용
         rnd = Random.Range(1, 3);
-        switch (rnd)
-        {
+        switch (rnd){
         case 1:
             FindPlayer();//좌우 확인
             EnergyBall();
@@ -60,54 +52,42 @@ public class Boss_Magician : Boss_form
         if (tempDelay < 0.5f)
             tempDelay = 0.5f;
         Invoke(nameof(Skills), tempDelay);
+        //시간이 지날수록 스킬 딜레이 감소
         if(attackDelay >= 0.5f)
             attackDelay -= 0.1f;
     }
     //메테오
-    private void UseMeteo()
-    {
+    private void UseMeteo(){
         StartCoroutine(CoMeteo(warningTime));
-
     }
-    IEnumerator CoMeteo(float warningTime)
-    {
+    IEnumerator CoMeteo(float warningTime){
         makeVec();
-        for (int i = 0; i < numOfMeteo; i++)
-        {
+        for (int i = 0; i < numOfMeteo; i++){
             MeteoWarning(posList[i]);
         }
         yield return new WaitForSeconds(warningTime);
-        for (int i = 0; i < numOfMeteo; i++)
-        {
+        for (int i = 0; i < numOfMeteo; i++){
             Meteo(posList[i] + new Vector3(0, meteoWarningPrefab.transform.localScale.y/2, 0));
         }
     }
     // 메테오 위치 설정
-    void makeVec()
-    {
+    void makeVec(){
         GetRandomInt(numOfMeteo, meteoPosX_min/3, meteoPosX_max/3);
-        for (int i = 0; i < numOfMeteo; i++)
-        {
+        for (int i = 0; i < numOfMeteo; i++){
             posList[i] = new Vector3(xList[i]*3, meteoPosY, -1);
         }
     }
 
     //중복없는 난수 생성
-    public void GetRandomInt(int length, int min, int max)
-    {
+    public void GetRandomInt(int length, int min, int max){
         bool isSame;
-
-        for (int i = 0; i < length; ++i)
-        {
-            while (true)
-            {
+        for (int i = 0; i < length; ++i){
+            while (true){
                 xList[i] = Random.Range(min, max);
                 isSame = false;
 
-                for (int j = 0; j < i; ++j)
-                {
-                    if (xList[j] == xList[i])
-                    {
+                for (int j = 0; j < i; ++j){
+                    if (xList[j] == xList[i]){
                         isSame = true;
                         break;
                     }

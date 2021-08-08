@@ -1,9 +1,8 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 //생성되는 프리팹에 적용
-public class Stone : Boss_Skills
+public class Stone : Boss_Skills_Figures
 {
     private float rnd;//던지는 돌의 속력을 랜덤하게
     private bool onGround = false;
@@ -15,6 +14,7 @@ public class Stone : Boss_Skills
 
     private void Awake()
     {
+        player = FindObjectOfType<Player>();
         damage = GameObject.Find("Boss").GetComponent<Boss_form>().damage_Stone;
         throwSpeed = GameObject.Find("Boss").GetComponent<Boss_form>().throwSpeed;
         direction = GameObject.Find("Boss").GetComponent<Boss_form>().direction;
@@ -35,16 +35,16 @@ public class Stone : Boss_Skills
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //땅(Platform과 접촉시 오브젝트 제거)
-        if (collision.gameObject.tag == "Ground")
+        //땅(Ground와 접촉시 오브젝트 제거)
+        if (collision.CompareTag("Ground"))
         {
             onGround = true;
-            rigid.velocity = Vector2.zero;
+            rigid.velocity = Vector3.zero;
             rigid.gravityScale = 0;
-            Invoke(nameof(DestroyStone), 1f);
+            Invoke(nameof(DestroyStone), 0.3f);
         }
         //플레이어와 접촉시 데미지
-        else if (collision.gameObject.tag == "Player" && !onGround)
+        else if (collision.CompareTag("Player") && !onGround)
         {
             Debug.Log("돌맞음");
             player.HpDecrease(damage);
