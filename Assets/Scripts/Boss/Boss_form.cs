@@ -37,6 +37,17 @@ public class Boss_form : LivingEntity
     public float energyBallSpeed; //에너지 볼 속도
     public float meteoGravity; // 메테오 속도
     public float warningTime; // 메테오 경고 시간
+    //메테오 관련 변수들
+    public int meteoPosY;
+    public int meteoPosX_min;
+    public int meteoPosX_max;
+    public int numOfMeteo;
+    //범위
+    public float RangeDistance; //범위 거리
+    public bool inRange; //범위 안 or 밖?
+
+    //보스 특징 관련
+    public int numOfTorchOff;
 
     //TIMER
     public float timerStartTime;
@@ -80,29 +91,20 @@ public class Boss_form : LivingEntity
     {
         GameObject MeteoWarningClone = Instantiate(meteoWarningPrefab, pos, transform.rotation);
     }
-
-
-    /*
     /////////////////////////////////////
-    ////////////////OTHERS///////////////
+    /////////////MORE DETAILS////////////
     /////////////////////////////////////
-    protected void GetDamage(float damage)
+    //플레이어가 범위안에 있는가?
+    protected void InRange()
     {
-        //플레이어 무적시간 고려
-        if (lastDamagedTime + damagedDelay <= Time.time)
-        {
-            canDamaged = true;
-            lastDamagedTime = Time.time;
-        }
-        else
-        {
-            canDamaged = false;
-        }
-        //데미지
-        if (canDamaged)
-        {
-            Debug.Log("부딪힘");
-        }
-    }*/
+        if (CalculateDistance(transform.position, player.GetComponent<Transform>().position) < RangeDistance)
+            inRange = true;
+        else inRange = false;
+    }
+    //거리계산
+    protected float CalculateDistance(Vector2 pos1, Vector2 pos2)
+    {
+        return Vector2.Distance(pos1, pos2);
+    }
 }
 

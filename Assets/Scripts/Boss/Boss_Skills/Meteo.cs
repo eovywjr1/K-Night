@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Meteo : Boss_Skills
+public class Meteo : Boss_Skills_Figures
 {
     private bool onGround = false;
     private Rigidbody2D rigid;

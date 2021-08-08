@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //생성되는 프리팹에 적용
-public class Stone : Boss_Skills
+public class Stone : Boss_Skills_Figures
 {
     private float rnd;//던지는 돌의 속력을 랜덤하게
     private bool onGround = false;

@@ -12,10 +12,6 @@ public class Boss_Spider: Boss_form
     private float lastAttackTime_Dash; //마지막 공격 시점
     private float lastAttackTime_Throw; //마지막 공격 시점
 
-    //범위
-    public float RangeDistance; //범위 거리
-    private bool inRange; //범위 안 or 밖?
-
     //상태
     //private bool doDash;
 
@@ -81,19 +77,6 @@ public class Boss_Spider: Boss_form
         //충돌 무시
         Physics2D.IgnoreLayerCollision(playerLayer, bossLayer,true);
         */
-    }
-
-    //플레이어가 범위안에 있는가?
-    private void InRange()
-    {
-        if (CalculateDistance(transform.position, player.GetComponent<Transform>().position) < RangeDistance)
-            inRange = true;
-        else inRange = false;
-    }
-    //거리계산
-    private float CalculateDistance(Vector2 pos1, Vector2 pos2)
-    {
-        return Vector2.Distance(pos1,pos2);
     }
 
     private void OnCollisionEnter2D (Collision2D collision)

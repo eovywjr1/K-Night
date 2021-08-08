@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Boss_Skills : MonoBehaviour
+public class Boss_Skills_Figures : MonoBehaviour
 {
     public Player player;
     protected int damage;

@@ -26,7 +26,7 @@ public class Torch : MonoBehaviour
         {
             gameObject.GetComponent<SpriteRenderer>().sprite = torchOff;
             child.SetActive(false);
-            Boss.GetComponent<Boss_Magician>().numOfTorchOff++;
+            Boss.GetComponent<Boss_form>().numOfTorchOff++;
             on = false;
         }
     }
@@ -34,7 +34,7 @@ public class Torch : MonoBehaviour
     {
         if (Timer != null)
         {
-            if (Boss.GetComponent<Boss_Magician>().numOfTorchOff == 6)
+            if (Boss.GetComponent<Boss_form>().numOfTorchOff == 6)
             {
                 if (Timer.GetComponent<TimeCountdown>().TimeEnd)
                 {
