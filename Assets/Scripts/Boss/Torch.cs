@@ -22,7 +22,7 @@ public class Torch : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //플레이어가 횃불을 공격한다면
-        if (collision.gameObject.tag == "Player" && on)
+        if (collision.gameObject.CompareTag("Player") && on)
         {
             gameObject.GetComponent<SpriteRenderer>().sprite = torchOff;
             child.SetActive(false);

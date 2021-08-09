@@ -27,6 +27,7 @@ public class Boss_form : LivingEntity
     public int damage_Meteo; //메테오 데미지
     public int damage_Dash; //대쉬 데미지
     public int damage_Stone; //던지기 데미지
+    public int damage_Touch; //닿았을때 데미지
 
     //스킬 관련
     public float dashSpeed; //대쉬 속도
@@ -34,11 +35,15 @@ public class Boss_form : LivingEntity
     public float energyBallSpeed; //에너지 볼 속도
     public float meteoGravity; // 메테오 속도
     public float warningTime; // 메테오 경고 시간
+
+    protected bool doDash; //대쉬중인가?
+
     //메테오 관련 변수들
     public int meteoPosY;
     public int meteoPosX_min;
     public int meteoPosX_max;
     public int numOfMeteo;
+
     //범위
     public float RangeDistance; //범위 거리
     public bool inRange; //범위 안 or 밖?
@@ -68,6 +73,7 @@ public class Boss_form : LivingEntity
     /////////////////////////////////////
     protected void Dash(float dashSpeed)
     {
+        doDash = true;
         rigid.AddForce(direction* dashSpeed, ForceMode2D.Impulse);
     }
     protected void ThrowStones()

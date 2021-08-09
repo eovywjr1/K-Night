@@ -12,11 +12,6 @@ public class Boss_Spider: Boss_form
     private float lastAttackTime_Dash; //마지막 공격 시점
     private float lastAttackTime_Throw; //마지막 공격 시점
 
-    //상태
-    //private bool doDash;
-
-    //레이어
-    int playerLayer, bossLayer;
     private void Start()
     {
         /*
@@ -78,13 +73,25 @@ public class Boss_Spider: Boss_form
         Physics2D.IgnoreLayerCollision(playerLayer, bossLayer,true);
         */
     }
-
-    private void OnCollisionEnter2D (Collision2D collision)
+    /////////////////////////////////////
+    //////////////피격 관련//////////////
+    /////////////////////////////////////
+    //대쉬를 할때 데미지 예를 들어 2이면 그냥 피격데미지는 1
+    //돌던지기에 관련된 피격은 따로 있음
+    //플레이어가 무적이 아닐동안
+    //=> 플레이어가 피격되면 일정시간 동안 무적
+    //임시 변수
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.CompareTag("Player") && doDash)
         {
+            Debug.Log("대쉬 맞음");
             player.HpDecrease(damage_Dash);
         }
+        else if (collision.gameObject.CompareTag("Player") && !doDash)
+        {
+            Debug.Log("몸빵 맞음");
+            player.HpDecrease(damage_Touch);
+        }
     }
-   
 }

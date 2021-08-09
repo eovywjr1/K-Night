@@ -17,11 +17,11 @@ public class Boss_Spider_Reprise : Boss_form
 
     private bool limitMagicSkills;// 보스가 마법공격 못함!
 
-
     private int rnd;
 
     void Start()
     {
+        inRange = true;
         limitMagicSkills = false;
         numOfTorchOff = 0;
         Skills();
@@ -101,6 +101,8 @@ public class Boss_Spider_Reprise : Boss_form
     private void FixedUpdate(){
         InRange(); // 범위 확인
         Debug.DrawRay(transform.position + Vector3.left * RangeDistance, Vector3.right *2 * RangeDistance, Color.red);
+        //이동x면 대쉬x
+        if (rigid.velocity == Vector2.zero) doDash = false;
     }
     
 
@@ -124,6 +126,27 @@ public class Boss_Spider_Reprise : Boss_form
                 numOfTorchOff = 0;
                 limitMagicSkills = false;
             }
+        }
+    }
+    /////////////////////////////////////
+    //////////////피격 관련//////////////
+    /////////////////////////////////////
+    //대쉬를 할때 데미지 예를 들어 2이면 그냥 피격데미지는 1
+    //돌던지기에 관련된 피격은 따로 있음
+    //플레이어가 무적이 아닐동안
+    //=> 플레이어가 피격되면 일정시간 동안 무적
+    //임시 변수
+    private void OnTriggerStay2D (Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player") && doDash)
+        {
+            Debug.Log("대쉬 맞음");
+            player.HpDecrease(damage_Dash);
+        }
+        else if (collision.gameObject.CompareTag("Player") && !doDash)
+        {
+            Debug.Log("몸빵 맞음");
+            player.HpDecrease(damage_Touch);
         }
     }
 }
