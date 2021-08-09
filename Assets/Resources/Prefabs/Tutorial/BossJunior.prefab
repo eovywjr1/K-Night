@@ -152,7 +152,7 @@ MonoBehaviour:
   playerPosition: {x: 0, y: 0}
   hp: 3
   power: 0
-  moveSpeed: 5
+  moveSpeed: 2
   moveDelaytime: 2
   isMoveDelay: 0
 --- !u!1 &4596541594102135345

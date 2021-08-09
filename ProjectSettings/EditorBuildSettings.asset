@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Village_Present.unity
     guid: cf45876716b6a40448a9eae39845812e
+  - enabled: 1
+    path: Assets/Scenes/TutorialBoss.unity
+    guid: 13466947a8eec3b48b7e2934d4af01d7
+  - enabled: 1
+    path: Assets/Scenes/Village_Present_AfterTutorial.unity
+    guid: 568cd6319f3145344bc98f1333a2357b
   m_configObjects: {}

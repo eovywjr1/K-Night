@@ -24,6 +24,7 @@ public class CameraMoving : MonoBehaviour
 
             // vectorA -> B까지 T의 속도로 이동
                 this.transform.position = Vector3.Lerp(this.transform.position, targetPosition, moveSpeed * Time.deltaTime);
+            target = FindObjectOfType<Player>();
         }
     }
 }
