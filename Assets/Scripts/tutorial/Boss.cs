@@ -38,8 +38,8 @@ public class Boss : MonoBehaviour
         boxCollider = GetComponent<BoxCollider2D>();
 
         StartCoroutine(RandomMove());
-        //StartCoroutine(JuniorCalldelay());
-        StartCoroutine(DashToplayer());
+        StartCoroutine(JuniorCalldelay());
+        //StartCoroutine(DashToplayer());
     }
 
     void Update()

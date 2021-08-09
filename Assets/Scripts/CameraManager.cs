@@ -6,47 +6,20 @@ using UnityEngine.SceneManagement;
 public class CameraManager : MonoBehaviour
 {
     public Player player;
+    public string sceneName;
 
     void Start()
     {        
         player = FindObjectOfType<Player>();
-        this.gameObject.transform.position = new Vector3(player.transform.position.x, this.gameObject.transform.position.y, -1);
+        sceneName = SceneManager.GetActiveScene().name;
     }
 
     void Update()
     {
-        // 
-        if (ReturnIsInVillage())
+        if (sceneName == "TutorialBoss")
         {
-            this.gameObject.transform.position = new Vector3(player.transform.position.x, this.gameObject.transform.position.y, -1);
-
-        }
-        else
-        {
-            if (player.transform.position.x > -22 && this.gameObject.transform.position.x < 18)
+            if (player.transform.position.x > -17.3 && this.gameObject.transform.position.x < 13)
                 this.gameObject.transform.position = new Vector3(player.transform.position.x, this.gameObject.transform.position.y, -1);
         }
-
-
-
-
-
-    }
-
-
-
-    private bool ReturnIsInVillage()
-    {
-        string[] playerPlace = SceneManager.GetActiveScene().name.Split('_');
-
-        if(playerPlace[0] == "Village")
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-
     }
 }

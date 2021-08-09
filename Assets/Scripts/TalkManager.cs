@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class TalkManager : MonoBehaviour
 {
+    // public이지만 절대 유니티 인스펙터 창에서 Player 오브젝트를 직접 넣으면 안 됩니다.
     public GameObject player;
 
     public GameObject talkPanel;
@@ -35,6 +36,8 @@ public class TalkManager : MonoBehaviour
 
     private void Awake()
     {
+        PlayerTracker();
+
         isYesNoOn = false;
         talkIsActive = false;
         escMenuPanelIsActive = false;
@@ -54,6 +57,8 @@ public class TalkManager : MonoBehaviour
 
     private void Update()
     {
+        PlayerTracker();
+
         ToggleArrowGhostSuggestion();
 
         TextQuestInEscAndTriggerStoryEvent();
@@ -236,7 +241,6 @@ public class TalkManager : MonoBehaviour
     {
         string talkString;
         string talkerName;
-        string clueToYesNo;
 
         if (GetTalkSentence(id, talkIndex) != null)
         {
@@ -263,7 +267,6 @@ public class TalkManager : MonoBehaviour
         {
             talkString = null;
             talkerName = null;
-            clueToYesNo = null;
         }
         
 
@@ -455,4 +458,15 @@ public class TalkManager : MonoBehaviour
 
     }
 
+    private void PlayerTracker()
+    {
+        if (GameObject.Find("Player") != null)
+        {
+            player = GameObject.Find("Player");
+        }
+        else
+        {
+            player = null;
+        }
+    }
 }
