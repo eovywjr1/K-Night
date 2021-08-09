@@ -10,8 +10,19 @@ public class CameraMoving : MonoBehaviour
     public float rightEnd;
     private Vector3 targetPosition; // 대상의 현재 위치
 
+
+
     void Update()
     {
+        if (GameObject.Find("Player") != null)
+        {
+            target = GameObject.Find("Player");
+        }
+        else
+        {
+            target = null;
+        }
+
         // 대상이 있는지 체크
         if (target.gameObject != null)
         {
@@ -24,7 +35,7 @@ public class CameraMoving : MonoBehaviour
 
             // vectorA -> B까지 T의 속도로 이동
                 this.transform.position = Vector3.Lerp(this.transform.position, targetPosition, moveSpeed * Time.deltaTime);
-            target = FindObjectOfType<Player>();
+            
         }
     }
 }
