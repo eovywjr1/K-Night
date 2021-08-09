@@ -12,12 +12,10 @@ public class Boss_Spider: Boss_form
     private float lastAttackTime_Dash; //마지막 공격 시점
     private float lastAttackTime_Throw; //마지막 공격 시점
 
+    //
+    Vector3 startPoint;
     private void Start()
     {
-        /*
-        playerLayer = LayerMask.NameToLayer("Player");
-        bossLayer = LayerMask.NameToLayer("Boss");
-        */
         inRange = false;
         lastAttackTime_Throw = 0f;
         Skills();
@@ -46,8 +44,10 @@ public class Boss_Spider: Boss_form
         FindPlayer();
 
         //범위 체크
-        if (inRange && canAttack_Dash)
+        if (inRange && canAttack_Dash && !doDash)
         {
+            startPoint = transform.position;
+            doDash = true;
             Dash(dashSpeed);
             attackDelay = attackDelay_Dash;
         }
@@ -62,16 +62,17 @@ public class Boss_Spider: Boss_form
     }
     private void FixedUpdate()
     {
-        //if (rigid.velocity == Vector2.zero) doDash = false;
-        //else doDash = true;
         InRange();
-        //Physics2D.IgnoreLayerCollision(6, 7);
         Debug.DrawRay(transform.position, direction*RangeDistance, Color.red);
-
-        /*
-        //충돌 무시
-        Physics2D.IgnoreLayerCollision(playerLayer, bossLayer,true);
-        */
+        //대쉬 그만!
+        if (doDash)
+        {
+            if(CalculateDistance(startPoint, transform.position) >= RangeDistance * 2)
+            {
+                rigid.velocity = Vector2.zero;
+                doDash = false;
+            }
+        }
     }
     /////////////////////////////////////
     //////////////피격 관련//////////////
@@ -81,7 +82,7 @@ public class Boss_Spider: Boss_form
     //플레이어가 무적이 아닐동안
     //=> 플레이어가 피격되면 일정시간 동안 무적
     //임시 변수
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player") && doDash)
         {

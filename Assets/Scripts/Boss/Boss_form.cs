@@ -5,7 +5,7 @@ using UnityEngine;
 public class Boss_form : LivingEntity
 {
     //PLAYER
-    public Player player;
+    protected Player player;
 
     //스킬 PREFAB
     public GameObject stonePrefab; //스킬(돌)
@@ -53,6 +53,8 @@ public class Boss_form : LivingEntity
 
     //TIMER
     public float timerStartTime;
+    public GameObject Timer;
+    public bool refill = false;
 
     /////////////////////////////////////
     ////////////////SETTING//////////////
@@ -71,9 +73,9 @@ public class Boss_form : LivingEntity
     /////////////////////////////////////
     ////////////////SKILLS///////////////
     /////////////////////////////////////
+    // 대쉬 특정 위치 도착후 정지하는 로직 필요
     protected void Dash(float dashSpeed)
     {
-        doDash = true;
         rigid.AddForce(direction* dashSpeed, ForceMode2D.Impulse);
     }
     protected void ThrowStones()

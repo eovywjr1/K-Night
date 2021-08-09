@@ -10,8 +10,8 @@ public class Torch : MonoBehaviour
     public GameObject Boss;
     public GameObject Timer;
     private GameObject child;
-
-    private bool on;
+    public bool on;
+    public bool refill;
 
     private void Awake()
     {
@@ -31,17 +31,16 @@ public class Torch : MonoBehaviour
         }
     }
     private void Update()
-    {
-        if (Timer != null)
+    { 
+        if (Timer.GetComponent<TimeCountdown>().TimeEnd && !on)
         {
-            if (Boss.GetComponent<Boss_form>().numOfTorchOff == 6)
+            refill = Boss.GetComponent<Boss_form>().refill;
+            if (refill)
             {
-                if (Timer.GetComponent<TimeCountdown>().TimeEnd)
-                {
-                    this.gameObject.GetComponent<SpriteRenderer>().sprite = torchOn;
-                    child.SetActive(true);
-                    on = true;
-                }
+                this.gameObject.GetComponent<SpriteRenderer>().sprite = torchOn;
+                child.SetActive(true);
+                Boss.GetComponent<Boss_form>().numOfTorchOff--;
+                on = true;
             }
         }
     }

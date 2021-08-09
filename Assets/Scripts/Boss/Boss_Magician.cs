@@ -99,7 +99,6 @@ public class Boss_Magician : Boss_form
     /////////////////////////////////////
     /////////////보스 특징 관련//////////
     /////////////////////////////////////
-    public GameObject Timer;
     private void Update()
     {
         //torch 여부
@@ -107,13 +106,23 @@ public class Boss_Magician : Boss_form
         {
             Debug.Log("15초간 보스에게 타격 가능");
             playerCanAttack = true;
-            if(Timer.GetComponent<TimeCountdown>().TimeEnd == false) Timer.SetActive(true);
+            if (Timer.GetComponent<TimeCountdown>().TimeEnd == false)
+            {
+                Timer.SetActive(true);
+            }
             //타이머가 꺼지면 초기화
-            if (numOfTorchOff == 6 && Timer.GetComponent<TimeCountdown>().TimeEnd)
+            if (Timer.GetComponent<TimeCountdown>().TimeEnd)
+            {
+                refill = true;
+            }
+        }
+        else if (numOfTorchOff == 0)
+        {
+            refill = false;
+            if (refill == false)
             {
                 Timer.GetComponent<TimeCountdown>().TimeEnd = false;
                 Timer.GetComponent<TimeCountdown>().TimeCost = timerStartTime;
-                numOfTorchOff = 0;
                 playerCanAttack = false;
             }
         }

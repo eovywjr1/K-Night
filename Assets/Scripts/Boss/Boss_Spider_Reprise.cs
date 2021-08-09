@@ -14,6 +14,7 @@ public class Boss_Spider_Reprise : Boss_form
     //메테오 관련 변수들
     private int[] xList = new int[10]; //numOfMeteo
     private Vector3[] posList = new Vector3[10]; //numOfMeteo
+    private Vector3 endPoint;
 
     private bool limitMagicSkills;// 보스가 마법공격 못함!
 
@@ -37,6 +38,7 @@ public class Boss_Spider_Reprise : Boss_form
 
         //범위 확인
         if (!inRange){ // 범위 안에 없다면
+            doDash = true;
             Dash(dashSpeed); // 대쉬
         }
         else if (inRange){ // 범위 안에 있다면
@@ -101,15 +103,16 @@ public class Boss_Spider_Reprise : Boss_form
     private void FixedUpdate(){
         InRange(); // 범위 확인
         Debug.DrawRay(transform.position + Vector3.left * RangeDistance, Vector3.right *2 * RangeDistance, Color.red);
-        //이동x면 대쉬x
-        if (rigid.velocity == Vector2.zero) doDash = false;
+        if(rigid.velocity == Vector2.zero)
+        {
+            doDash = false;
+        }
     }
-    
+
 
     /////////////////////////////////////
     /////////////보스 특징 관련//////////
     /////////////////////////////////////
-    public GameObject Timer;
     private void Update()
     {
         //torch 여부
@@ -117,13 +120,23 @@ public class Boss_Spider_Reprise : Boss_form
         {
             Debug.Log("마법 스킬 사용 불가!");
             limitMagicSkills = true;
-            if (Timer.GetComponent<TimeCountdown>().TimeEnd == false) Timer.SetActive(true);
+            if (Timer.GetComponent<TimeCountdown>().TimeEnd == false)
+            {
+                Timer.SetActive(true);
+            }
             //타이머가 꺼지면 초기화
-            if (numOfTorchOff == 6 && Timer.GetComponent<TimeCountdown>().TimeEnd)
+            if (Timer.GetComponent<TimeCountdown>().TimeEnd)
+            {
+                refill = true;
+            }
+        }
+        else if (numOfTorchOff == 0)
+        {
+            refill = false;
+            if (refill == false)
             {
                 Timer.GetComponent<TimeCountdown>().TimeEnd = false;
                 Timer.GetComponent<TimeCountdown>().TimeCost = timerStartTime;
-                numOfTorchOff = 0;
                 limitMagicSkills = false;
             }
         }
