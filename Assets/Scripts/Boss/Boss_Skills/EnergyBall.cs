@@ -7,6 +7,7 @@ public class EnergyBall : Boss_Skills_Figures
     private float throwSpeed;
     private Vector3 direction;
     private Rigidbody2D rigid;
+    private SpriteRenderer sprite;
 
     private void Awake()
     {
@@ -14,10 +15,14 @@ public class EnergyBall : Boss_Skills_Figures
         damage = GameObject.Find("Boss").GetComponent<Boss_form>().damage_EnergyBall;
         throwSpeed = GameObject.Find("Boss").GetComponent<Boss_form>().energyBallSpeed;
         direction = GameObject.Find("Boss").GetComponent<Boss_form>().direction;
+        sprite = GetComponent<SpriteRenderer>();
         rigid = GetComponent<Rigidbody2D>();
     }
     void Start()
     {
+        if(direction == Vector3.right)
+            this.transform.localRotation = Quaternion.Euler(0f,0f,90f);
+        else this.transform.localRotation = Quaternion.Euler(0f, 0f, -90f);
         StartCoroutine(nameof(Throw));
     }
     IEnumerator Throw()
@@ -32,8 +37,11 @@ public class EnergyBall : Boss_Skills_Figures
         {
             if (SceneManager.GetActiveScene().name == nameof(Boss_Spider_Reprise)){
                 Debug.Log("벽에 튕김");
-                rigid.velocity *= -1;
 
+                rigid.velocity *= -1;
+                if (sprite.flipY == false)
+                    sprite.flipY = true;
+                else sprite.flipY = false;
                 Destroy(gameObject,7f);
             }
             else if(SceneManager.GetActiveScene().name == nameof(Boss_Magician)){
