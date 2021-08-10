@@ -242,23 +242,26 @@ public class Player : MonoBehaviour
             directionPlayerLooksAt = new Vector3(-1, 0, 0);
         }
 
-       if (
-            ( // npc에게 말 걸기.
-             (Input.GetKeyDown(KeyCode.UpArrow) && scannedTalker != null)
-             ||
-             (talkManager.talkIndex >= 1 && (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) )  )
-            ) && (isYesNoOn == false) )
+        if (scannedTalker != null)
         {
-            talkManager.TriggerTalks(scannedTalker);
-        }
-        else if (
-            ( // npc에게 말 걸기.
-             (Input.GetKeyDown(KeyCode.UpArrow) && scannedTalker != null)
-             ||
-             (talkManager.talkIndex >= 1 && (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow)))
-            ) && (isYesNoOn == true) )
-        {
+            if (
+                ( // npc에게 말 걸기.
+                 (Input.GetKeyDown(KeyCode.UpArrow) && scannedTalker != null)
+                 ||
+                 (talkManager.talkIndex >= 1 && (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow)))
+                ) && (isYesNoOn == false))
+            {
+                talkManager.TriggerTalks(scannedTalker);
+            }
+            else if (
+                ( // npc에게 말 걸기.
+                 (Input.GetKeyDown(KeyCode.UpArrow) && scannedTalker != null)
+                 ||
+                 (talkManager.talkIndex >= 1 && (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow)))
+                ) && (isYesNoOn == true))
+            {
 
+            }
         }
     }
 
