@@ -67,6 +67,7 @@ public class Player : MonoBehaviour
 
             instance = this;
         }
+
         else
             Destroy(this.gameObject);
     }
@@ -83,6 +84,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetButtonDown("Jump"))
         {
+            Debug.Log("1");
             if (jumpCount == 1)
             {
                 isJumping = true;
@@ -157,7 +159,7 @@ public class Player : MonoBehaviour
     {
         if (!isJumping)
             return;
-
+        
         rigid.velocity = Vector2.zero;
 
         Vector2 jumpVelocity = new Vector2(0, jumpSpeed);
@@ -240,7 +242,7 @@ public class Player : MonoBehaviour
             directionPlayerLooksAt = new Vector3(-1, 0, 0);
         }
 
-        if (
+       if (
             ( // npc에게 말 걸기.
              (Input.GetKeyDown(KeyCode.UpArrow) && scannedTalker != null)
              ||
