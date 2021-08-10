@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Village_Present_AfterTutorial.unity
     guid: 568cd6319f3145344bc98f1333a2357b
+  - enabled: 1
+    path: Assets/Scenes/Village_Past_BeforeCombat.unity
+    guid: f1a0d8e3f4c11064d9376df9e80a8b64
   m_configObjects: {}

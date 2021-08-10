@@ -18,7 +18,7 @@ public class MapManager : MonoBehaviour
 
     void Update()
     {
-        if(boss.activeSelf == false)
+        if(boss != null && boss.activeSelf == false)
         {
             player.mapName = SceneManager.GetActiveScene().name + '>' + mapName + "StartPoint";
             SceneManager.LoadScene(mapName);
