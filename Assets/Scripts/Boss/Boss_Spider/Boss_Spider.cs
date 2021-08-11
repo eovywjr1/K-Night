@@ -19,7 +19,7 @@ public class Boss_Spider: Boss_form
         inRange = false;
         lastAttackTime_Throw = 0f;
         Skills();
-        Invoke(nameof(Skills),attackDelay);
+        Invoke(nameof(Skills), attackDelay);
     }
 
     //스킬 사용
