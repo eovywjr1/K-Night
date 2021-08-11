@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 227800758}
   - component: {fileID: 227800757}
   m_Layer: 10
-  m_Name: Collider
+  m_Name: PlayerCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -410,6 +410,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boss: {fileID: 1451925175}
+  barricade: {fileID: 0}
+  mapTransfer: {fileID: 800657900}
 --- !u!4 &393383748
 Transform:
   m_ObjectHideFlags: 0
@@ -570,7 +572,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &800657901
 Transform:
   m_ObjectHideFlags: 0
@@ -598,7 +600,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapName: Village_Present_AfterTutorial
-  thisSceneName: 
   player: {fileID: 0}
   boss: {fileID: 1451925175}
 --- !u!1 &965483399
@@ -7397,24 +7398,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 10
-  power: 0
-  dashSpeed: 10
+  power: 1
+  dashSpeed: 3
   moveSpeed: 300
-  moveDelaytime: 7
-  juniorcallDelaytime: 11
-  dashToplayerDelaytime: 15
-  ismoveDelay: 1
+  skillDelaytime: 3
+  skillindex: 0
+  isSkilldelay: 0
   isjunorcallDelay: 1
   isdashToplayerDelay: 1
+  ismoveDelay: 0
   isattack: 0
   direction: {x: 0, y: 0}
-  playerPosition: {x: 0, y: 0, z: 0}
-  rigidBody: {fileID: 0}
-  spriteRenderer: {fileID: 0}
-  boxCollider: {fileID: 0}
   junior: {fileID: 4596541593900640029, guid: 29ebc5ebb2cca1d45b6fd9fc5f70a70d, type: 3}
-  childBoxCollider: {fileID: 0}
-  player: {fileID: 0}
 --- !u!212 &1451925177
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7479,7 +7474,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.02}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -7490,7 +7485,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.3, y: 0.2}
+  m_Size: {x: 0.2, y: 0.15}
   m_EdgeRadius: 0
 --- !u!50 &1451925179
 Rigidbody2D:
@@ -7521,8 +7516,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1451925175}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.93, y: 1.33, z: 0}
-  m_LocalScale: {x: 7, y: 7, z: 1}
+  m_LocalPosition: {x: -10.36, y: 0.6049815, z: 0}
+  m_LocalScale: {x: 10, y: 10, z: 1}
   m_Children:
   - {fileID: 1674702237}
   m_Father: {fileID: 0}
@@ -7651,7 +7646,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.02}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -7662,7 +7657,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.3, y: 0.2}
+  m_Size: {x: 0.2, y: 0.15}
   m_EdgeRadius: 0
 --- !u!1 &1850019796
 GameObject:

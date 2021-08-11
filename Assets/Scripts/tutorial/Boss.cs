@@ -8,25 +8,27 @@ public class Boss : MonoBehaviour
     public int power;
     public int dashSpeed;
     public int moveSpeed;
-    public int moveDelaytime;
-    public int juniorcallDelaytime;
-    public int dashToplayerDelaytime;
+    public int skillDelaytime;
+    public int skillindex;
 
-    public bool ismoveDelay;
+    public bool isSkilldelay;
     public bool isjunorcallDelay;
     public bool isdashToplayerDelay;
+    public bool ismoveDelay;
     public bool isattack;
 
     public Vector2 direction;
-    public Vector3 playerPosition;
+    Vector3 playerPosition;
 
-    public Rigidbody2D rigidBody;
-    public SpriteRenderer spriteRenderer;
-    public BoxCollider2D boxCollider;
+    Rigidbody2D rigidBody;
+    SpriteRenderer spriteRenderer;
+    BoxCollider2D boxCollider;
 
     public GameObject junior;
-    public GameObject childBoxCollider;
-    public Player player;
+    GameObject childBoxCollider;
+    Player player;
+
+    RaycastHit2D rayHit;
 
     void Start()
     {
@@ -37,9 +39,7 @@ public class Boss : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         boxCollider = GetComponent<BoxCollider2D>();
 
-        StartCoroutine(RandomMove());
-        StartCoroutine(JuniorCalldelay());
-        //StartCoroutine(DashToplayer());
+        StartCoroutine(Skilldelay());
     }
 
     void Update()
@@ -57,6 +57,9 @@ public class Boss : MonoBehaviour
             spriteRenderer.flipX = true;
         else if (direction == Vector2.left)
             spriteRenderer.flipX = false;
+
+        if (!isdashToplayerDelay)
+            DashFindCollision();
     }
 
     void FixedUpdate()
@@ -75,7 +78,7 @@ public class Boss : MonoBehaviour
     {
         rigidBody.AddForce(direction * moveSpeed * Time.deltaTime, ForceMode2D.Impulse);
         ismoveDelay = true;
-        StartCoroutine(RandomMove());
+        StartCoroutine(Skilldelay());
     }
 
     //잡몹 소환 함수
@@ -83,7 +86,7 @@ public class Boss : MonoBehaviour
     {
         Instantiate(junior, new Vector2(this.gameObject.transform.position.x + 2, this.gameObject.transform.position.y), Quaternion.identity); 
         isjunorcallDelay = true;
-        StartCoroutine(JuniorCalldelay());
+        StartCoroutine(Skilldelay());
     }
 
     //공격받았을 때
@@ -94,9 +97,6 @@ public class Boss : MonoBehaviour
 
     void Dash()
     {
-        //Move 코루틴 중단
-        StopCoroutine(RandomMove());
-
         //자식 오브젝트 레이어 변경
         childBoxCollider.layer = 9;
 
@@ -104,7 +104,7 @@ public class Boss : MonoBehaviour
         if ((direction == Vector2.right && playerPosition.x > this.gameObject.transform.position.x) || (direction == Vector2.left && playerPosition.x < this.gameObject.transform.position.x)) {
             //속도 제한
             if ((direction == Vector2.right && rigidBody.velocity.x < dashSpeed) || (direction == Vector2.left && rigidBody.velocity.x > dashSpeed * (-1)))
-                rigidBody.AddForce(direction * dashSpeed * Time.deltaTime, ForceMode2D.Impulse);
+                rigidBody.AddForce(direction * 10 * Time.deltaTime, ForceMode2D.Impulse);
         }
         //위치 도착 후
         else
@@ -120,58 +120,68 @@ public class Boss : MonoBehaviour
             isdashToplayerDelay = true;
             isattack = false;
 
-            //딜레이 시작
-            StartCoroutine(DashToplayer());
-            StartCoroutine(RandomMove());
+            //모든 코루틴 시작
+            StartCoroutine(Skilldelay());
+        }
+    }
+
+    //대쉬 중 플레이어 충돌 찾기
+    void DashFindCollision()
+    {
+        Debug.DrawRay(this.gameObject.transform.position, direction * 1.6f, new Color(0, 0, 1), LayerMask.GetMask("Player"));
+        rayHit = Physics2D.Raycast(this.gameObject.transform.position, direction, 1.6f, LayerMask.GetMask("Player"));
+
+        if (rayHit.collider.name == "Player" && isattack == false)
+        {
+            isattack = true;
+
+            player.HpDecrease(power);
         }
     }
 
     //잡몹 소환 딜레이
-    IEnumerator JuniorCalldelay()
+    IEnumerator Skilldelay()
     {
-        yield return new WaitForSecondsRealtime(juniorcallDelaytime);
+        yield return new WaitForSecondsRealtime(skillDelaytime);
 
-        isjunorcallDelay = false;
-    }
+        skillindex = Random.Range(1, 4);
 
-    //플레이어로 돌진 딜레이
-    IEnumerator DashToplayer()
-    {
-        yield return new WaitForSecondsRealtime(dashToplayerDelaytime);
-
-        //플레이어 위치 및 방향 저장
-        playerPosition = new Vector3(player.GetTransform().position.x, this.gameObject.transform.position.y);
-        if (playerPosition.x >= this.transform.position.x)
-            direction = Vector2.right;
-        else
-            direction = Vector2.left;
-
-        this.gameObject.layer = 9;
-
-        isdashToplayerDelay = false;
-    }
-
-    //보스 이동 딜레이
-    IEnumerator RandomMove()
-    {
-        yield return new WaitForSecondsRealtime(moveDelaytime);
-
-        //좌우 방향 결정
-        if (Random.Range(-1, 1) < 0)
-            direction = Vector2.left;
-        else
-            direction = Vector2.right;
-
-        ismoveDelay = false;
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        //대쉬 중 처음 플레이어가 공격받았을 때 플레이어 피 감소
-        if (collision.gameObject.CompareTag("Player") && !isattack && this.gameObject.layer == 9)
+        switch (skillindex)
         {
-            player.HpDecrease(power);
-            isattack = true;
+            //잡몹 소환
+            case 1:
+                isjunorcallDelay = false;
+                break;
+
+            //대쉬
+            case 2:
+                //플레이어 위치 및 방향 저장
+                playerPosition = new Vector3(player.GetTransform().position.x, this.gameObject.transform.position.y);
+                if (playerPosition.x >= this.transform.position.x)
+                    direction = Vector2.right;
+                else
+                    direction = Vector2.left;
+
+                this.gameObject.layer = 9;
+
+                isdashToplayerDelay = false;
+
+                break;
+
+            //랜덤 이동
+            case 3:
+                //좌우 방향 결정
+                if (Random.Range(-1, 1) < 0)
+                    direction = Vector2.left;
+                else
+                    direction = Vector2.right;
+
+                ismoveDelay = false;
+
+                break;
+
+            default:
+                break;
         }
     }
 }

@@ -84,7 +84,6 @@ public class Player : MonoBehaviour
 
         if (Input.GetButtonDown("Jump"))
         {
-            Debug.Log("1");
             if (jumpCount == 1)
             {
                 isJumping = true;
@@ -107,7 +106,6 @@ public class Player : MonoBehaviour
         {
             isattack = true;
         }
-
     }
 
     void OnCollisionEnter2D(Collision2D col)   // Ground tag에 닿으면 점프횟수 초기화 (다시 점프 가능하도록)
