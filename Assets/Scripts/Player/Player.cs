@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
 
     public string myName; // player 이름 (만약 게임 시작시 입력받는다면)
 
-    private int hp; // 체력
+    public int hp; // 체력
 
     
     public int atkDamage; // player가 가하는 damage
@@ -46,7 +46,8 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         isYesNoOn = false;
-        
+
+        hp = 100;
 
     }
     void Start()
@@ -84,7 +85,6 @@ public class Player : MonoBehaviour
 
         if (Input.GetButtonDown("Jump"))
         {
-            Debug.Log("1");
             if (jumpCount == 1)
             {
                 isJumping = true;
@@ -107,7 +107,6 @@ public class Player : MonoBehaviour
         {
             isattack = true;
         }
-
     }
 
     void OnCollisionEnter2D(Collision2D col)   // Ground tag에 닿으면 점프횟수 초기화 (다시 점프 가능하도록)
@@ -252,6 +251,7 @@ public class Player : MonoBehaviour
                 ) && (isYesNoOn == false))
             {
                 talkManager.TriggerTalks(scannedTalker);
+                
             }
             else if (
                 ( // npc에게 말 걸기.

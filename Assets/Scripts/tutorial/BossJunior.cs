@@ -61,7 +61,7 @@ public class BossJunior : MonoBehaviour
 
         //속도 추가, 제한
         if ((moveDirection == Vector2.right && rigidBody.velocity.x < moveSpeed) || (moveDirection == Vector2.left && rigidBody.velocity.x > moveSpeed * (-1)))
-            rigidBody.AddForce(moveDirection * moveSpeed * 4 * Time.deltaTime, ForceMode2D.Impulse);
+            rigidBody.AddForce(moveDirection * 10 * Time.deltaTime, ForceMode2D.Impulse);
 
         //플레이어를 지나칠 경우 딜레이
         if ((rigidBody.velocity.x > 0 && this.transform.position.x > playerPosition.x) || (rigidBody.velocity.x < 0 && this.transform.position.x < playerPosition.x))

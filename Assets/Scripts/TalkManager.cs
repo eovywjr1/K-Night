@@ -27,6 +27,10 @@ public class TalkManager : MonoBehaviour
 
     public int lastTalkID;
 
+    public Animator Amulet;
+    public Animator GhostToKing;
+    public Animator BCGhost;
+
     // YesNo 관련 변수.
     public GameObject talkYesNoPanel;
     public GameObject talkYesArrow;
@@ -34,8 +38,14 @@ public class TalkManager : MonoBehaviour
     private bool isYesNoOn;
     public int toggleOneOrTwo;
 
+    //체력바 관련.
+    private Vector3 HPBarAnchor;
+    private GameObject HPBar;
+    private GameObject HPBarRed;
+
     private void Awake()
     {
+        FindHpbar();
         PlayerTracker();
 
         isYesNoOn = false;
@@ -57,6 +67,8 @@ public class TalkManager : MonoBehaviour
 
     private void Update()
     {
+        ShowingHPBar();
+
         PlayerTracker();
 
         ToggleArrowGhostSuggestion();
@@ -157,6 +169,13 @@ public class TalkManager : MonoBehaviour
             "포탈을 타고 주술사가 살고 있는 오두막으로 가자.:혼령"
         });
 
+        talkData.Add(380, new string[]
+        {
+            "주술사에게 말을 걸어서 부적을 받자!:혼령"
+        });
+
+    // 주의: 주술사의 부적 이벤트는 아래 id 400, 500의 string[]를 사용하지 않습니다. (just 참고용).
+    // SorcererEvent() 함수가 부적 이벤트를 진행해줍니다.
         // (2)를 선택한 경우. 오두막의 주술사가 플레이어에게. (400).
         talkData.Add(400, new string[] {
             "이 부적을 붙이면 다시 살아날 수 있다.:주술사",
@@ -165,26 +184,29 @@ public class TalkManager : MonoBehaviour
 
         // 되살아난 혼령(오두막에서). (500).
         talkData.Add(500, new string[] {
-            "자, 이 포탈을 타고 왕이 있는 성으로 가자.",
-            "왕은 네가 지금까지 본 적 없는 이상한 스킬을 쓸 수도 있다는 점을 조심해.",
-            "가서 부정한 왕을 처치하고 왕의 자리를 되찾는거야!"
+            "자, 이제 성으로 바로 갈 수 있는 포탈을 소환할게.:왕",
+            "그 전에 주의할 점은... 미리 말하지 않고 성으로 들어가는 것이라:왕",
+            "왕이 바로 공격을 시작할 거라는 점이야.:왕",
+            "그리고 왕은 지금까지 네가 본 적 없는 스킬을 쓸 수도 있으니,:왕",
+            "포탈을 타기 전에 마음의 준비를 하도록 해.:왕",
+            "그럼 건투를 빌게. 꼭 승리해서 왕의 자리를 되찾는거야!:왕"
         });
 
         // 현재의 왕을 처치하고 나서 괴물로부터 듣는 사건의 전말. (600).
         talkData.Add(600, new string[] {
-            /*플레이어의 이름 + */ ", 드디어 왕을 처치했군!",
-            "우리가 해냈어!!!",
+            /*플레이어의 이름 + */ ", 드디어 왕을 처치했군!:왕",
+            "우리가 해냈어!!!:왕",
         });
         talkData.Add(601, new string[] {
-            "라고 할 줄 알았나?",
-            "사실 나는 부적과 왕의 마법 지팡이를 얻어서 더 강한 마법을 얻고,",
-            "이 마을을 차지하려 했던 것이다.",
-            "나는 애초에 왕자도 아니었고, 그저 왕의 자리를 노렸을 뿐이었다.",
-            "그래서 반란을 일으키려 했는데 결국 들켰고 처형당했지.",
-            "내가 과거에서 괴물을 소환해서 왕을 처치하기에는 힘이 부족해서,",
-            "너를 이용해서 왕을 처치하고 내가 더 강한 마법을 갖고 마을을 지배하려 했는데,",
-            "일이 너무 잘 풀려버렸네.",
-            "자, 이제 너만 처리하면 끝이다. 그동안 수고 많았다!!!"
+            "라고 할 줄 알았나?:왕",
+            "사실 나는 부적과 왕의 마법 지팡이를 얻어서 더 강한 마법을 얻고,:괴물",
+            "이 마을을 차지하려 했던 것이다.:괴물",
+            "나는 애초에 왕자도 아니었고, 그저 왕의 자리를 노렸을 뿐이었다.:괴물",
+            "그래서 반란을 일으키려 했는데 결국 들켰고 처형당했지.:괴물",
+            "내가 과거에서 괴물을 소환해서 왕을 처치하기에는 힘이 부족해서,:괴물",
+            "너를 이용해서 왕을 처치하고 내가 더 강한 마법을 갖고 마을을 지배하려 했는데,:괴물",
+            "일이 너무 잘 풀려버렸네.:괴물",
+            "자, 이제 너만 처리하면 끝이다. 그동안 수고 많았다!!!:괴물"
         });
 
         // 괴물(Re) 처치 후, 플레이어의 독백. (700).
@@ -289,15 +311,42 @@ public class TalkManager : MonoBehaviour
 
     public void TriggerTalks(GameObject ObjectTriggeringTalk)
     {
+        
         Time.timeScale = 0;
         ObjectForTalkId = ObjectTriggeringTalk;
         ObjTalkData objTalkData = ObjectForTalkId.GetComponent<ObjTalkData>();
-        Talk(objTalkData.talkId);
 
-        SetLastTalkID(objTalkData.talkId);
+        if (objTalkData.talkId <= 9000) //일반적인 NPC 대화.
+        {
+            Talk(objTalkData.talkId);
 
-        talkPanel.SetActive(talkIsActive);
-        talkerNamePanel.SetActive(talkIsActive);
+            SetLastTalkID(objTalkData.talkId);
+
+            talkPanel.SetActive(talkIsActive);
+            talkerNamePanel.SetActive(talkIsActive);
+        }
+        else // 특별한 이벤트(ex. 주술사와의 부적 이벤트, )
+        {
+            if(objTalkData.talkId == 10000)
+            {
+                talkIsActive = true;
+
+                SorcererEvent();
+                print("주술사 이벤트 실행");
+
+                objTalkData.talkId += 1;
+            }
+            else if(objTalkData.talkId == 20000)
+            {
+
+            }
+            else
+            {
+
+            }
+
+
+        }
         
     }
 
@@ -338,7 +387,7 @@ public class TalkManager : MonoBehaviour
     {
         if(lastTalkID == 0)
         {
-            nextQuestText.text = "아직 받은 퀘스트가 없습니다.";
+            nextQuestText.text = " ";
         }
         else if(lastTalkID == 100)
         {
@@ -360,6 +409,23 @@ public class TalkManager : MonoBehaviour
         else if(lastTalkID == 370)
         {
             nextQuestText.text = "포탈을 타고 숲으로 가서 주술사로부터 부적을 받자.";
+        }
+        else if(lastTalkID == 400)
+        {
+            Amulet.SetBool("onAmuletUp", true);
+            GhostToKing.SetBool("onGhostToKing", true);
+            BCGhost.SetBool("onBCGhost", true);
+
+            GameObject GhostFound = GameObject.Find("Ghost");
+            GhostFound.GetComponent<ObjTalkData>().talkId = 500;
+
+            //GameObject BCSorcerer1 = GameObject.Find("BubbleCaution_Sorcerer1");
+            //BCSorcerer1.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 0);
+
+        }
+        else if(lastTalkID == 500)
+        {
+            // 여기에 포탈 활성화하는 코드.ㅅㅈ
         }
         else
         {
@@ -387,6 +453,62 @@ public class TalkManager : MonoBehaviour
         }
     }
 
+    // 일단 지금은 호출 금지. (스토리용 함수 | 주술사 씬의 애니메이션 eventer입니다.
+    public void SorcererEvent()
+    {
+        int eventTalkIndex = 0;
+
+        talkerNamePanel.SetActive(true);
+        talkPanel.SetActive(true);
+
+        talkText.text = "이 부적을 붙이면 다시 인간으로 살아날 수 있다.";
+        talkerNameText.text = "주술사";
+
+        while(eventTalkIndex == 0)
+        {
+            print("While문 실행 중");
+            if (IsPressedNPCNextText())
+            {
+                talkText.text = "하지만 부적이 떨어지지 않게 조심해야 해. 그러면 다시 혼령으로 돌아갈테니.";
+                break;
+            }
+
+            
+        }
+
+        //talkerNamePanel.SetActive(false);
+        //talkPanel.SetActive(false);
+
+
+
+
+
+        Time.timeScale = 1;
+    }
+
+
+
+
+
+    public bool IsPressedNPCNextText()
+    {
+        if(Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            while (true)
+            {
+                if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow))
+                {
+                    break;
+                }
+                
+            }
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
     // (스토리용 UI 함수) 호출 시, TalkYesNoPanel이 활성화되도록 TM과 Player의 isYesNoOn의 값을 true로 바꿉니다.
     public void OnTogglePanelGhostSuggestion()
@@ -469,4 +591,34 @@ public class TalkManager : MonoBehaviour
             player = null;
         }
     }
+
+
+
+
+
+
+    private void FindHpbar()
+    {
+        HPBar = GameObject.Find("HPBar");
+        HPBarRed = GameObject.Find("HPBarRed");
+    }
+
+    private void ShowingHPBar()
+    {
+        if (HPBar != null && HPBarRed != null)
+        {
+
+
+            Vector3 toControlVector = new Vector3(0, Screen.height/9.8f, 0);
+            HPBarAnchor = Camera.main.WorldToScreenPoint(player.transform.position) - toControlVector;
+
+            HPBar.transform.position = HPBarAnchor;
+
+            HPBarRed.GetComponent<Image>().fillAmount = player.GetComponent<Player>().hp / 100.0f;
+
+
+
+        }
+    }
+
 }
