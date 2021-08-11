@@ -38,8 +38,14 @@ public class TalkManager : MonoBehaviour
     private bool isYesNoOn;
     public int toggleOneOrTwo;
 
+    //체력바 관련.
+    private Vector3 HPBarAnchor;
+    private GameObject HPBar;
+    private GameObject HPBarRed;
+
     private void Awake()
     {
+        FindHpbar();
         PlayerTracker();
 
         isYesNoOn = false;
@@ -61,6 +67,8 @@ public class TalkManager : MonoBehaviour
 
     private void Update()
     {
+        ShowingHPBar();
+
         PlayerTracker();
 
         ToggleArrowGhostSuggestion();
@@ -584,5 +592,33 @@ public class TalkManager : MonoBehaviour
         }
     }
 
+
+
+
+
+
+    private void FindHpbar()
+    {
+        HPBar = GameObject.Find("HPBar");
+        HPBarRed = GameObject.Find("HPBarRed");
+    }
+
+    private void ShowingHPBar()
+    {
+        if (HPBar != null && HPBarRed != null)
+        {
+
+
+            Vector3 toControlVector = new Vector3(0, Screen.height/9.8f, 0);
+            HPBarAnchor = Camera.main.WorldToScreenPoint(player.transform.position) - toControlVector;
+
+            HPBar.transform.position = HPBarAnchor;
+
+            HPBarRed.GetComponent<Image>().fillAmount = player.GetComponent<Player>().hp / 100.0f;
+
+
+
+        }
+    }
 
 }

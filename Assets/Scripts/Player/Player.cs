@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
 
     public string myName; // player 이름 (만약 게임 시작시 입력받는다면)
 
-    private int hp; // 체력
+    public int hp; // 체력
 
     
     public int atkDamage; // player가 가하는 damage
@@ -46,7 +46,8 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         isYesNoOn = false;
-        
+
+        hp = 100;
 
     }
     void Start()
