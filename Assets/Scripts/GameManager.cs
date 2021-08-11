@@ -21,5 +21,9 @@ public class GameManager : MonoBehaviour
         //aftertutorial에서 beforecombet 씬으로 이동하는 오브젝트 활성화
         if (barricade != null && mapTransfer != null && barricade.activeSelf == false)
             mapTransfer.SetActive(true);
+
+        //tutorial 보스에서 보스가 죽었을 때 오브젝트 활성화
+        if(boss != null && mapTransfer != null && boss.activeSelf == false)
+            mapTransfer.SetActive(true);
     }
 }

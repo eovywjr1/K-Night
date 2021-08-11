@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class MapManager : MonoBehaviour
 {
     public string mapName;
-    public string thisSceneName;
 
     public Player player;
     public GameObject boss;
@@ -30,7 +29,7 @@ public class MapManager : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            player.mapName = thisSceneName + '>' + mapName + "StartPoint";
+            player.mapName = SceneManager.GetActiveScene().name + '>' + mapName + "StartPoint";
             SceneManager.LoadScene(mapName);
         }
     }
