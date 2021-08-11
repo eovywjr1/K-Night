@@ -252,6 +252,7 @@ public class Player : MonoBehaviour
                 ) && (isYesNoOn == false))
             {
                 talkManager.TriggerTalks(scannedTalker);
+                
             }
             else if (
                 ( // npc에게 말 걸기.
