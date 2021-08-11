@@ -22,6 +22,10 @@ public class Boss_Spider_Reprise : Boss_form
 
     void Start()
     {
+        FindPlayer(); // 플레이어가 왼쪽에 있는지 오른쪽에 있는지 확인
+        doDash = true;
+        Dash(dashSpeed); // 대쉬
+
         inRange = true;
         limitMagicSkills = false;
         numOfTorchOff = 0;
