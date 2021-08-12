@@ -10,6 +10,8 @@ public class MapManager : MonoBehaviour
     public Player player;
     public GameObject boss;
 
+    public bool isSave;
+
     private void Start()
     {
         player = FindObjectOfType<Player>();
@@ -19,6 +21,7 @@ public class MapManager : MonoBehaviour
     {
         if(boss != null && boss.activeSelf == false)
         {
+            isSave = true;
             player.mapName = SceneManager.GetActiveScene().name + '>' + mapName + "StartPoint";
             SceneManager.LoadScene(mapName);
         }

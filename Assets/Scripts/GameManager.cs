@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour
     public GameObject barricade;
     public GameObject mapTransfer;
 
+    float x;
+    float y;
+
     void Start()
     {
         //플레이어가 튜토리얼 보스 씬으로 이동 시 보스 생성
@@ -25,5 +28,23 @@ public class GameManager : MonoBehaviour
         //tutorial 보스에서 보스가 죽었을 때 오브젝트 활성화
         if(boss != null && mapTransfer != null && boss.activeSelf == false)
             mapTransfer.SetActive(true);
+    }
+
+    public void Save(Player player)
+    {
+        PlayerPrefs.SetString("playerName", player.myName);
+        PlayerPrefs.SetString("sceneName", SceneManager.GetActiveScene().name);
+        Debug.Log(SceneManager.GetActiveScene().name);
+        PlayerPrefs.SetInt("Hp", player.hp);
+        PlayerPrefs.SetFloat("playerX", player.transform.position.x);
+        PlayerPrefs.SetFloat("playerY", player.transform.position.y);
+    }
+
+    public void Load(Player player)
+    {
+        x = PlayerPrefs.GetFloat("playerX");
+        y = PlayerPrefs.GetFloat("playerY");
+
+        player.transform.position = new Vector3(x, y, 0);
     }
 }

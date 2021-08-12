@@ -894,6 +894,7 @@ MonoBehaviour:
   boss: {fileID: 1451925175}
   barricade: {fileID: 0}
   mapTransfer: {fileID: 800657900}
+  player: {fileID: 0}
 --- !u!4 &393383748
 Transform:
   m_ObjectHideFlags: 0
@@ -1052,7 +1053,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 4
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -9086,7 +9087,6 @@ MonoBehaviour:
   moveSpeed: 300
   skillDelaytime: 3
   skillindex: 0
-  isSkilldelay: 0
   isjunorcallDelay: 1
   isdashToplayerDelay: 1
   ismoveDelay: 0

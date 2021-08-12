@@ -6,16 +6,15 @@ public class Boss : MonoBehaviour
 {
     public int hp;
     public int power;
-    public int dashSpeed;
-    public int moveSpeed;
-    public int skillDelaytime;
+    public int dashSpeed = 3;
+    public int moveSpeed = 300;
+    public int skillDelaytime = 5;
     public int skillindex;
 
-    public bool isSkilldelay;
-    public bool isjunorcallDelay;
-    public bool isdashToplayerDelay;
-    public bool ismoveDelay;
-    public bool isattack;
+    public bool isjunorcallDelay = true;
+    public bool isdashToplayerDelay = true;
+    public bool ismoveDelay = true;
+    public bool isattack = false;
 
     public Vector2 direction;
     Vector3 playerPosition;
@@ -90,9 +89,9 @@ public class Boss : MonoBehaviour
     }
 
     //공격받았을 때
-    public void Ondamaged(int quantity)
+    public void Ondamaged(int power)
     {
-        hp -= quantity;
+        hp -= power;
     }
 
     void Dash()
@@ -131,7 +130,7 @@ public class Boss : MonoBehaviour
         Debug.DrawRay(this.gameObject.transform.position, direction * 1.6f, new Color(0, 0, 1), LayerMask.GetMask("Player"));
         rayHit = Physics2D.Raycast(this.gameObject.transform.position, direction, 1.6f, LayerMask.GetMask("Player"));
 
-        if (rayHit.collider.name == "Player" && isattack == false)
+        if (rayHit.collider.name == "Player" && !isattack)
         {
             isattack = true;
 
