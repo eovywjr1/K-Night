@@ -3711,6 +3711,9 @@ MonoBehaviour:
   escMenuPanel: {fileID: 1197344268}
   nextQuestText: {fileID: 1116267468}
   lastTalkID: 0
+  Amulet: {fileID: 0}
+  GhostToKing: {fileID: 0}
+  BCGhost: {fileID: 0}
   talkYesNoPanel: {fileID: 0}
   talkYesArrow: {fileID: 0}
   talkNoArrow: {fileID: 0}
@@ -4200,6 +4203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myName: 
+  hp: 0
   atkDamage: 0
   mapName: 
   moveSpeed: 4
