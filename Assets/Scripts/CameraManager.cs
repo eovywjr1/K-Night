@@ -18,7 +18,7 @@ public class CameraManager : MonoBehaviour
     {
         if (sceneName == "TutorialBoss")
         {
-            if (player.transform.position.x > -17.3 && this.gameObject.transform.position.x < 13)
+            if (player.transform.position.x > -23.3 && this.gameObject.transform.position.x < 19.2)
                 this.gameObject.transform.position = new Vector3(player.transform.position.x, this.gameObject.transform.position.y, -1);
         }
     }

@@ -37,6 +37,8 @@ public class LivingEntity : MonoBehaviour
     public virtual void Die()
     {
         dead = true;
+
+        this.gameObject.SetActive(true);
     }
 
 }
