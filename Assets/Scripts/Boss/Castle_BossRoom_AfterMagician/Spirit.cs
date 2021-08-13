@@ -29,7 +29,7 @@ public class Spirit : MonoBehaviour
             dashSpeed = 0f;
             //지팡이를 줍고
             GameObject staff = GameObject.Find("Staff");
-            staff.transform.eulerAngles(Vector3.zero);
+            staff.gameObject.SetActive(false);
             //모습이 변하고
             ChangeToKing();
             //대사를 하고
