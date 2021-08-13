@@ -607,16 +607,26 @@ public class TalkManager : MonoBehaviour
     {
         if (HPBar != null && HPBarRed != null)
         {
+            if (SceneManager.GetActiveScene().name == "TutorialBoss") // 튜토리얼 보스 씬에서 체력바 위치가 이상함.
+            {
+                Vector3 toControlVector = new Vector3(0, Screen.height / 11.7f, 0);
+                HPBarAnchor = Camera.main.WorldToScreenPoint(player.transform.position) + toControlVector;
 
+                HPBar.transform.position = HPBarAnchor;
 
-            Vector3 toControlVector = new Vector3(0, Screen.height/9.8f, 0);
-            HPBarAnchor = Camera.main.WorldToScreenPoint(player.transform.position) - toControlVector;
+                HPBarRed.GetComponent<Image>().fillAmount = player.GetComponent<Player>().hp / 100.0f;
+            }
+            else
+            {
 
-            HPBar.transform.position = HPBarAnchor;
+                Vector3 toControlVector = new Vector3(2.5f, Screen.height / 9.8f, 0);
+                HPBarAnchor = Camera.main.WorldToScreenPoint(player.transform.position) + toControlVector;
 
-            HPBarRed.GetComponent<Image>().fillAmount = player.GetComponent<Player>().hp / 100.0f;
+                HPBar.transform.position = HPBarAnchor;
 
+                HPBarRed.GetComponent<Image>().fillAmount = player.GetComponent<Player>().hp / 100.0f;
 
+            }
 
         }
     }

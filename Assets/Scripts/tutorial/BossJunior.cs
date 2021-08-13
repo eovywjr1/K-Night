@@ -4,20 +4,22 @@ using UnityEngine;
 
 public class BossJunior : MonoBehaviour
 {
-    public Player player;
+    Player player;
 
-    public Rigidbody2D rigidBody;
-    public SpriteRenderer spriteRenderer;
+    Rigidbody2D rigidBody;
+    SpriteRenderer spriteRenderer;
 
-    public Vector2 moveDirection;
-    public Vector2 playerPosition;
+    Vector2 moveDirection;
+    Vector2 playerPosition;
 
     public int hp;
     public int power;
-    public int moveSpeed;
-    public int moveDelaytime;
+    int moveSpeed = 1;
+    int moveDelaytime = 2;
 
-    public bool isMoveDelay;
+    bool isMoveDelay;
+
+    RaycastHit2D rayHit;
 
     void Start()
     {
@@ -34,10 +36,12 @@ public class BossJunior : MonoBehaviour
             Destroy(this.gameObject);
 
         //애니메이션 방향 전환
-        if (rigidBody.velocity.x >= 0)
+        if (moveDirection == Vector2.left)
             spriteRenderer.flipX = false;
-        else
+        else if(moveDirection == Vector2.right)
             spriteRenderer.flipX = true;
+
+        FindCollision();
     }
 
     void FixedUpdate()
@@ -73,9 +77,9 @@ public class BossJunior : MonoBehaviour
     }
 
     //피격 받았을 때 피 감소
-    public void Ondagamaed(int quantitiy)
+    public void Ondagamaed(int power)
     {
-        hp -= quantitiy;
+        hp -= power;
     }
 
     //이동딜레이
@@ -86,18 +90,13 @@ public class BossJunior : MonoBehaviour
         isMoveDelay = false;
     }
 
-    //플레이어 충돌 시 플레이어 피 감소
-    private void OnCollisionEnter2D(Collision2D collision)
+    //플레이어 충돌 시 피 감소
+    void FindCollision()
     {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            //플레이어 피 감소
+        Debug.DrawRay(this.gameObject.transform.position, moveDirection * 0.4f, new Color(0, 0, 1), LayerMask.GetMask("Player"));
+        rayHit = Physics2D.Raycast(this.gameObject.transform.position, moveDirection, 0.4f, LayerMask.GetMask("Player"));
+        Debug.Log(rayHit.collider.name);
+        if (rayHit.collider.name == "Player")
             player.HpDecrease(power);
-
-            //충돌 시 멈춤
-            rigidBody.velocity = new Vector2(0, 0);
-            isMoveDelay = true;
-            StartCoroutine(MoveDelay());
-        }
     }
 }
