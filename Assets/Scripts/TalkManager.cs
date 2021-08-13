@@ -27,9 +27,15 @@ public class TalkManager : MonoBehaviour
 
     public int lastTalkID;
 
+    // 애니메이션.
     public Animator Amulet;
     public Animator GhostToKing;
     public Animator BCGhost;
+
+    public Animator Medal;
+    public Animator Firework1;
+    public Animator Firework2;
+    public Animator Firework3;
 
     // YesNo 관련 변수.
     public GameObject talkYesNoPanel;
@@ -38,10 +44,13 @@ public class TalkManager : MonoBehaviour
     private bool isYesNoOn;
     public int toggleOneOrTwo;
 
-    //체력바 관련.
+    // 체력바 관련.
     private Vector3 HPBarAnchor;
     private GameObject HPBar;
     private GameObject HPBarRed;
+
+    // 엔딩 관련.
+    public bool alreadyFireworked = false;
 
     private void Awake()
     {
@@ -81,6 +90,10 @@ public class TalkManager : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        CameraAscendInFirstEndingInFixedUpdate();
+    }
     // ---------------------------------------------------------
 
     /* 화자(Talker) 번호 정리표.
@@ -145,15 +158,19 @@ public class TalkManager : MonoBehaviour
 
         // (1)을 선택한 경우 괴물이 플레이어에게. (310)
         talkData.Add(310, new string[] {
-            "...:혼령"
+            "...:혼령",
+            "동굴로 가서 현재로 돌아가자..!:플레이어"
 
         });
 
         // (1)을 선택한 경우. ((1)을 선택하여 플레이어가 포탈을 타고 난 후 엔딩 씬에서.) (350 ~ 352).
         talkData.Add(350, new string[] {
-            /*플레이어의 이름 + */ "! 우리 마을을 위해 괴물을 처치해주다니 정말 고맙다!",
-            "우리 마을을 구해 준 공적으로 너를 우리 마을의 기사로 임명하겠다!"
+            /*플레이어의 이름 + */ "우리 마을을 위해 괴물을 처치해주다니 정말 고맙다!:왕",
+            "우리 마을을 구해 준 공적으로 너를 우리 마을의 기사로 임명하겠다!:왕",
+            "(괴물이 했던 말이 조금 신경 쓰이기는 하지만...):플레이어",
+            "(평범한 일상으로 돌아가고 기사가 된 것으로 만족하자.):플레이어"
         });
+
         talkData.Add(351, new string[] {
             "괴물이 했던 말이 조금 신경 쓰이기는 하지만...",
             "평범한 일상으로 돌아가고 기사가 된 것으로 만족하자."
@@ -174,8 +191,7 @@ public class TalkManager : MonoBehaviour
             "주술사에게 말을 걸어서 부적을 받자!:혼령"
         });
 
-    // 주의: 주술사의 부적 이벤트는 아래 id 400, 500의 string[]를 사용하지 않습니다. (just 참고용).
-    // SorcererEvent() 함수가 부적 이벤트를 진행해줍니다.
+
         // (2)를 선택한 경우. 오두막의 주술사가 플레이어에게. (400).
         talkData.Add(400, new string[] {
             "이 부적을 붙이면 다시 살아날 수 있다.:주술사",
@@ -211,25 +227,25 @@ public class TalkManager : MonoBehaviour
 
         // 괴물(Re) 처치 후, 플레이어의 독백. (700).
         talkData.Add(700, new string[] {
-            "그런 음모를 꾸미고 있었다니...",
-            "내가 섬기던 왕은 내가 죽였고.. 어떻게 해야 할까...",
-            "괴물이 죽으면서 떨어뜨린 부적을 왕에게 붙이면 왕을 살려낼 수 있을까?"
+            "그런 음모를 꾸미고 있었다니...:플레이어",
+            "내가 섬기던 왕은 내가 죽였고.. 어떻게 해야 할까...:플레이어",
+            "괴물이 죽으면서 떨어뜨린 부적을 왕에게 붙이면 왕을 살려낼 수 있을까?:플레이어"
         });
 
         // 부적을 왕에게 붙이고 나서, 왕과 플레이어의 대화. (800).
         talkData.Add(800, new string[] {
-            "정신이 드십니까?",
-            "...",
-            "정말 죄송합니다... 괴물이 그런 음모를 꾸몄을지는 정말 상상도 못했습니다",
-            "저를 용서해주십시오...",
-            "...",
-            "아니네.",
-            "저 괴물도 죽고 나도 죽은 상황에서 다른 선택을 했을 수도 있는데,",
-            "오히려 이번 일로 자네에 대한 신뢰가 생긴 것 같네.",
-            "게다가 마법을 쓰는 나를 상대로도 이기다니 자네의 실력도 몰라보게 출중해졌군",
-            "자네, 우리 마을의 공식적인 기사가 되지 않겠나?",
-            "...!",
-            "정말 영광입니다..!"
+            "정신이 드십니까?:플레이어",
+            "...:왕",
+            "정말 죄송합니다... 괴물이 그런 음모를 꾸몄을지는 정말 상상도 못했습니다:플레이어",
+            "저를 용서해주십시오...:플레이어",
+            "...:왕",
+            "아니네.:왕",
+            "저 괴물도 죽고 나도 죽은 상황에서 다른 선택을 했을 수도 있는데,:왕",
+            "오히려 이번 일로 자네에 대한 신뢰가 생긴 것 같네.:왕",
+            "게다가 마법을 쓰는 나를 상대로도 이기다니 자네의 실력도 몰라보게 출중해졌군.:왕",
+            "자네, 우리 마을의 공식적인 기사가 되지 않겠나?:왕",
+            "...!:플레이어",
+            "정말 영광입니다..!:플레이어"
             /*
              아직 수정 중입니다... 이 부분 대사에 대한 아이디어가 있으시다면 직접 수정해주셔도 좋습니다.
              */
@@ -276,7 +292,7 @@ public class TalkManager : MonoBehaviour
                 talkerName = " ";
             }
 
-            if (GetTalkSentence(id, talkIndex).Split(':').Length >= 3)
+            if (GetTalkSentence(id, talkIndex).Split(':').Length >= 3) // 이 Length가 3 이상인 상황은 past after combat 씬의 선택지밖에 없으므로.
             {
                 if (GetTalkSentence(id, talkIndex).Split(':')[2] != null)
                 {
@@ -298,6 +314,9 @@ public class TalkManager : MonoBehaviour
             Time.timeScale = 1;
             talkIndex = 0;
             talkIsActive = false;
+
+            
+
             return;
         }
 
@@ -311,12 +330,14 @@ public class TalkManager : MonoBehaviour
 
     public void TriggerTalks(GameObject ObjectTriggeringTalk)
     {
+        if(!( SceneManager.GetActiveScene().name == "Village_FirstEnding" || SceneManager.GetActiveScene().name == "Village_SecondEnding" )){
+            Time.timeScale = 0;
+        }
         
-        Time.timeScale = 0;
         ObjectForTalkId = ObjectTriggeringTalk;
         ObjTalkData objTalkData = ObjectForTalkId.GetComponent<ObjTalkData>();
 
-        if (objTalkData.talkId <= 9000) //일반적인 NPC 대화.
+        if (objTalkData.talkId <= 9000 && objTalkData.talkId > 0) //일반적인 NPC 대화.
         {
             Talk(objTalkData.talkId);
 
@@ -324,28 +345,6 @@ public class TalkManager : MonoBehaviour
 
             talkPanel.SetActive(talkIsActive);
             talkerNamePanel.SetActive(talkIsActive);
-        }
-        else // 특별한 이벤트(ex. 주술사와의 부적 이벤트, )
-        {
-            if(objTalkData.talkId == 10000)
-            {
-                talkIsActive = true;
-
-                SorcererEvent();
-                print("주술사 이벤트 실행");
-
-                objTalkData.talkId += 1;
-            }
-            else if(objTalkData.talkId == 20000)
-            {
-
-            }
-            else
-            {
-
-            }
-
-
         }
         
     }
@@ -387,7 +386,7 @@ public class TalkManager : MonoBehaviour
     {
         if(lastTalkID == 0)
         {
-            nextQuestText.text = " ";
+            //nextQuestText.text = " ";
         }
         else if(lastTalkID == 100)
         {
@@ -405,6 +404,27 @@ public class TalkManager : MonoBehaviour
         else if(lastTalkID == 310)
         {
             nextQuestText.text = "포탈을 타고 현재로 돌아가자!";
+        }
+    // lastTalkID == 350: FirstEnding 관련 애니메이션 발동.
+        else if(lastTalkID == 350)
+        {
+            if(talkIndex == 2)
+            {
+                Medal.SetBool("onMedalGiving", true);
+                alreadyFireworked = true;
+            }
+            if(talkIndex == 0 && alreadyFireworked == true)
+            {
+                GameObject firstEndingTrigger1 = GameObject.Find("FirstEndingTrigger");
+                firstEndingTrigger1.GetComponent<ObjTalkData>().talkId = 0;
+
+                Firework1.SetBool("onFirework", true);
+                Firework2.SetBool("onFirework", true);
+                Firework3.SetBool("onFirework", true);
+
+
+
+            }
         }
         else if(lastTalkID == 370)
         {
@@ -429,14 +449,41 @@ public class TalkManager : MonoBehaviour
         }
         else
         {
-            nextQuestText.text = " ";
+            //nextQuestText.text = " ";
         }
 
     }
 
+    private void CameraAscendInFirstEndingInFixedUpdate()
+    {
+        if (lastTalkID == 350)
+        {
+            
+            if (talkIndex == 0 && alreadyFireworked == true)
+            {
+
+                GameObject cameraInThisScene = GameObject.Find("Main Camera");
+                cameraInThisScene.transform.position += new Vector3(0, 0.01f, 0);
 
 
+                if(cameraInThisScene.transform.position.y >= 1.55f)
+                {
+                    GameObject blackPanelFadeOut = GameObject.Find("BlackPanelFadeOut");
+                    blackPanelFadeOut.GetComponent<Image>().color += new Color(0, 0, 0, 0.01f);
 
+                }
+
+                if (cameraInThisScene.transform.position.y >= 2.9f)
+                {
+                    Debug.Log("노말 엔딩 업적 클리어, 선택지 재선택 화면으로.");
+
+                }
+
+
+            }
+        }
+
+    }
 
 
 
