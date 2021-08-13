@@ -51,7 +51,9 @@ public class Boss_Magician : Boss_form
         tempDelay = attackDelay - Mathf.Abs(player.transform.position.x/40*attackDelay);
         if (tempDelay < 0.5f)
             tempDelay = 0.5f;
-        Invoke(nameof(Skills), tempDelay);
+        //보스가 죽으면 정지
+        if(dead == false)
+            Invoke(nameof(Skills), tempDelay);
         //시간이 지날수록 스킬 딜레이 감소
         if(attackDelay >= 0.5f)
             attackDelay -= 0.1f;
@@ -126,9 +128,32 @@ public class Boss_Magician : Boss_form
                 playerCanAttack = false;
             }
         }
+        ///////////////////////////////////////
+        //////////////보스 사망시//////////////
+        ///////////////////////////////////////
+        dead = true;
+        if(dead == true)
+        {
+            GameObject staff = GameObject.Find("Staff");
+            if (staff.transform.eulerAngles.z >= 270f)
+            {
+                staff.transform.Rotate(Vector3.back * Time.deltaTime * 50);
+                transform.Rotate(Vector3.forward * Time.deltaTime * 50);
+                transform.position -= new Vector3(0, 0.001f, 0);
+            }
+
+            else
+            {
+                Time.timeScale = 0;
+                //씬전환
+            }
+        }
+        /////////////////////////////////////
+        //////////////피격 관련//////////////
+        /////////////////////////////////////
+        //playerCnaAttack == true 일 동안에만 피격가능
+        if(playerCanAttack == true)
+            GetComponent<BoxCollider2D>().enabled = true;
+        else GetComponent<BoxCollider2D>().enabled = false;
     }
-    /////////////////////////////////////
-    //////////////피격 관련//////////////
-    /////////////////////////////////////
-    //playerCnaAttack == true 일 동안에만 피격가능
 }
