@@ -29,6 +29,7 @@ public class Player : MonoBehaviour
     public bool isJumping = false; // 점프상태
     public bool isdash = false; // 대쉬상태
     public bool isattack = false; // 공격상태
+    public bool isSave;
 
     Rigidbody2D rigid;
 

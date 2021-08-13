@@ -17,4 +17,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Village_Past_BeforeCombat.unity
     guid: f1a0d8e3f4c11064d9376df9e80a8b64
+  - enabled: 1
+    path: Assets/Scenes/Boss_Spider 1.unity
+    guid: ef63e130593885e409b9077b792ca642
+  - enabled: 1
+    path: Assets/Scenes/Village_Past_AfterCombat.unity
+    guid: 72eebc60ab46cff4a8a7ae61479a99d8
+  - enabled: 1
+    path: Assets/Scenes/Village_FirstEnding.unity
+    guid: 4cd9129ba870cb24080cb49ee807ea34
+  - enabled: 1
+    path: Assets/Scenes/Village_Sorcerer.unity
+    guid: bc1c84cb13fcf44488a1673678fc32c3
   m_configObjects: {}

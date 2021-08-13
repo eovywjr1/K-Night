@@ -9,7 +9,6 @@ public class Boss : MonoBehaviour
     public int dashSpeed = 3;
     public int moveSpeed = 300;
     public int skillDelaytime = 5;
-    public int skillindex;
 
     public bool isjunorcallDelay = true;
     public bool isdashToplayerDelay = true;
@@ -51,12 +50,7 @@ public class Boss : MonoBehaviour
         if (hp <= 0)
             this.gameObject.SetActive(false);
 
-        //애니메이션 방향 전환
-        if (direction == Vector2.right)
-            spriteRenderer.flipX = true;
-        else if (direction == Vector2.left)
-            spriteRenderer.flipX = false;
-
+        //대쉬 중 충돌 감지
         if (!isdashToplayerDelay)
             DashFindCollision();
     }
@@ -143,9 +137,7 @@ public class Boss : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(skillDelaytime);
 
-        skillindex = Random.Range(1, 4);
-
-        switch (skillindex)
+        switch (Random.Range(1, 4))
         {
             //잡몹 소환
             case 1:
@@ -157,9 +149,17 @@ public class Boss : MonoBehaviour
                 //플레이어 위치 및 방향 저장
                 playerPosition = new Vector3(player.GetTransform().position.x, this.gameObject.transform.position.y);
                 if (playerPosition.x >= this.transform.position.x)
+                {
                     direction = Vector2.right;
+
+                    spriteRenderer.flipX = true;
+                }
                 else
+                {
                     direction = Vector2.left;
+
+                    spriteRenderer.flipX = false;
+                }
 
                 this.gameObject.layer = 9;
 
@@ -171,9 +171,17 @@ public class Boss : MonoBehaviour
             case 3:
                 //좌우 방향 결정
                 if (Random.Range(-1, 1) < 0)
+                {
                     direction = Vector2.left;
+
+                    spriteRenderer.flipX = false;
+                }
                 else
+                {
                     direction = Vector2.right;
+
+                    spriteRenderer.flipX = true;
+                }
 
                 ismoveDelay = false;
 
