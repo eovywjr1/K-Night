@@ -3756,6 +3756,7 @@ MonoBehaviour:
   isJumping: 0
   isdash: 0
   isattack: 0
+  isSave: 0
   scannedTalker: {fileID: 0}
   talkManager: {fileID: 0}
   isYesNoOn: 0
@@ -7445,7 +7446,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1194618107
   m_SortingLayer: 8
-  m_SortingOrder: 2
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 5d22d92dc496b20449c60db76da186a8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -7465,7 +7466,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1014962848}
   m_LocalRotation: {x: 0, y: -0, z: 0.7072366, w: -0.706977}
-  m_LocalPosition: {x: 0.6, y: -3.678, z: 0}
+  m_LocalPosition: {x: 0.6, y: -3.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
