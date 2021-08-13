@@ -68,7 +68,7 @@ public class Boss_form : LivingEntity
     }
     public void FindPlayer() //플레이어의 위치 파악 (좌, 우)
     {
-        direction = player.transform.position.x <= base.transform.position.x ? Vector3.left : Vector3.right;
+        direction = player.transform.position.x <= transform.position.x ? Vector3.left : Vector3.right;
     }
     /////////////////////////////////////
     ////////////////SKILLS///////////////
@@ -94,7 +94,7 @@ public class Boss_form : LivingEntity
     }
     protected void MeteoWarning(Vector3 pos)
     {
-        GameObject MeteoWarningClone = Instantiate(meteoWarningPrefab, pos, transform.rotation);
+        GameObject MeteoWarningClone = Instantiate(meteoWarningPrefab, pos, this.transform.rotation);
     }
     /////////////////////////////////////
     /////////////MORE DETAILS////////////

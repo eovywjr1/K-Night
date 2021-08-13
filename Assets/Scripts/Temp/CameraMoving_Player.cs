@@ -1,14 +1,14 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraMoving : MonoBehaviour
+public class CameraMoving_Player : MonoBehaviour
 {
-    public GameObject target; // Ä«¸Ş¶ó°¡ µû¶ó°¥ ´ë»ó
-    public float moveSpeed; // Ä«¸Ş¶ó°¡ µû¶ó°¥ ¼Óµµ
+    public GameObject target; // ì¹´ë©”ë¼ê°€ ë”°ë¼ê°ˆ ëŒ€ìƒ
+    public float moveSpeed; // ì¹´ë©”ë¼ê°€ ë”°ë¼ê°ˆ ì†ë„
     public float leftEnd;
     public float rightEnd;
-    private Vector3 targetPosition; // ´ë»óÀÇ ÇöÀç À§Ä¡
+    private Vector3 targetPosition; // ëŒ€ìƒì˜ í˜„ì¬ ìœ„ì¹˜
 
 
 
@@ -23,17 +23,17 @@ public class CameraMoving : MonoBehaviour
             target = null;
         }
 
-        // ´ë»óÀÌ ÀÖ´ÂÁö Ã¼Å©
+        // ëŒ€ìƒì´ ìˆëŠ”ì§€ ì²´í¬
         if (target.gameObject != null)
         {
-            // this´Â Ä«¸Ş¶ó¸¦ ÀÇ¹Ì (z°ªÀº Ä«¸Ş¶ó°ªÀ» ±×´ë·Î À¯Áö)
+            // thisëŠ” ì¹´ë©”ë¼ë¥¼ ì˜ë¯¸ (zê°’ì€ ì¹´ë©”ë¼ê°’ì„ ê·¸ëŒ€ë¡œ ìœ ì§€)
             targetPosition.Set(target.transform.position.x, this.transform.position.y, this.transform.position.z);
             if (targetPosition.x < leftEnd)
                 targetPosition.x = leftEnd;
             else if (targetPosition.x > rightEnd)
                 targetPosition.x = rightEnd;
 
-            // vectorA -> B±îÁö TÀÇ ¼Óµµ·Î ÀÌµ¿
+            // vectorA -> Bê¹Œì§€ Tì˜ ì†ë„ë¡œ ì´ë™
                 this.transform.position = Vector3.Lerp(this.transform.position, targetPosition, moveSpeed * Time.deltaTime);
             
         }
