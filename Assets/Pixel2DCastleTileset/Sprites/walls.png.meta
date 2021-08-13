@@ -59,6 +59,15 @@ TextureImporter:
   - first:
       213: -5199613361349611217
     second: walls_18
+  - first:
+      213: 2689462866469278851
+    second: walls_19
+  - first:
+      213: -674365099278563466
+    second: walls_20
+  - first:
+      213: 2937849406781047536
+    second: walls_21
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -155,7 +164,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 1
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -271,7 +280,7 @@ TextureImporter:
         x: 304
         y: 256
         width: 128
-        height: 256
+        height: 85
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -554,6 +563,69 @@ TextureImporter:
       bones: []
       spriteID: f21b163523347d7b0800000000000000
       internalID: -5199613361349611217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: walls_19
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 400
+        width: 128
+        height: 112
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38451884a34e25520800000000000000
+      internalID: 2689462866469278851
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: walls_20
+      rect:
+        serializedVersion: 2
+        x: 349
+        y: 240
+        width: 1
+        height: 1
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6778490e38c24a6f0800000000000000
+      internalID: -674365099278563466
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: walls_21
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 341
+        width: 128
+        height: 59
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f2c6c6587655c820800000000000000
+      internalID: 2937849406781047536
       vertices: []
       indices: 
       edges: []

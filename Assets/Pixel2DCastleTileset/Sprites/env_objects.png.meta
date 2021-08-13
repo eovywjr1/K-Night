@@ -101,6 +101,15 @@ TextureImporter:
   - first:
       213: -1142286757930104601
     second: env_objects_32
+  - first:
+      213: 329992096061439250
+    second: env_objects_33
+  - first:
+      213: -8766197755384916742
+    second: env_objects_34
+  - first:
+      213: -9052038255856177991
+    second: env_objects_35
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -197,7 +206,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 1
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -457,10 +466,10 @@ TextureImporter:
       name: env_objects_12
       rect:
         serializedVersion: 2
-        x: 0
-        y: 32
-        width: 272
-        height: 224
+        x: 48
+        y: 192
+        width: 48
+        height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -890,6 +899,69 @@ TextureImporter:
       bones: []
       spriteID: 7e881f9ee38c520f0800000000000000
       internalID: -1142286757930104601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: env_objects_33
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 160
+        width: 48
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21dbd60201e549400800000000000000
+      internalID: 329992096061439250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: env_objects_34
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 208
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af494773695385680800000000000000
+      internalID: -8766197755384916742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: env_objects_35
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 208
+        width: 32
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9bc22728a23b06280800000000000000
+      internalID: -9052038255856177991
       vertices: []
       indices: 
       edges: []
