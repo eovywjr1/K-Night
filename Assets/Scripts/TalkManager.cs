@@ -84,7 +84,7 @@ public class TalkManager : MonoBehaviour
 
         TextQuestInEscAndTriggerStoryEvent();
 
-        if (Input.GetKeyDown("escape"))
+        if (Input.GetKeyDown("escape") && lastTalkID != 350)
         {
             ActivateEscMenuPanel();
         }
