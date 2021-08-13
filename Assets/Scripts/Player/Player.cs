@@ -29,6 +29,7 @@ public class Player : MonoBehaviour
     public bool isJumping = false; // 점프상태
     public bool isdash = false; // 대쉬상태
     public bool isattack = false; // 공격상태
+    public bool isSave;
 
     Rigidbody2D rigid;
 
@@ -40,8 +41,17 @@ public class Player : MonoBehaviour
     public GameObject scannedTalker;
     public TalkManager talkManager;
 
+    // NPC 인식.
+    float rayLenOfLooking = 0.5f;
+    RaycastHit2D rayHit;
+
     // YesNo 관련 변수.
     public bool isYesNoOn;
+
+    // 엔딩 관련 변수.
+    bool alreadyTriggeredFirstEnding = false;
+    private GameObject cameraInThisScene;
+    private bool passedFirstTalkTriggerInFirstEnding = false;
 
     private void Awake()
     {
@@ -78,6 +88,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        CheckIsInFirstEnding();
         TalkerFinder();
         
 
@@ -248,7 +259,7 @@ public class Player : MonoBehaviour
                  (Input.GetKeyDown(KeyCode.UpArrow) && scannedTalker != null)
                  ||
                  (talkManager.talkIndex >= 1 && (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow)))
-                ) && (isYesNoOn == false))
+                ) && (isYesNoOn == false) && passedFirstTalkTriggerInFirstEnding == false)
             {
                 talkManager.TriggerTalks(scannedTalker);
                 
@@ -268,13 +279,9 @@ public class Player : MonoBehaviour
     // 이 함수를 통해서 Player는 "Talker" 레이어의 오브젝트를 감지합니다.
     void TalkerFinderInAwakeAndFixedUpdate()
     {
-        
-        float rayLenOfLooking = 0.5f;
-
         // Ray.
         Debug.DrawRay(rigid.position, directionPlayerLooksAt * rayLenOfLooking, new Color(0, 255 / 255f, 0, 255 / 255f));
-        RaycastHit2D rayHit
-            = Physics2D.Raycast(rigid.position, directionPlayerLooksAt, rayLenOfLooking, LayerMask.GetMask("Talker"));
+        rayHit = Physics2D.Raycast(rigid.position, directionPlayerLooksAt, rayLenOfLooking, LayerMask.GetMask("Talker"));
 
         if (rayHit.collider != null)
         {
@@ -284,9 +291,71 @@ public class Player : MonoBehaviour
         {
             scannedTalker = null;
         }
+
     }
 
     
    
+
+
+
+
+
+
+
+
+
+
+    // 스토리용 함수. 엔딩.
+    void CheckIsInFirstEnding()
+    {
+        if (SceneManager.GetActiveScene().name == "Village_FirstEnding")
+        {
+            if (alreadyTriggeredFirstEnding == false)
+            {
+                passedFirstTalkTriggerInFirstEnding = true;
+            }
+            cameraInThisScene = GameObject.Find("Main Camera");
+            moveSpeed = 0;
+            jumpSpeed = 0;
+            dashSpeed = 0;
+            this.gameObject.GetComponent<SpriteRenderer>().flipX = true;
+        }
+
+
+        if(SceneManager.GetActiveScene().name == "Village_FirstEnding" && alreadyTriggeredFirstEnding == false && cameraInThisScene.transform.position.x <= 5.0f)
+        {
+            passedFirstTalkTriggerInFirstEnding = false;
+            TriggerFirstEnding();
+            alreadyTriggeredFirstEnding = true;
+        }
+
+
+
+    }
+
+    // 스토리용 함수. 엔딩.
+    void TriggerFirstEnding()
+    {
+        // Ray.
+        Debug.DrawRay(rigid.position, directionPlayerLooksAt * rayLenOfLooking, new Color(0, 255 / 255f, 0, 255 / 255f));
+        rayHit = Physics2D.Raycast(rigid.position, directionPlayerLooksAt, rayLenOfLooking, LayerMask.GetMask("Talker"));
+
+        if (rayHit.collider != null)
+        {
+            scannedTalker = rayHit.collider.gameObject;
+        }
+        else if (rayHit.collider == null)
+        {
+            scannedTalker = null;
+        }
+
+
+        talkManager.TriggerTalks(scannedTalker); // talkID 350의 대사가 실행되도록 하려는 의도입니다.
+    }
+
+
+
+
 
 }
