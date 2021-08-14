@@ -45,8 +45,13 @@ public class Player : MonoBehaviour
     float rayLenOfLooking = 0.5f;
     RaycastHit2D rayHit;
 
+    // 물과 충돌 시.
+
     // YesNo 관련 변수.
     public bool isYesNoOn;
+
+    // Save Point 관련 변수.
+    GameObject savePoint;
 
     // 엔딩 관련 변수.
     bool alreadyTriggeredFirstEnding = false;
@@ -88,10 +93,14 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        FindTalkManager();
         CheckIsInFirstEnding();
         TalkerFinder();
         
-
+        if(SceneManager.GetActiveScene().name == "TitleScreen")
+        {
+            hp = 100;
+        }
 
 
         if (Input.GetButtonDown("Jump"))
@@ -134,10 +143,25 @@ public class Player : MonoBehaviour
 
 
 
+
     }
+
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.tag == "Water")
+        {
+            hp = 0;
+        }
+        if(collider.gameObject.tag == "SavePoint")
+        {
+            talkManager.SaveGame();
+        }
+    }
+
 
     private void FixedUpdate()
     {
+
         Move();
         Jump();
         Dash();
@@ -294,7 +318,10 @@ public class Player : MonoBehaviour
 
     }
 
-    
+    void FindTalkManager()
+    {
+        talkManager = GameObject.Find("TalkManager").GetComponent<TalkManager>();
+    }
    
 
 
@@ -334,6 +361,8 @@ public class Player : MonoBehaviour
 
     }
 
+
+
     // 스토리용 함수. 엔딩.
     void TriggerFirstEnding()
     {
@@ -355,6 +384,7 @@ public class Player : MonoBehaviour
     }
 
 
+    
 
 
 

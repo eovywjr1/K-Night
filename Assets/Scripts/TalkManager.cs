@@ -22,6 +22,15 @@ public class TalkManager : MonoBehaviour
     public GameObject escMenuPanel;
     public Text nextQuestText;
 
+    // 이전 세이브 포인트.
+    private GameObject panelPrefsNull;
+    private GameObject panelPrefsNullText;
+    float deltaTime = 0.0f;
+
+    // Death Panel.
+    public GameObject deathPanel;
+    bool playerIsDead = false;
+
     // 대사 딕셔너리.
     Dictionary<int, string[]> talkData;
 
@@ -54,6 +63,7 @@ public class TalkManager : MonoBehaviour
 
     private void Awake()
     {
+        FindSomePanels();
         FindHpbar();
         PlayerTracker();
 
@@ -76,6 +86,8 @@ public class TalkManager : MonoBehaviour
 
     private void Update()
     {
+        CheckPlayerIsDead();
+
         ShowingHPBar();
 
         PlayerTracker();
@@ -84,7 +96,7 @@ public class TalkManager : MonoBehaviour
 
         TextQuestInEscAndTriggerStoryEvent();
 
-        if (Input.GetKeyDown("escape") && lastTalkID != 350)
+        if (Input.GetKeyDown("escape") && playerIsDead == false && lastTalkID != 350)
         {
             ActivateEscMenuPanel();
         }
@@ -146,12 +158,12 @@ public class TalkManager : MonoBehaviour
             "나는 원래 이 마을의 왕자로서, 왕이 되었어야 했어.:혼령",
             "그런데 지금 네가 섬기는 왕이 나를 죄인으로 몰아 죽였고:혼령",
             "나는 결국 이렇게 과거에 원혼으로 남게 되었어.:혼령",
-            "...:playerName", // 화자: 플레이어.
+            "...:플레이어", // 화자: 플레이어.
             "마을 근처 호숫가에 한 주술사가 살고 있는 숲이 있는데:혼령", // 적절한 오두막 에셋을 찾으면 '숲'을 '오두막'으로 바꾸겠습니다.
             "그 주술사한테서 부활의 부적을 받을 수 있어.:혼령",
             "부적을 받으면 난 사람으로 되살아날 수 있고 더 강력한 스킬도 사용할 수 있게 돼.:혼령",
-            "...:playerName", //화자: 플레이어.
-            /*플레이어의 이름 + */ "나와 같이 부정한 왕을 처치하고 이 마을의 왕이 되지 않을래? \n" +
+            "...:플레이어", //화자: 플레이어.
+            /*플레이어의 이름 + */ "나와 같이 부정한 왕을 처치하고 이 마을의 왕이 되지 않을래? (화살표키와 엔터키로 선택) \n" +
             "[1] 혼령의 말을 무시하고 포탈을 타고 ‘현재’로 가서, 일상으로 돌아간다. \n" +
             "[2] 혼령의 부탁을 수락하고, 포탈을 타고 ‘현재’의 왕을 처치하러 간다.:혼령:YesNo|1|0"
         });
@@ -485,7 +497,32 @@ public class TalkManager : MonoBehaviour
 
     }
 
+    void CheckPlayerIsDead()
+    {
+        if (player.GetComponent<Player>().hp <= 0)
+        {
+            playerIsDead = true;
+            player.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 0);
+            if (deathPanel != null)
+            {
+                deathPanel.SetActive(true);
+            }
+            Time.timeScale = 0;
+        }
+    }
 
+
+    public void SaveGame()
+    {
+        Save(player.GetComponent<Player>());
+    }
+
+    public void LoadGame()
+    {
+
+        Load(player.GetComponent<Player>());
+        
+    }
 
 
 
@@ -676,6 +713,108 @@ public class TalkManager : MonoBehaviour
             }
 
         }
+    }
+
+
+    //저장
+    public void Save(Player player)
+    {
+        PlayerPrefs.SetString("playerName", player.myName);
+        PlayerPrefs.SetString("sceneName", SceneManager.GetActiveScene().name);
+        PlayerPrefs.SetInt("Hp", player.hp);
+        PlayerPrefs.SetFloat("playerX", player.transform.position.x);
+        PlayerPrefs.SetFloat("playerY", player.transform.position.y);
+    }
+
+    //불러오기
+    private void Load(Player player)
+    {
+        if (PlayerPrefs.HasKey("playerX") == true)
+        {
+            float x = PlayerPrefs.GetFloat("playerX");
+            float y = PlayerPrefs.GetFloat("playerY");
+            player.transform.position = new Vector3(x, y, 0);
+            SceneManager.LoadScene(PlayerPrefs.GetString("sceneName"));
+            player.myName = PlayerPrefs.GetString("playerName");
+            player.hp = PlayerPrefs.GetInt("Hp");
+            Time.timeScale = 1;
+            print("게임 로드 성공");
+        }
+        else
+        {
+            deltaTime = 0.0f;
+            if (escMenuPanel != null)
+            {
+                ActivateEscMenuPanel();
+            }
+            panelPrefsNull.SetActive(true);
+            panelPrefsNull.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+            panelPrefsNullText.GetComponent<Text>().color = new Color(0.7215f, 0.7215f, 0.7215f, 1);
+            
+            Time.timeScale = 1;
+            Invoke("PrefsNullPanelHide", 0.8f);
+            print("게임 데이터 없음");
+            
+        }
+        player.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+    }
+
+    void PrefsNullPanelHide()
+    {
+        panelPrefsNull.GetComponent<Image>().color = new Color(1, 1, 1, 0);
+        panelPrefsNullText.GetComponent<Text>().color = new Color(0.7215f, 0.7215f, 0.7215f, 0);
+        panelPrefsNull.SetActive(false);
+    }
+
+    void FindSomePanels()
+    {
+        panelPrefsNull = GameObject.Find("Canvas").transform.Find("PanelPrefsNull").gameObject;
+        panelPrefsNullText = panelPrefsNull.transform.Find("PanelPrefsNullText").gameObject;
+    }
+
+
+    // Title Screen.
+    public void BtNewGame()
+    {
+        player.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+        player.GetComponent<SpriteRenderer>().flipX = false;
+        player.transform.position = new Vector3(17.836f, -1.324f, 0);
+        SceneManager.LoadScene("Village_Present");
+        Time.timeScale = 1;
+        
+    }
+    
+    public void BtLoadGame()
+    {
+        LoadGame();
+    }
+
+    public void BtMedals()
+    {
+
+    }
+
+    public void BtGoToCredits()
+    {
+
+    }
+
+    public void BtExitGame()
+    {
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #else
+            Application.Quit();
+        #endif
+    }
+
+    public void BtGoToTitle()
+    {
+        if (deathPanel != null)
+        {
+            deathPanel.SetActive(false);
+        }
+        SceneManager.LoadScene("TitleScreen");
     }
 
 }

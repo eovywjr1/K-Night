@@ -8,6 +8,8 @@ TagManager:
   - Junior
   - Ground
   - Wall
+  - Water
+  - SavePoint
   layers:
   - Default
   - TransparentFX
@@ -23,7 +25,7 @@ TagManager:
   - BossKinematic
   - 
   - 
-  - 
+  - Water
   - Talker
   - 
   - 
