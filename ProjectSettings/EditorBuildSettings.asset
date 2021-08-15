@@ -33,6 +33,27 @@ EditorBuildSettings:
     path: Assets/Scenes/Village_Sorcerer.unity
     guid: bc1c84cb13fcf44488a1673678fc32c3
   - enabled: 1
+    path: Assets/Scenes/Castle_OutSide.unity
+    guid: 4a15181a454811d4c9f16c62fdad9e5c
+  - enabled: 1
+    path: Assets/Scenes/Castle_BossRoom_BeforeCombat.unity
+    guid: f72f8589c7bcf5544aeb876fcd650811
+  - enabled: 1
+    path: Assets/Scenes/Boss_Magician.unity
+    guid: 1dda58177d5fc854b913d24a2266571d
+  - enabled: 1
+    path: Assets/Scenes/Castle_BossRoom_AfterMagician.unity
+    guid: 7e291fb8ab09b834d826bbe2983751bc
+  - enabled: 1
+    path: Assets/Scenes/Boss_Spider_Reprise.unity
+    guid: 28ca003988e5cdc4dad65889d2b58c27
+  - enabled: 1
+    path: Assets/Scenes/Castle_BossRoom_AfterCombat.unity
+    guid: 7aa24dca17d04b94f947cb96270c6393
+  - enabled: 1
+    path: Assets/Scenes/Village_SecondEnding.unity
+    guid: 22ef0d1b0873ed24aa35bb54b25f6a23
+  - enabled: 1
     path: Assets/Scenes/UI_AfterClear.unity
     guid: b276db244611e704185ce0bcbf25576d
   m_configObjects: {}
