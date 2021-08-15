@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Village_Sorcerer.unity
     guid: bc1c84cb13fcf44488a1673678fc32c3
+  - enabled: 1
+    path: Assets/Scenes/UI_AfterClear.unity
+    guid: b276db244611e704185ce0bcbf25576d
   m_configObjects: {}

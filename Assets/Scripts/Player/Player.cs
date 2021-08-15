@@ -94,7 +94,7 @@ public class Player : MonoBehaviour
     private void Update()
     {
         FindTalkManager();
-        CheckIsInFirstEnding();
+        CheckIsInEnding();
         TalkerFinder();
         
         if(SceneManager.GetActiveScene().name == "TitleScreen")
@@ -334,9 +334,9 @@ public class Player : MonoBehaviour
 
 
     // 스토리용 함수. 엔딩.
-    void CheckIsInFirstEnding()
+    void CheckIsInEnding()
     {
-        if (SceneManager.GetActiveScene().name == "Village_FirstEnding")
+        if (SceneManager.GetActiveScene().name == "Village_FirstEnding" || SceneManager.GetActiveScene().name == "Village_SecondEnding")
         {
             if (alreadyTriggeredFirstEnding == false)
             {
@@ -350,7 +350,7 @@ public class Player : MonoBehaviour
         }
 
 
-        if(SceneManager.GetActiveScene().name == "Village_FirstEnding" && alreadyTriggeredFirstEnding == false && cameraInThisScene.transform.position.x <= 5.0f)
+        if( (SceneManager.GetActiveScene().name == "Village_FirstEnding" || SceneManager.GetActiveScene().name == "Village_SecondEnding") && alreadyTriggeredFirstEnding == false && cameraInThisScene.transform.position.x <= 5.0f)
         {
             passedFirstTalkTriggerInFirstEnding = false;
             TriggerFirstEnding();
