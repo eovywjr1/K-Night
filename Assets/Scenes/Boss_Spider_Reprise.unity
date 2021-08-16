@@ -311,9 +311,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boss: {fileID: 0}
-  bossStart: {fileID: 0}
   barricade: {fileID: 0}
   mapTransfer: {fileID: 0}
+  bossSpider: {fileID: 0}
 --- !u!4 &9306430
 Transform:
   m_ObjectHideFlags: 0
@@ -6205,9 +6205,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boss: {fileID: 1272977218}
-  bossStart: {fileID: 0}
   barricade: {fileID: 0}
   mapTransfer: {fileID: 1993162338}
+  bossSpider: {fileID: 0}
 --- !u!4 &569097085
 Transform:
   m_ObjectHideFlags: 0
@@ -6462,9 +6462,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boss: {fileID: 0}
-  bossStart: {fileID: 0}
   barricade: {fileID: 0}
   mapTransfer: {fileID: 0}
+  bossSpider: {fileID: 0}
   startPointName: 
   player: {fileID: 0}
 --- !u!4 &618477526
@@ -17237,7 +17237,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1993162339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17253,8 +17253,8 @@ MonoBehaviour:
   mapName: Castle_BossRoom_AfterCombat
   player: {fileID: 0}
   magician: {fileID: 0}
-  boss: {fileID: 1272977218}
-  staff: {fileID: 0}
+  boss: {fileID: 0}
+  BOSS: {fileID: 1272977220}
 --- !u!4 &1993162340
 Transform:
   m_ObjectHideFlags: 0

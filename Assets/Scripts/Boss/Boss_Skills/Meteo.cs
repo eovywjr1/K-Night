@@ -12,6 +12,9 @@ public class Meteo : Boss_Skills_Figures
         rigid = GetComponent<Rigidbody2D>();
         rigid.gravityScale = GameObject.Find(nameof(Boss)).GetComponent<Boss_form>().meteoGravity;
     }
+    private void Start()
+    {
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

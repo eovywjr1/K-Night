@@ -4475,7 +4475,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 478914667}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.38, y: -2.56, z: 0}
+  m_LocalPosition: {x: -2.38, y: -3, z: 0}
   m_LocalScale: {x: 0.5902213, y: 0.5703898, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -8067,7 +8067,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapName: Village_SecondEnding
   player: {fileID: 0}
+  magician: {fileID: 0}
   boss: {fileID: 0}
+  BOSS: {fileID: 0}
 --- !u!4 &887303583
 Transform:
   m_ObjectHideFlags: 0
@@ -11180,9 +11182,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boss: {fileID: 0}
-  bossStart: {fileID: 0}
   barricade: {fileID: 0}
   mapTransfer: {fileID: 0}
+  bossSpider: {fileID: 0}
   startPointName: 
   player: {fileID: 0}
 --- !u!4 &1329206501
@@ -11193,7 +11195,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1329206499}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 49.45, y: -1.35, z: 0}
+  m_LocalPosition: {x: -2.38, y: -3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -17247,9 +17249,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boss: {fileID: 0}
-  bossStart: {fileID: 0}
   barricade: {fileID: 0}
   mapTransfer: {fileID: 0}
+  bossSpider: {fileID: 0}
 --- !u!4 &2070755075
 Transform:
   m_ObjectHideFlags: 0

@@ -29,7 +29,7 @@ public class Boss_Magician : Boss_form
 
     void Start()
     {
-        dead = true;
+        //dead = true;
         isStaff = false;
         playerCanAttack = false;
         numOfTorchOff = 0;
@@ -135,7 +135,6 @@ public class Boss_Magician : Boss_form
         ///////////////////////////////////////
         //////////////보스 사망시//////////////
         ///////////////////////////////////////
-        dead = true;
         if(dead == true)
         {
             GameObject staff = GameObject.Find("Staff");
