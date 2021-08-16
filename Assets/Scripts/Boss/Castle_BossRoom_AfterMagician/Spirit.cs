@@ -12,6 +12,7 @@ public class Spirit : MonoBehaviour
     private bool once;
     void Start()
     {
+        Time.timeScale = 1;
         moveVelocity = Vector3.right;
         once = false;
     }
@@ -31,6 +32,7 @@ public class Spirit : MonoBehaviour
             GameObject staff = GameObject.Find("Staff");
             staff.transform.eulerAngles = Vector3.zero;
             //모습이 변하고
+            this.transform.position += new Vector3(0,0.41f,0);
             ChangeToKing();
             //대사를 하고
 

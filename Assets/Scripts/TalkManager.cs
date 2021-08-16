@@ -636,7 +636,7 @@ public class TalkManager : MonoBehaviour
                 Destroy(caveBarricade);
             }
 
-            GameObject portalToPast = GameObject.Find("PortalParent").transform.Find("Village>Past").gameObject;
+            GameObject portalToPast = GameObject.Find("PortalParent").transform.Find("Village>Cave").gameObject;
             portalToPast.SetActive(true);
         }
     }

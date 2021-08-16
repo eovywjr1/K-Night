@@ -15,6 +15,7 @@ public class Boss_Spider: Boss_form
     Vector3 startPoint;
     private void Start()
     {
+        dead = true;
         inRange = false;
         lastAttackTime_Throw = 0f;
         Skills();

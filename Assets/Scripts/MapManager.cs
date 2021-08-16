@@ -53,7 +53,7 @@ public class MapManager : MonoBehaviour
             {
                 //저장 bool
                 player.isSave = true;
-
+                
                 //맵 이동
                 MapTransfer();
             }
