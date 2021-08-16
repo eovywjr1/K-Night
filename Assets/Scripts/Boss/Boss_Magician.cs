@@ -25,6 +25,8 @@ public class Boss_Magician : Boss_form
     //보스 특징 관련 변수
     private bool playerCanAttack;// 보스를 때릴수 있다!
 
+    public bool isStaff;
+
     void Start()
     {
         playerCanAttack = false;
@@ -144,6 +146,8 @@ public class Boss_Magician : Boss_form
 
             else
             {
+                isStaff = true; // 맵 이동 플래그
+
                 Time.timeScale = 0;
                 //씬전환
             }

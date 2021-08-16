@@ -42,7 +42,6 @@ public class Boss : MonoBehaviour
 
     void Update()
     {
-        //잡몹 소환
         if (!isjunorcallDelay)
             JuniorCall();
 
@@ -50,18 +49,15 @@ public class Boss : MonoBehaviour
         if (hp <= 0)
             this.gameObject.SetActive(false);
 
-        //대쉬 중 충돌 감지
         if (!isdashToplayerDelay)
             DashFindCollision();
     }
 
     void FixedUpdate()
     {
-        //보스 이동
         if (!ismoveDelay)
             Move();
 
-        //보스 돌진
         if (!isdashToplayerDelay)
             Dash();
     }
@@ -142,6 +138,7 @@ public class Boss : MonoBehaviour
             //잡몹 소환
             case 1:
                 isjunorcallDelay = false;
+                Debug.Log("1");
                 break;
 
             //대쉬
@@ -165,6 +162,7 @@ public class Boss : MonoBehaviour
 
                 isdashToplayerDelay = false;
 
+                Debug.Log("2");
                 break;
 
             //랜덤 이동
@@ -185,10 +183,14 @@ public class Boss : MonoBehaviour
 
                 ismoveDelay = false;
 
+                Debug.Log("3");
                 break;
 
             default:
                 break;
         }
+
+        //코루틴 중단
+        StopAllCoroutines();
     }
 }

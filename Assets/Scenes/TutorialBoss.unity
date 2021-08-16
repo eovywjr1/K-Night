@@ -192,9 +192,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boss: {fileID: 0}
-  bossStart: {fileID: 0}
   barricade: {fileID: 0}
   mapTransfer: {fileID: 0}
+  bossSpider: {fileID: 0}
 --- !u!4 &3875843
 Transform:
   m_ObjectHideFlags: 0
@@ -1043,9 +1043,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boss: {fileID: 1451925175}
-  bossStart: {fileID: 0}
   barricade: {fileID: 0}
   mapTransfer: {fileID: 800657900}
+  bossSpider: {fileID: 0}
 --- !u!4 &393383748
 Transform:
   m_ObjectHideFlags: 0
@@ -1725,7 +1725,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapName: Village_Present_AfterTutorial
   player: {fileID: 0}
+  magician: {fileID: 0}
   boss: {fileID: 1451925175}
+  staff: {fileID: 0}
 --- !u!1 &815205418
 GameObject:
   m_ObjectHideFlags: 0
@@ -2788,9 +2790,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boss: {fileID: 0}
-  bossStart: {fileID: 0}
   barricade: {fileID: 0}
   mapTransfer: {fileID: 0}
+  bossSpider: {fileID: 0}
   startPointName: 
   player: {fileID: 344231514}
 --- !u!1 &1260863344
@@ -9902,7 +9904,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 10
-  power: 1
+  power: 3
   dashSpeed: 3
   moveSpeed: 200
   skillDelaytime: 3

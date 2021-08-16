@@ -9,6 +9,7 @@ public class Boss_Spider_Start : MonoBehaviour
     private Rigidbody2D rigid;
     public GameObject realboss;
     public int damage_Stone;
+
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();

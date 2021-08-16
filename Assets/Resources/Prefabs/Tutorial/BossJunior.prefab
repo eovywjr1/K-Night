@@ -144,13 +144,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d49e1ef96f2b194984fe2de13e29b54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  rigidBody: {fileID: 0}
-  spriteRenderer: {fileID: 0}
-  moveDirection: {x: 0, y: 0}
-  playerPosition: {x: 0, y: 0}
   hp: 3
-  power: 0
-  moveSpeed: 1
-  moveDelaytime: 2
-  isMoveDelay: 0
+  power: 1

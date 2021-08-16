@@ -6,9 +6,10 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public GameObject boss;
-    public GameObject bossStart;
     public GameObject barricade;
     public GameObject mapTransfer;
+
+    public Boss_Spider bossSpider;
 
     float x;
     float y;
@@ -16,22 +17,22 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         //플레이어가 튜토리얼 보스 씬으로 이동 시 보스 생성
-        if (boss != null)
+        if (boss != null && SceneManager.GetActiveScene().name == "TutorialBoss")
             boss.SetActive(true);
     }
 
     void Update()
     {
         //aftertutorial에서 beforecombet 씬으로 이동하는 오브젝트 활성화
-        if (barricade != null && mapTransfer != null && barricade.activeSelf == false)
+        if (barricade != null && barricade.activeSelf == false)
             mapTransfer.SetActive(true);
 
         //보스가 죽었을 때 오브젝트 활성화
-        if(boss != null && mapTransfer != null && boss.activeSelf == false)
+        if(boss != null && boss.activeSelf == false)
             mapTransfer.SetActive(true);
 
         //spider 보스가 죽었을 때 오브젝트 활성화
-        if (boss != null && mapTransfer != null && bossStart != null && !boss.activeSelf && !bossStart.activeSelf)
+        if (bossSpider != null && !boss.activeSelf && bossSpider.dead)
             mapTransfer.SetActive(true);
     }
 
