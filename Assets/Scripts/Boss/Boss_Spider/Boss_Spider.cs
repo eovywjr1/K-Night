@@ -12,7 +12,6 @@ public class Boss_Spider: Boss_form
     private float lastAttackTime_Dash; //마지막 공격 시점
     private float lastAttackTime_Throw; //마지막 공격 시점
 
-    //
     Vector3 startPoint;
     private void Start()
     {

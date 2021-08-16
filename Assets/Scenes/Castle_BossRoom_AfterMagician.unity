@@ -5307,7 +5307,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 478914667}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.38, y: -2.56, z: 0}
+  m_LocalPosition: {x: -3, y: -3, z: 0}
   m_LocalScale: {x: 0.5902213, y: 0.5703898, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -5930,9 +5930,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boss: {fileID: 0}
-  bossStart: {fileID: 0}
   barricade: {fileID: 0}
   mapTransfer: {fileID: 0}
+  bossSpider: {fileID: 0}
 --- !u!4 &545344726
 Transform:
   m_ObjectHideFlags: 0
@@ -7908,9 +7908,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boss: {fileID: 0}
-  bossStart: {fileID: 0}
   barricade: {fileID: 0}
   mapTransfer: {fileID: 0}
+  bossSpider: {fileID: 0}
   startPointName: 
   player: {fileID: 0}
 --- !u!4 &769049311
@@ -7921,7 +7921,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 769049309}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 49.45, y: -1.35, z: 0}
+  m_LocalPosition: {x: -3, y: -3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -9245,6 +9245,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapName: Boss_Spider_Reprise
   player: {fileID: 0}
+  magician: {fileID: 0}
   boss: {fileID: 0}
 --- !u!4 &901939082
 Transform:
@@ -14328,6 +14329,7 @@ GameObject:
   - component: {fileID: 1802381800}
   - component: {fileID: 1802381799}
   - component: {fileID: 1802381802}
+  - component: {fileID: 1802381798}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -14335,6 +14337,38 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1802381798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1802381797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
 --- !u!81 &1802381799
 AudioListener:
   m_ObjectHideFlags: 0
@@ -14394,7 +14428,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1802381797}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -22, y: 0, z: -10}
+  m_LocalPosition: {x: -1, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

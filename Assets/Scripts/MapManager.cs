@@ -10,7 +10,7 @@ public class MapManager : MonoBehaviour
     public Player player;
     public Boss_Magician magician;
     public GameObject boss;
-    public GameObject staff;
+    public LivingEntity BOSS;
 
     private void Start()
     {
@@ -19,24 +19,44 @@ public class MapManager : MonoBehaviour
 
     void Update()
     {
-        if(boss != null && boss.activeSelf == false)
+        if(boss != null)
         {
-            //저장 bool
-            player.isSave = true;
+            if (boss.activeSelf == false)
+            {
+                //저장 bool
+                player.isSave = true;
 
-            //맵 이동
-            MapTransfer();
+                //맵 이동
+                MapTransfer();
+            }
         }
 
         //매지션 씬 스태프 관련 맵 이동
-        if(staff != null && magician != null && magician.isStaff)
+        if (magician != null)
         {
-            player.isSave = true;
+            if (magician.isStaff)
+            {
+                player.isSave = true;
 
-            magician.isStaff = false;
+                magician.isStaff = false;
 
-            //맵 이동
-            MapTransfer();
+                //맵 이동
+                MapTransfer();
+            }
+        }
+
+        //나머지 보스들
+        if (BOSS != null)
+        {
+            Debug.Log(BOSS.dead);
+            if (BOSS.dead)
+            {
+                //저장 bool
+                player.isSave = true;
+
+                //맵 이동
+                MapTransfer();
+            }
         }
     }
 

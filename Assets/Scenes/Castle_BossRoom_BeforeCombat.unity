@@ -999,9 +999,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boss: {fileID: 0}
-  bossStart: {fileID: 0}
   barricade: {fileID: 0}
   mapTransfer: {fileID: 0}
+  bossSpider: {fileID: 0}
 --- !u!4 &108704265
 Transform:
   m_ObjectHideFlags: 0
@@ -4560,9 +4560,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boss: {fileID: 0}
-  bossStart: {fileID: 0}
   barricade: {fileID: 0}
   mapTransfer: {fileID: 0}
+  bossSpider: {fileID: 0}
   startPointName: 
   player: {fileID: 0}
 --- !u!4 &414070196
@@ -4573,7 +4573,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 414070194}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.08, y: -3, z: 0}
+  m_LocalPosition: {x: -30, y: -3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -7242,10 +7242,10 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 1.5995898}
+  m_Offset: {x: 0.62312484, y: 1.5995898}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -7256,7 +7256,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 4.199176}
+  m_Size: {x: 2.2462497, y: 4.199176}
   m_EdgeRadius: 0
 --- !u!4 &662210542
 Transform:
@@ -8637,7 +8637,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapName: Boss_Magician
   player: {fileID: 0}
+  magician: {fileID: 0}
   boss: {fileID: 0}
+  staff: {fileID: 0}
 --- !u!4 &823613842
 Transform:
   m_ObjectHideFlags: 0
