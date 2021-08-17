@@ -71,7 +71,6 @@ public class Player : MonoBehaviour
         {
             
         }
-
         if (instance == null) // 씬 이동하면서 캐릭터 복사하지 않기 위해 static 선언 후 대입
         {
             DontDestroyOnLoad(this.gameObject);
@@ -161,6 +160,18 @@ public class Player : MonoBehaviour
         if(collider.gameObject.layer == 15 && collider.GetComponent<ObjTalkData>().talkId == 550)
         {
             talkManager.TriggerTalks(scannedTalker);
+        }
+        //Castle_BossRoom_AfterMagician
+        //StartTalk콜리더에 들어갈시 대사 이벤트 발생
+        if (collider.gameObject.layer == 15 && collider.GetComponent<ObjTalkData>().talkId == 600)
+        {
+            talkManager.TriggerTalks(scannedTalker);
+            collider.gameObject.SetActive(false);
+        }
+        if (collider.gameObject.layer == 15 && collider.GetComponent<ObjTalkData>().talkId == 601)
+        {
+            talkManager.TriggerTalks(scannedTalker);
+            collider.gameObject.SetActive(false);
         }
     }
 

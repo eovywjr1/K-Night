@@ -104,6 +104,8 @@ public class TalkManager : MonoBehaviour
 
         TextQuestInEscAndTriggerStoryEvent();
 
+        SceneAfterMagicianTalk();
+
         if (Input.GetKeyDown("escape") && playerIsDead == false && (lastTalkID != 350  && lastTalkID != 900))
         {
             ActivateEscMenuPanel();
@@ -484,10 +486,19 @@ public class TalkManager : MonoBehaviour
         else if (lastTalkID == 600)
         {
             nextQuestText.text = "드디어 부정한 왕을 처치했다.. ";
+            if(talkIndex == 0)
+            {
+                Spirit spirit = GameObject.Find("Spirit").GetComponent<Spirit>();
+                spirit.talkIsEnd = true;
+            }
         }
         else if (lastTalkID == 601)
         {
             nextQuestText.text = "왕이 된 괴물을 처지하자..!";
+            if (talkIndex == 0)
+            {
+                SceneManager.LoadScene("Boss_Spider_Reprise");
+            }
         }
         else if (lastTalkID == 700)
         {
@@ -512,9 +523,6 @@ public class TalkManager : MonoBehaviour
                 Firework1.SetBool("onFirework", true);
                 Firework2.SetBool("onFirework", true);
                 Firework3.SetBool("onFirework", true);
-
-
-
             }
         }
         else
@@ -522,6 +530,17 @@ public class TalkManager : MonoBehaviour
             //nextQuestText.text = " ";
         }
 
+    }
+    private void SceneAfterMagicianTalk()
+    {
+        if(SceneManager.GetActiveScene().name == "Castle_BossRoom_AfterMagician")
+        {
+            Spirit spirit = GameObject.Find("Spirit").GetComponent<Spirit>();
+            if (spirit.isChangeClear = true)
+            {
+                //talkid 601 실행
+            }
+        }
     }
 
     private void CameraAscendInFirstEndingInFixedUpdate()

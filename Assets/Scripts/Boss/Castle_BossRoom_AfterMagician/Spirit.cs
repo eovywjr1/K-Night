@@ -10,6 +10,10 @@ public class Spirit : MonoBehaviour
     public float dashSpeed;
     public float changeDelay;
     private bool once;
+
+
+    public bool talkIsEnd = false;
+    public bool isChangeClear = false;
     void Start()
     {
         Time.timeScale = 1;
@@ -20,7 +24,7 @@ public class Spirit : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (/*대사가 끝나면*/true)
+        if (talkIsEnd)
             transform.position += moveVelocity * dashSpeed * Time.deltaTime;
 
         //지팡이까지 이동하면
@@ -34,6 +38,7 @@ public class Spirit : MonoBehaviour
             //모습이 변하고
             this.transform.position += new Vector3(0,0.41f,0);
             ChangeToKing();
+            isChangeClear = true;
             //대사를 하고
 
             //씬 전환
