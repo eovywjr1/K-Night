@@ -42,7 +42,7 @@ public class Player : MonoBehaviour
     public TalkManager talkManager;
 
     // NPC 인식.
-    float rayLenOfLooking = 0.5f;
+    float rayLenOfLooking = 1.5f;
     RaycastHit2D rayHit;
 
     // 물과 충돌 시.
@@ -155,6 +155,12 @@ public class Player : MonoBehaviour
         if(collider.gameObject.tag == "SavePoint")
         {
             talkManager.SaveGame();
+        }
+        //Castle_BossRoom_BeforeCombat
+        //StartTalk콜리더에 들어갈시 대사 이벤트 발생
+        if(collider.gameObject.layer == 15 && collider.GetComponent<ObjTalkData>().talkId == 550)
+        {
+            talkManager.TriggerTalks(scannedTalker);
         }
     }
 

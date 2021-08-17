@@ -214,9 +214,15 @@ public class TalkManager : MonoBehaviour
             "자, 이제 성으로 바로 갈 수 있는 포탈을 소환할게.:왕",
             "그 전에 주의할 점은... 미리 말하지 않고 성으로 들어가는 것이라:왕",
             "왕이 바로 공격을 시작할 거라는 점이야.:왕",
+            "횃불을 주의해서 봐봐:왕",
             "그리고 왕은 지금까지 네가 본 적 없는 스킬을 쓸 수도 있으니,:왕",
             "포탈을 타기 전에 마음의 준비를 하도록 해.:왕",
             "그럼 건투를 빌게. 꼭 승리해서 왕의 자리를 되찾는거야!:왕"
+        });
+
+        // 되살아난 혼령(오두막에서). (550).
+        talkData.Add(550, new string[] {
+            "누구냐!:왕"
         });
 
         // 현재의 왕을 처치하고 나서 괴물로부터 듣는 사건의 전말. (600).
@@ -442,9 +448,6 @@ public class TalkManager : MonoBehaviour
                 Firework1.SetBool("onFirework", true);
                 Firework2.SetBool("onFirework", true);
                 Firework3.SetBool("onFirework", true);
-
-
-
             }
         }
         else if(lastTalkID == 370)
@@ -469,7 +472,14 @@ public class TalkManager : MonoBehaviour
         else if(lastTalkID == 500)
         {
             nextQuestText.text = "성으로 가서 부정한 왕을 처치하자!";
-            // 여기에 포탈 활성화하는 코드.ㅅㅈ
+            ActivatePortalSorcererToCastleOutside();
+        }
+        else if(lastTalkID == 550)
+        {
+            if(talkIndex == 0)
+            {
+                SceneManager.LoadScene("Boss_Magician");
+            }
         }
         else if (lastTalkID == 600)
         {
@@ -658,6 +668,17 @@ public class TalkManager : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "Village_Past_AfterCombat")
         {
             GameObject portalVillageToSorcerer = GameObject.Find("PortalParent").transform.Find("Village>Sorcerer").gameObject;
+            portalVillageToSorcerer.SetActive(true);
+
+        }
+    }
+
+    // 스토리용 함수 :: 성 외부 씬으로 가는 포탈 활성화.
+    public void ActivatePortalSorcererToCastleOutside()
+    {
+        if (SceneManager.GetActiveScene().name == "Village_Sorcerer")
+        {
+            GameObject portalVillageToSorcerer = GameObject.Find("PortalParent").transform.Find("Village>CastleOutside").gameObject;
             portalVillageToSorcerer.SetActive(true);
 
         }

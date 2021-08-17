@@ -9247,6 +9247,7 @@ MonoBehaviour:
   player: {fileID: 0}
   magician: {fileID: 0}
   boss: {fileID: 0}
+  BOSS: {fileID: 0}
 --- !u!4 &901939082
 Transform:
   m_ObjectHideFlags: 0
