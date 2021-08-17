@@ -335,7 +335,7 @@ public class TalkManager : MonoBehaviour
 
         if(talkString == null)
         {
-            Time.timeScale = 1;
+            Player.instance.isTalking = false;
             talkIndex = 0;
             talkIsActive = false;
 
@@ -355,7 +355,7 @@ public class TalkManager : MonoBehaviour
     public void TriggerTalks(GameObject ObjectTriggeringTalk)
     {
         if(!( SceneManager.GetActiveScene().name == "Village_FirstEnding" || SceneManager.GetActiveScene().name == "Village_SecondEnding" )){
-            Time.timeScale = 0;
+            Player.instance.isTalking = true;
         }
         
         ObjectForTalkId = ObjectTriggeringTalk;
@@ -495,12 +495,10 @@ public class TalkManager : MonoBehaviour
         else if (lastTalkID == 601)
         {
             nextQuestText.text = "왕이 된 괴물을 처지하자..!";
-            /*
             if (talkIndex == 0)
             {
                 SceneManager.LoadScene("Boss_Spider_Reprise");
             }
-            */
         }
         else if (lastTalkID == 700)
         {

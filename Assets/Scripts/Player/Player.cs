@@ -30,6 +30,7 @@ public class Player : MonoBehaviour
     public bool isdash = false; // 대쉬상태
     public bool isattack = false; // 공격상태
     public bool isSave;
+    public bool isTalking = false;//대화중인가?
 
     Rigidbody2D rigid;
 
@@ -161,16 +162,19 @@ public class Player : MonoBehaviour
         {
             talkManager.TriggerTalks(scannedTalker);
         }
+    }
+    private void OnTriggerStay2D(Collider2D collider)
+    {
         //Castle_BossRoom_AfterMagician
         //StartTalk콜리더에 들어갈시 대사 이벤트 발생
         if (collider.gameObject.layer == 15 && collider.GetComponent<ObjTalkData>().talkId == 600)
         {
-            talkManager.TriggerTalks(scannedTalker);
+            talkManager.TriggerTalks(collider.gameObject);
             collider.gameObject.SetActive(false);
         }
         if (collider.gameObject.layer == 15 && collider.GetComponent<ObjTalkData>().talkId == 601)
         {
-            talkManager.TriggerTalks(scannedTalker);
+            talkManager.TriggerTalks(collider.gameObject);
             collider.gameObject.SetActive(false);
         }
     }
@@ -178,11 +182,13 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-
-        Move();
-        Jump();
-        Dash();
-        Attack();
+        if (isTalking == false)
+        {
+            Move();
+            Jump();
+            Dash();
+            Attack();
+        }
 
         TalkerFinderInAwakeAndFixedUpdate();
     }

@@ -38,7 +38,6 @@ public class Spirit : MonoBehaviour
             //모습이 변하고
             this.transform.position += new Vector3(0,0.41f,0);
             ChangeToKing();
-            isChangeClear = true;
             //대사를 하고
 
             //씬 전환
@@ -53,6 +52,10 @@ public class Spirit : MonoBehaviour
         gameObject.GetComponent<SpriteRenderer>().sprite = king;
         gameObject.GetComponent<SpriteRenderer>().color = new Color(123f / 255f, 160f / 255f, 248f / 255f, 1f);
         gameObject.transform.localScale = new Vector3(2, 2, 0);
+
+        //별개
+        GameObject talkStart2 = GameObject.Find("TalkParent").transform.Find("TalkStart2").gameObject;
+        talkStart2.SetActive(true);
     }
 
 }
