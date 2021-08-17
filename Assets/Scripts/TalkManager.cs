@@ -104,8 +104,6 @@ public class TalkManager : MonoBehaviour
 
         TextQuestInEscAndTriggerStoryEvent();
 
-        SceneAfterMagicianTalk();
-
         if (Input.GetKeyDown("escape") && playerIsDead == false && (lastTalkID != 350  && lastTalkID != 900))
         {
             ActivateEscMenuPanel();
@@ -488,6 +486,8 @@ public class TalkManager : MonoBehaviour
             nextQuestText.text = "드디어 부정한 왕을 처치했다.. ";
             if(talkIndex == 0)
             {
+                GameObject talkStart1 = GameObject.Find("TalkParent").transform.Find("TalkStart1").gameObject;
+                talkStart1.SetActive(false);
                 Spirit spirit = GameObject.Find("Spirit").GetComponent<Spirit>();
                 spirit.talkIsEnd = true;
             }
@@ -531,18 +531,6 @@ public class TalkManager : MonoBehaviour
         }
 
     }
-    private void SceneAfterMagicianTalk()
-    {
-        if(SceneManager.GetActiveScene().name == "Castle_BossRoom_AfterMagician")
-        {
-            Spirit spirit = GameObject.Find("Spirit").GetComponent<Spirit>();
-            if (spirit.isChangeClear = true)
-            {
-                //talkid 601 실행
-            }
-        }
-    }
-
     private void CameraAscendInFirstEndingInFixedUpdate()
     {
         if (lastTalkID == 350)

@@ -13,7 +13,6 @@ public class Spirit : MonoBehaviour
 
 
     public bool talkIsEnd = false;
-    public bool isChangeClear = false;
     void Start()
     {
         Time.timeScale = 1;
@@ -35,27 +34,11 @@ public class Spirit : MonoBehaviour
             //지팡이를 줍고
             GameObject staff = GameObject.Find("Staff");
             staff.transform.eulerAngles = Vector3.zero;
-            //모습이 변하고
-            this.transform.position += new Vector3(0,0.41f,0);
-            ChangeToKing();
             //대사를 하고
+            GameObject talkStart2 = GameObject.Find("TalkParent").transform.Find("TalkStart2").gameObject;
+            talkStart2.SetActive(true);
 
             //씬 전환
         }
     }
-    void ChangeToKing()
-    {
-        Invoke(nameof(King), changeDelay);
-    }
-    void King()
-    {
-        gameObject.GetComponent<SpriteRenderer>().sprite = king;
-        gameObject.GetComponent<SpriteRenderer>().color = new Color(123f / 255f, 160f / 255f, 248f / 255f, 1f);
-        gameObject.transform.localScale = new Vector3(2, 2, 0);
-
-        //별개
-        GameObject talkStart2 = GameObject.Find("TalkParent").transform.Find("TalkStart2").gameObject;
-        talkStart2.SetActive(true);
-    }
-
 }

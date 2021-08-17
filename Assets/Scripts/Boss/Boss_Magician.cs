@@ -149,7 +149,7 @@ public class Boss_Magician : Boss_form
             {
                 isStaff = true; // 맵 이동 플래그
 
-                Time.timeScale = 0;
+                //Time.timeScale = 0;
             }
         }
         /////////////////////////////////////

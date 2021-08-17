@@ -4366,6 +4366,7 @@ MonoBehaviour:
   isdash: 0
   isattack: 0
   isSave: 0
+  isTalking: 0
   scannedTalker: {fileID: 0}
   talkManager: {fileID: 0}
   isYesNoOn: 0

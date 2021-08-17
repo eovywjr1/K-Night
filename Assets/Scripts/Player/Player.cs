@@ -163,19 +163,22 @@ public class Player : MonoBehaviour
             talkManager.TriggerTalks(scannedTalker);
         }
     }
+
+    bool once = false;
+    bool once2 = false;
     private void OnTriggerStay2D(Collider2D collider)
     {
         //Castle_BossRoom_AfterMagician
         //StartTalk콜리더에 들어갈시 대사 이벤트 발생
-        if (collider.gameObject.layer == 15 && collider.GetComponent<ObjTalkData>().talkId == 600)
+        if (collider.gameObject.layer == 15 && collider.GetComponent<ObjTalkData>().talkId == 600 && once == false)
         {
-            talkManager.TriggerTalks(collider.gameObject);
-            collider.gameObject.SetActive(false);
+            once = true;
+            talkManager.TriggerTalks(scannedTalker);
         }
-        if (collider.gameObject.layer == 15 && collider.GetComponent<ObjTalkData>().talkId == 601)
+        if (collider.gameObject.layer == 15 && collider.GetComponent<ObjTalkData>().talkId == 601 && once2 == false)
         {
-            talkManager.TriggerTalks(collider.gameObject);
-            collider.gameObject.SetActive(false);
+            once2 = true;
+            talkManager.TriggerTalks(scannedTalker);
         }
     }
 
@@ -202,7 +205,7 @@ public class Player : MonoBehaviour
             moveVelocity = Vector3.left;
             this.gameObject.GetComponent<SpriteRenderer>().flipX = false; 
         }
-
+          
         else if (Input.GetAxisRaw("Horizontal") > 0)
         {
             moveVelocity = Vector3.right;
@@ -405,10 +408,4 @@ public class Player : MonoBehaviour
 
         talkManager.TriggerTalks(scannedTalker); // talkID 350의 대사가 실행되도록 하려는 의도입니다.
     }
-
-
-    
-
-
-
 }
