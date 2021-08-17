@@ -146,3 +146,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 3
   power: 1
+  moveSpeed: 1
+  isMoveDelay: 0
+  player: {fileID: 0}
+  rigidBody: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  direction: {x: 0, y: 0}
+  playerPosition: {x: 0, y: 0}
