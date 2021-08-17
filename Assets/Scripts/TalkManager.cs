@@ -495,10 +495,12 @@ public class TalkManager : MonoBehaviour
         else if (lastTalkID == 601)
         {
             nextQuestText.text = "왕이 된 괴물을 처지하자..!";
+            /*
             if (talkIndex == 0)
             {
                 SceneManager.LoadScene("Boss_Spider_Reprise");
             }
+            */
         }
         else if (lastTalkID == 700)
         {
