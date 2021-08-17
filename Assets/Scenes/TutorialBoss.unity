@@ -9905,13 +9905,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 10
   power: 3
-  moveSpeed: 2
-  isMoveDelay: 1
-  player: {fileID: 0}
-  rigidBody: {fileID: 0}
-  spriteRenderer: {fileID: 0}
+  dashSpeed: 3
+  moveSpeed: 200
+  skillDelaytime: 3
+  isjunorcallDelay: 1
+  isdashToplayerDelay: 1
+  ismoveDelay: 0
+  isattack: 0
   direction: {x: 0, y: 0}
-  playerPosition: {x: 0, y: 0}
   junior: {fileID: 5134403815998400744, guid: 29ebc5ebb2cca1d45b6fd9fc5f70a70d, type: 3}
 --- !u!212 &1451925177
 SpriteRenderer:
