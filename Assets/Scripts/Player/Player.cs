@@ -62,13 +62,12 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         isYesNoOn = false;
-
+        isTalking = false;
         hp = 100;
 
     }
     void Start()
     {
-        //FindTalkManager();
         if (SceneManager.GetActiveScene().name == "Village_Present")
         {
             
@@ -346,7 +345,11 @@ public class Player : MonoBehaviour
 
     void FindTalkManager()
     {
-        talkManager = GameObject.Find("TalkManager").GetComponent<TalkManager>();
+        if (talkManager == null)
+        {
+            Debug.Log("asdf");
+            talkManager = GameObject.Find("TalkManager").GetComponent<TalkManager>();
+        }
     }
    
 
@@ -369,9 +372,7 @@ public class Player : MonoBehaviour
                 passedFirstTalkTriggerInFirstEnding = true;
             }
             cameraInThisScene = GameObject.Find("Main Camera");
-            moveSpeed = 0;
-            jumpSpeed = 0;
-            dashSpeed = 0;
+            isTalking = true;
             this.gameObject.GetComponent<SpriteRenderer>().flipX = true;
         }
 

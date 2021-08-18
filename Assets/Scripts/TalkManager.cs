@@ -640,6 +640,7 @@ public class TalkManager : MonoBehaviour
 
     public void SaveGame()
     {
+        Debug.Log("저장하기");
         Save(player.GetComponent<Player>());
     }
 
