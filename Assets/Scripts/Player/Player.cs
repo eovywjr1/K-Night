@@ -139,7 +139,7 @@ public class Player : MonoBehaviour
         {
             hp = 0;
         }
-        if(collider.gameObject.tag == "SavePoint")
+        if (collider.gameObject.tag == "SavePoint")
         {
             talkManager.SaveGame();
         }
@@ -155,6 +155,7 @@ public class Player : MonoBehaviour
     bool once2 = false;
     bool once3 = false;
     bool once4 = false;
+
     private void OnTriggerStay2D(Collider2D collider)
     {
         //Castle_BossRoom_AfterMagician

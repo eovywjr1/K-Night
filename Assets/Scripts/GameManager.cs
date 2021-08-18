@@ -49,11 +49,14 @@ public class GameManager : MonoBehaviour
     //불러오기
     public void Load(Player player)
     {
-        x = PlayerPrefs.GetFloat("playerX");
-        y = PlayerPrefs.GetFloat("playerY");
-        player.transform.position = new Vector3(x, y, 0);
-        SceneManager.LoadScene(PlayerPrefs.GetString("sceneName"));
-        player.myName = PlayerPrefs.GetString("playerName");
-        player.hp = PlayerPrefs.GetInt("Hp");
+        if (PlayerPrefs.HasKey("playerX") == true)
+        {
+            x = PlayerPrefs.GetFloat("playerX");
+            y = PlayerPrefs.GetFloat("playerY");
+            player.transform.position = new Vector3(x, y, 0);
+            SceneManager.LoadScene(PlayerPrefs.GetString("sceneName"));
+            player.myName = PlayerPrefs.GetString("playerName");
+            player.hp = PlayerPrefs.GetInt("Hp");
+        }
     }
 }
