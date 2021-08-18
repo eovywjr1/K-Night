@@ -375,9 +375,7 @@ public class Player : MonoBehaviour
                 passedFirstTalkTriggerInFirstEnding = true;
             }
             cameraInThisScene = GameObject.Find("Main Camera");
-            moveSpeed = 0;
-            jumpSpeed = 0;
-            dashSpeed = 0;
+            
             isTalking = true;
             this.gameObject.GetComponent<SpriteRenderer>().flipX = true;
         }

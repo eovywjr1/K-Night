@@ -516,6 +516,8 @@ public class TalkManager : MonoBehaviour
             nextQuestText.text = " ";
             if (talkIndex == 0)
             {
+                player.transform.position = new Vector3(1.67f, -1.35f, 0);
+                player.GetComponent<SpriteRenderer>().flipX = true;
                 SceneManager.LoadScene("Village_SecondEnding");
             }
         }
@@ -1128,6 +1130,7 @@ public class TalkManager : MonoBehaviour
         }
         player.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
         player.GetComponent<SpriteRenderer>().flipX = false;
+        player.GetComponent<Player>().isTalking = false;
         player.transform.position = new Vector3(17.836f, -1.324f, 0);
         SceneManager.LoadScene("Village_Present");
         Time.timeScale = 1;
@@ -1140,6 +1143,7 @@ public class TalkManager : MonoBehaviour
     
     public void BtLoadGame()
     {
+        player.GetComponent<Player>().isTalking = false;
         LoadGame();
     }
 
