@@ -63,6 +63,8 @@ public class Player : MonoBehaviour
     {
         isYesNoOn = false;
 
+
+
         hp = 100;
 
     }
