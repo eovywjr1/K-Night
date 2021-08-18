@@ -5109,7 +5109,7 @@ MonoBehaviour:
   isSave: 0
   isTalking: 0
   scannedTalker: {fileID: 0}
-  talkManager: {fileID: 0}
+  talkManager: {fileID: 108704263}
   isYesNoOn: 0
 --- !u!61 &478914670
 BoxCollider2D:

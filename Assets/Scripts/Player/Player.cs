@@ -68,6 +68,7 @@ public class Player : MonoBehaviour
     }
     void Start()
     {
+        //FindTalkManager();
         if (SceneManager.GetActiveScene().name == "Village_Present")
         {
             
@@ -76,7 +77,6 @@ public class Player : MonoBehaviour
         {
             DontDestroyOnLoad(this.gameObject);
 
-            
             rigid = gameObject.GetComponent<Rigidbody2D>();
             animator = GetComponent<Animator>();
             jumpCount = 1;

@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
             mapTransfer.SetActive(true);
 
         //spider 보스가 죽었을 때 오브젝트 활성화
-        if (bossSpider != null && !boss.activeSelf && bossSpider.dead)
+        if (bossSpider != null && !bossSpider.gameObject.activeSelf && bossSpider.dead)
             mapTransfer.SetActive(true);
     }
 
