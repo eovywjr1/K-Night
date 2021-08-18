@@ -474,8 +474,6 @@ public class TalkManager : MonoBehaviour
         else if(lastTalkID == 500)
         {
             nextQuestText.text = "성으로 가서 부정한 왕을 처치하자!";
-            GameObject bubble = GameObject.Find("BubbleCaution").transform.Find("BubbleCaution_Ghost").gameObject;
-            bubble.SetActive(false);
             ActivatePortalSorcererToCastleOutside();
         }
         else if(lastTalkID == 550)
