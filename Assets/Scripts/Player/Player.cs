@@ -108,17 +108,12 @@ public class Player : MonoBehaviour
             if (jumpCount == 1)
             {
                 isJumping = true;
-
-                
                 jumpCount = 0;
-
-
             }
         }
 
 
         if (Input.GetKeyDown(KeyCode.C))
-
         {
             isdash = true;
         }
@@ -131,19 +126,11 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)   // Ground tag에 닿으면 점프횟수 초기화 (다시 점프 가능하도록)
     { 
-
         if (col.gameObject.CompareTag("Ground"))
         {
-
             Debug.Log("isGround!");
-
             jumpCount = 1;
-
         }
-
-
-
-
     }
 
     void OnTriggerEnter2D(Collider2D collider)
@@ -166,6 +153,8 @@ public class Player : MonoBehaviour
 
     bool once = false;
     bool once2 = false;
+    bool once3 = false;
+    bool once4 = false;
     private void OnTriggerStay2D(Collider2D collider)
     {
         //Castle_BossRoom_AfterMagician
@@ -178,6 +167,16 @@ public class Player : MonoBehaviour
         if (collider.gameObject.layer == 15 && collider.GetComponent<ObjTalkData>().talkId == 601 && once2 == false)
         {
             once2 = true;
+            talkManager.TriggerTalks(scannedTalker);
+        }
+        if (collider.gameObject.layer == 15 && collider.GetComponent<ObjTalkData>().talkId == 700 && once3 == false)
+        {
+            once3 = true;
+            talkManager.TriggerTalks(scannedTalker);
+        }
+        if (collider.gameObject.layer == 15 && collider.GetComponent<ObjTalkData>().talkId == 800 && once4 == false)
+        {
+            once4 = true;
             talkManager.TriggerTalks(scannedTalker);
         }
     }

@@ -461,6 +461,8 @@ public class TalkManager : MonoBehaviour
             Amulet.SetBool("onAmuletUp", true);
             GhostToKing.SetBool("onGhostToKing", true);
             BCGhost.SetBool("onBCGhost", true);
+            GameObject bubble = GameObject.Find("BubbleCaution").transform.Find("BubbleCaution_Sorcerer1").gameObject;
+            bubble.SetActive(false);
 
             GameObject GhostFound = GameObject.Find("Ghost");
             GhostFound.GetComponent<ObjTalkData>().talkId = 500;
@@ -472,6 +474,8 @@ public class TalkManager : MonoBehaviour
         else if(lastTalkID == 500)
         {
             nextQuestText.text = "성으로 가서 부정한 왕을 처치하자!";
+            GameObject bubble = GameObject.Find("BubbleCaution").transform.Find("BubbleCaution_Ghost").gameObject;
+            bubble.SetActive(false);
             ActivatePortalSorcererToCastleOutside();
         }
         else if(lastTalkID == 550)
@@ -503,10 +507,19 @@ public class TalkManager : MonoBehaviour
         else if (lastTalkID == 700)
         {
             nextQuestText.text = "왕에게 부적을 붙여보자..!";
+            if (talkIndex == 0)
+            {
+                GameObject talkStart1 = GameObject.Find("TalkParent").transform.Find("TalkStart1").gameObject;
+                talkStart1.SetActive(false);
+            }
         }
         else if (lastTalkID == 800)
         {
             nextQuestText.text = " ";
+            if (talkIndex == 0)
+            {
+                SceneManager.LoadScene("Village_SecondEnding");
+            }
         }
         else if (lastTalkID == 900)
         {
