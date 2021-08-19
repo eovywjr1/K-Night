@@ -19,7 +19,7 @@ TagManager:
   - UI
   - Monster
   - Boss
-  - 
+  - PlayerDamaged
   - TutorialBossDash
   - PlayerKinematic
   - BossKinematic

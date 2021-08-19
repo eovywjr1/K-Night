@@ -774,18 +774,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 643731d12b4d2aa468a93b8a8b0b9480, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myName: 
   hp: 0
   atkDamage: 0
   mapName: 
+  myName: 
   moveSpeed: 4
   jumpSpeed: 6
   dashSpeed: 80
   jumpCount: 1
   isJumping: 0
-  isdash: 0
+  isDash: 0
+  isDashDelay: 0
   isattack: 0
   isSave: 0
+  isTalking: 0
+  isBounce: 0
   scannedTalker: {fileID: 0}
   talkManager: {fileID: 0}
   isYesNoOn: 0
