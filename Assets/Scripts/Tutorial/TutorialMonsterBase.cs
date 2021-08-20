@@ -29,14 +29,21 @@ public class TutorialMonsterBase : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    //피격 받았을 때 피 감소
-    public void Ondamaged(int power)
+    //피격 받았을 때 hp 감소
+    private void OnTriggerEnter2D(Collider2D col)
     {
-        hp -= power;
+        if (col.CompareTag("Sword"))
+        {
+            if (player.isAttack)
+            {
+                hp -= player.atkDamage;
+                Debug.Log("attacked");
+                player.isAttack = false;
 
-        //죽었을 때
-        if (hp <= 0)
-            Destroy(this.gameObject);
+                if (hp <= 0) //사망
+                    Destroy(this.gameObject);
+            }
+        }
     }
 
     //플레이어 위치 저장 및 방향 설정

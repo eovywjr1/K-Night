@@ -10,6 +10,7 @@ TagManager:
   - Wall
   - Water
   - SavePoint
+  - Sword
   layers:
   - Default
   - TransparentFX
