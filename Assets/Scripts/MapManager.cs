@@ -48,7 +48,6 @@ public class MapManager : MonoBehaviour
         //나머지 보스들
         if (BOSS != null)
         {
-            Debug.Log(BOSS.dead);
             if (BOSS.dead)
             {
                 //저장 bool
