@@ -11,14 +11,11 @@ public class Player : MonoBehaviour
     X: attack 
     */
 
-    public string myName; // player 이름 (만약 게임 시작시 입력받는다면)
-
     public int hp; // 체력
-
-    
     public int atkDamage; // player가 가하는 damage
 
     public string mapName;
+    public string myName; // player 이름 (만약 게임 시작시 입력받는다면)
 
     public float moveSpeed = 4f; // 이동속도
     public float jumpSpeed = 4f; // 점프속도
@@ -27,14 +24,19 @@ public class Player : MonoBehaviour
     public int jumpCount = 1; // 점프 가능 횟수 
 
     public bool isJumping = false; // 점프상태
-    public bool isdash = false; // 대쉬상태
+    public bool isDash; // 대쉬상태
+    public bool isDashDelay;
     public bool isattack = false; // 공격상태
     public bool isSave;
     public bool isTalking = false;//대화중인가?
+    public bool isBounce;
 
     Rigidbody2D rigid;
+    SpriteRenderer spriteRenderer;
 
     Vector3 movement;
+    Vector3 Direction;
+
     private Animator animator;
 
     // npc 대사.
@@ -81,6 +83,8 @@ public class Player : MonoBehaviour
 
             rigid = gameObject.GetComponent<Rigidbody2D>();
             animator = GetComponent<Animator>();
+            spriteRenderer = GetComponent<SpriteRenderer>();
+
             jumpCount = 1;
 
             instance = this;
@@ -98,12 +102,6 @@ public class Player : MonoBehaviour
         FindTalkManager();
         CheckIsInEnding();
         TalkerFinder();
-        
-        if(SceneManager.GetActiveScene().name == "TitleScreen")
-        {
-            hp = 100;
-        }
-
 
         if (Input.GetButtonDown("Jump"))
         {
@@ -117,7 +115,8 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.C))
         {
-            isdash = true;
+            if (!isDashDelay)
+                isDash = true;
         }
         
         if (Input.GetKeyDown(KeyCode.X))
@@ -191,7 +190,13 @@ public class Player : MonoBehaviour
         {
             Move();
             Jump();
-            Dash();
+
+            if (isDash)
+                Dash();
+
+            if (isBounce)
+                Bounce();
+
             Attack();
         }
 
@@ -205,13 +210,13 @@ public class Player : MonoBehaviour
         if (Input.GetAxisRaw("Horizontal") < 0)
         {
             moveVelocity = Vector3.left;
-            this.gameObject.GetComponent<SpriteRenderer>().flipX = false; 
+            spriteRenderer.flipX = false; 
         }
           
         else if (Input.GetAxisRaw("Horizontal") > 0)
         {
             moveVelocity = Vector3.right;
-            this.gameObject.GetComponent<SpriteRenderer>().flipX = true; 
+            spriteRenderer.flipX = true; 
         }
 
         transform.position += moveVelocity * moveSpeed * Time.deltaTime;
@@ -234,32 +239,19 @@ public class Player : MonoBehaviour
 
     void Dash() // 대쉬
     {
-        Vector3 moveVelocity = Vector3.zero;
-
-
-        if (!isdash)
-        {
-            
-            return;
-        }
-
         // 캐릭터가 좌측을 보고 있을 때
-        if (this.gameObject.GetComponent<SpriteRenderer>().flipX == false)
-        {
-            moveVelocity = Vector3.left;
-        }
+        if (spriteRenderer.flipX == false)
+            Direction = Vector3.left;
         // 캐릭터가 우측을 보고 있을 때
-        if (this.gameObject.GetComponent<SpriteRenderer>().flipX == true)
-        {
-            moveVelocity = Vector3.right;
-        }
+        else
+            Direction = Vector3.right;
 
-        transform.position += moveVelocity * dashSpeed * Time.deltaTime;
+        transform.position += Direction * dashSpeed * Time.deltaTime;
 
         animator.SetBool("isdash", true);
 
-        isdash = false;
-
+        isDash = false;
+        StartCoroutine(DashDelay());
     }
 
     void Attack() // 공격
@@ -268,7 +260,6 @@ public class Player : MonoBehaviour
             return;
 
         animator.SetBool("isattack", true);
-
 
         isattack = false;
     }
@@ -281,16 +272,9 @@ public class Player : MonoBehaviour
     public void HpDecrease(int quantity)
     {
         hp -= quantity;
+
+        isBounce = true;
     }
-
-
-
-
-
-
-
-
-
 
     void TalkerFinder()
     {
@@ -377,7 +361,7 @@ public class Player : MonoBehaviour
             cameraInThisScene = GameObject.Find("Main Camera");
             
             isTalking = true;
-            this.gameObject.GetComponent<SpriteRenderer>().flipX = true;
+            spriteRenderer.flipX = true;
         }
 
 
@@ -412,5 +396,45 @@ public class Player : MonoBehaviour
 
 
         talkManager.TriggerTalks(scannedTalker); // talkID 350의 대사가 실행되도록 하려는 의도입니다.
+    }
+
+    //튕겨지는 함수
+    void Bounce()
+    {
+        Vector2 bounceDirection;
+
+        this.gameObject.layer = 8;
+
+        if (Direction == Vector3.left)
+            bounceDirection = new Vector2(1,1);
+        else
+            bounceDirection = new Vector2(-1,1);
+
+        rigid.AddForce(bounceDirection * 100 * Time.deltaTime, ForceMode2D.Impulse);
+
+        spriteRenderer.color = new Color(1, 1, 1, 0.5f);
+
+        StartCoroutine(BounceDelay());
+    }
+
+    //대쉬 딜레이 코루틴
+    IEnumerator DashDelay()
+    {
+        isDashDelay = true;
+
+        yield return new WaitForSecondsRealtime(1f);
+
+        isDashDelay = false;
+    }
+
+    //피격 무적 딜레이
+    IEnumerator BounceDelay()
+    {
+        isBounce = false;
+
+        yield return new WaitForSecondsRealtime(1f);
+
+        this.gameObject.layer = 3;
+        spriteRenderer.color = new Color(1, 1, 1, 1);
     }
 }
