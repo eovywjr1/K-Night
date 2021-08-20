@@ -91,7 +91,7 @@ public class Boss : TutorialMonsterBase
         Debug.DrawRay(this.gameObject.transform.position, direction * 1.6f, new Color(0, 0, 1), LayerMask.GetMask("Player"));
         raycastHit = Physics2D.Raycast(this.gameObject.transform.position, direction, 1.6f, LayerMask.GetMask("Player"));
 
-        if (raycastHit.collider != null && raycastHit.collider.name == "Player" && !isattack)
+        if (raycastHit.collider.name == "Player" && !isattack)
         {
             isattack = true;
 

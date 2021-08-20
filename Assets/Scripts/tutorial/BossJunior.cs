@@ -53,7 +53,7 @@ public class BossJunior : TutorialMonsterBase
         Debug.DrawRay(this.gameObject.transform.position, direction * 0.4f, new Color(0, 0, 1), LayerMask.GetMask("Player"));
         raycastHit = Physics2D.Raycast(this.gameObject.transform.position, direction, 0.4f, LayerMask.GetMask("Player"));
         Debug.Log(raycastHit.collider.name);
-        if (raycastHit.collider != null && raycastHit.collider.name == "Player")
+        if (raycastHit.collider.name == "Player")
             player.HpDecrease(power);
     }
 }
