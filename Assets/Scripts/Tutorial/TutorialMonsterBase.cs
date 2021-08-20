@@ -34,9 +34,20 @@ public class TutorialMonsterBase : MonoBehaviour
     {
         hp -= power;
 
-        //죽었을 때
-        if (hp <= 0)
+        if (hp <= 0)//죽었을 때
             Destroy(this.gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Sword"))
+        {
+            if (player.isAttack)
+            {
+                Ondamaged(player.atkDamage);
+                player.isAttack = false;
+            }
+        }
     }
 
     //플레이어 위치 저장 및 방향 설정
