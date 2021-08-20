@@ -10,7 +10,10 @@ public class CameraMoving_Player : MonoBehaviour
     public float rightEnd;
     private Vector3 targetPosition; // 대상의 현재 위치
 
-
+    private void Awake()
+    {
+        moveSpeed = 1000;
+    }
 
     void Update()
     {

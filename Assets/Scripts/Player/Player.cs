@@ -148,7 +148,9 @@ public class Player : MonoBehaviour
         //StartTalk콜리더에 들어갈시 대사 이벤트 발생
         if(collider.gameObject.layer == 15 && collider.GetComponent<ObjTalkData>().talkId == 550)
         {
+            
             talkManager.TriggerTalks(scannedTalker);
+            
         }
     }
 
@@ -357,11 +359,13 @@ public class Player : MonoBehaviour
             if (alreadyTriggeredFirstEnding == false)
             {
                 passedFirstTalkTriggerInFirstEnding = true;
+                isTalking = true;
+                spriteRenderer.flipX = true;
             }
             cameraInThisScene = GameObject.Find("Main Camera");
             
-            isTalking = true;
-            spriteRenderer.flipX = true;
+            
+            
         }
 
 
