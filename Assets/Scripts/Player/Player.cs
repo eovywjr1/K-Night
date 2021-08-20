@@ -13,20 +13,21 @@ public class Player : MonoBehaviour
 
     public int hp; // 체력
     public int atkDamage; // player가 가하는 damage
+    public float atkSpeed = 1;
 
     public string mapName;
     public string myName; // player 이름 (만약 게임 시작시 입력받는다면)
 
     public float moveSpeed = 4f; // 이동속도
-    public float jumpSpeed = 4f; // 점프속도
-    public float dashSpeed = 30f; // 대쉬속도
+    public float jumpSpeed = 6f; // 점프속도
+    public float dashSpeed = 6f; // 대쉬속도
 
-    public int jumpCount = 1; // 점프 가능 횟수 
+    public int jumpCount = 2; // 점프 가능 횟수 
 
     public bool isJumping = false; // 점프상태
     public bool isDash; // 대쉬상태
     public bool isDashDelay;
-    public bool isattack = false; // 공격상태
+    public bool isAttack = false; // 공격상태
     public bool isSave;
     public bool isTalking = false;//대화중인가?
     public bool isBounce;
@@ -85,7 +86,7 @@ public class Player : MonoBehaviour
             animator = GetComponent<Animator>();
             spriteRenderer = GetComponent<SpriteRenderer>();
 
-            jumpCount = 1;
+            jumpCount = 2;
 
             instance = this;
         }
@@ -105,10 +106,10 @@ public class Player : MonoBehaviour
 
         if (Input.GetButtonDown("Jump"))
         {
-            if (jumpCount == 1)
+            if (jumpCount == 2 && jumpCount >= 1)
             {
                 isJumping = true;
-                jumpCount = 0;
+                jumpCount--;
             }
         }
 
@@ -121,37 +122,30 @@ public class Player : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.X))
         {
-            isattack = true;
+            isAttack = true;
+            Debug.Log("isAttack");
         }
+        AnimationUpdate();
     }
 
     void OnCollisionEnter2D(Collision2D col)   // Ground tag에 닿으면 점프횟수 초기화 (다시 점프 가능하도록)
-    { 
+    {
         if (col.gameObject.CompareTag("Ground"))
-        {
-            Debug.Log("isGround!");
-            jumpCount = 1;
-        }
+            jumpCount = 2;
     }
 
     void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.gameObject.tag == "Water")
-        {
             hp = 0;
-        }
+
         if (collider.gameObject.tag == "SavePoint")
-        {
             talkManager.SaveGame();
-        }
+
         //Castle_BossRoom_BeforeCombat
         //StartTalk콜리더에 들어갈시 대사 이벤트 발생
         if(collider.gameObject.layer == 15 && collider.GetComponent<ObjTalkData>().talkId == 550)
-        {
-            
             talkManager.TriggerTalks(scannedTalker);
-            
-        }
     }
 
     bool once = false;
@@ -201,7 +195,6 @@ public class Player : MonoBehaviour
 
             Attack();
         }
-
         TalkerFinderInAwakeAndFixedUpdate();
     }
 
@@ -250,22 +243,22 @@ public class Player : MonoBehaviour
 
         transform.position += Direction * dashSpeed * Time.deltaTime;
 
-        animator.SetBool("isdash", true);
-
         isDash = false;
         StartCoroutine(DashDelay());
     }
 
     void Attack() // 공격
     {
-        if (!isattack)
+        if (!isAttack)
             return;
 
-        animator.SetBool("isattack", true);
-
-        isattack = false;
+        isAttack = false;
     }
-
+    void AnimationUpdate() // 애니메이션 실행 함수
+    {
+        animator.SetBool("isDash", isDash);
+        animator.SetBool("isAttack", isAttack);
+    }
     public Transform GetTransform()
     {
         return this.gameObject.transform;
@@ -282,13 +275,9 @@ public class Player : MonoBehaviour
     {
         // 플레이어가 발사하는 Ray의 벡터 조절.
         if (Input.GetAxisRaw("Horizontal") == 1)
-        {
             directionPlayerLooksAt = new Vector3(1, 0, 0);
-        }
         else if (Input.GetAxisRaw("Horizontal") == -1)
-        {
             directionPlayerLooksAt = new Vector3(-1, 0, 0);
-        }
 
         if (scannedTalker != null)
         {
@@ -331,7 +320,6 @@ public class Player : MonoBehaviour
         }
 
     }
-
     void FindTalkManager()
     {
         if (talkManager == null)
@@ -340,16 +328,6 @@ public class Player : MonoBehaviour
             talkManager = GameObject.Find("TalkManager").GetComponent<TalkManager>();
         }
     }
-   
-
-
-
-
-
-
-
-
-
 
     // 스토리용 함수. 엔딩.
     void CheckIsInEnding()
@@ -363,9 +341,6 @@ public class Player : MonoBehaviour
                 spriteRenderer.flipX = true;
             }
             cameraInThisScene = GameObject.Find("Main Camera");
-            
-            
-            
         }
 
 
@@ -436,7 +411,7 @@ public class Player : MonoBehaviour
     {
         isBounce = false;
 
-        yield return new WaitForSecondsRealtime(1f);
+        yield return new WaitForSecondsRealtime(2f);
 
         this.gameObject.layer = 3;
         spriteRenderer.color = new Color(1, 1, 1, 1);
