@@ -1128,13 +1128,19 @@ public class TalkManager : MonoBehaviour
         {
             player.GetComponent<Player>().myName = panelNewGame.transform.Find("InputField").transform.Find("Text").gameObject.GetComponent<Text>().text;
         }
+        player.GetComponent<Player>().hp = 100;
         player.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
         player.GetComponent<SpriteRenderer>().flipX = false;
         player.GetComponent<Player>().isTalking = false;
         player.transform.position = new Vector3(17.836f, -1.324f, 0);
-        SceneManager.LoadScene("Village_Present");
+        
         Time.timeScale = 1;
+
+
+        SceneManager.LoadScene("Village_Present");
     }
+
+    
 
     public void BtCloseNewGamePanel()
     {
