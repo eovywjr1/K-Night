@@ -632,6 +632,8 @@ public class TalkManager : MonoBehaviour
         {
             playerIsDead = true;
             player.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 0);
+            player.GetComponent<Player>().rigid.velocity = new Vector2(0, 0);
+
             if (deathPanel != null)
             {
                 deathPanel.SetActive(true);
@@ -903,9 +905,10 @@ public class TalkManager : MonoBehaviour
             float x = PlayerPrefs.GetFloat("playerX");
             float y = PlayerPrefs.GetFloat("playerY");
             player.transform.position = new Vector3(x, y, 0);
-            SceneManager.LoadScene(PlayerPrefs.GetString("sceneName"));
             player.myName = PlayerPrefs.GetString("playerName");
             player.hp = PlayerPrefs.GetInt("Hp");
+
+            SceneManager.LoadScene(PlayerPrefs.GetString("sceneName"));
             Time.timeScale = 1;
             print("게임 로드 성공");
         }

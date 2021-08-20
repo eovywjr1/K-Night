@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
     public bool isTalking = false;//대화중인가?
     public bool isBounce;
 
-    Rigidbody2D rigid;
+    public Rigidbody2D rigid;
     SpriteRenderer spriteRenderer;
 
     Vector3 movement;
@@ -268,7 +268,8 @@ public class Player : MonoBehaviour
     {
         hp -= quantity;
 
-        isBounce = true;
+        if (hp > 0)
+            isBounce = true;
     }
 
     void TalkerFinder()
