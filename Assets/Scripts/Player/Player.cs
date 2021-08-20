@@ -389,7 +389,7 @@ public class Player : MonoBehaviour
         else
             bounceDirection = new Vector2(-1,1);
 
-        rigid.AddForce(bounceDirection * 100 * Time.deltaTime, ForceMode2D.Impulse);
+        rigid.AddForce(bounceDirection * 77 * Time.deltaTime, ForceMode2D.Impulse);
 
         spriteRenderer.color = new Color(1, 1, 1, 0.5f);
 

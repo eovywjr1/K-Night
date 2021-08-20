@@ -11,11 +11,6 @@ public class BossJunior : TutorialMonsterBase
         Initial();
     }
 
-    void Update()
-    { 
-        FindCollision();
-    }
-
     void FixedUpdate()
     {
         //플레이어로 이동
@@ -45,15 +40,5 @@ public class BossJunior : TutorialMonsterBase
         yield return new WaitForSecondsRealtime(moveDelaytime);
 
         isMoveDelay = false;
-    }
-
-    //플레이어 충돌 시 피 감소
-    void FindCollision()
-    {
-        Debug.DrawRay(this.gameObject.transform.position, direction * 0.4f, new Color(0, 0, 1), LayerMask.GetMask("Player"));
-        raycastHit = Physics2D.Raycast(this.gameObject.transform.position, direction, 0.4f, LayerMask.GetMask("Player"));
-        Debug.Log(raycastHit.collider.name);
-        if (raycastHit.collider.name == "Player")
-            player.HpDecrease(power);
     }
 }
