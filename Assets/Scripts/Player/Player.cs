@@ -121,10 +121,7 @@ public class Player : MonoBehaviour
     void OnCollisionEnter2D(Collision2D col)   // Ground tag에 닿으면 점프횟수 초기화 (다시 점프 가능하도록)
     { 
         if (col.gameObject.CompareTag("Ground"))
-        {
-            Debug.Log("isGround!");
             jumpCount = 1;
-        }
     }
 
     void OnTriggerEnter2D(Collider2D collider)

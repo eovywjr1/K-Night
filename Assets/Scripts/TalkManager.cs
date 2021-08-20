@@ -70,7 +70,8 @@ public class TalkManager : MonoBehaviour
 
     private void Awake()
     {
-        playerScript = player.GetComponent<Player>();
+        playerScript = FindObjectOfType<Player>();
+        player = playerScript.gameObject;
 
         FindSomePanels();
         FindHpbar();
@@ -153,8 +154,8 @@ public class TalkManager : MonoBehaviour
 
         // 과거의 괴물 처치 후 시작되는 대사. (250)
         talkData.Add(250, new string[] {
-            "괴물을 드디어 쓰러뜨렸다..!:" + player.GetComponent<Player>().myName,
-            "괴물에게 왕에 대한 자세한 이야기를 들어보자..:" + player.GetComponent<Player>().myName
+            "괴물을 드디어 쓰러뜨렸다..!:" + playerScript.myName,
+            "괴물에게 왕에 대한 자세한 이야기를 들어보자..:" + playerScript.myName
         });
 
         // 과거의 괴물(혼령)과 처치 이후. (300).
@@ -162,12 +163,12 @@ public class TalkManager : MonoBehaviour
             "나는 원래 이 마을의 왕자로서, 왕이 되었어야 했어.:혼령",
             "그런데 지금 네가 섬기는 왕이 나를 죄인으로 몰아 죽였고:혼령",
             "나는 결국 이렇게 과거에 원혼으로 남게 되었어.:혼령",
-            "...:"+ player.GetComponent<Player>().myName, // 화자: 플레이어.
+            "...:"+ playerScript.myName, // 화자: 플레이어.
             "마을 근처 호숫가에 한 주술사가 살고 있는 숲이 있는데:혼령", // 적절한 오두막 에셋을 찾으면 '숲'을 '오두막'으로 바꾸겠습니다.
             "그 주술사한테서 부활의 부적을 받을 수 있어.:혼령",
             "부적을 받으면 난 사람으로 되살아날 수 있고 더 강력한 스킬도 사용할 수 있게 돼.:혼령",
-            "...:"+ player.GetComponent<Player>().myName, //화자: 플레이어.
-            player.GetComponent<Player>().myName + ", 나와 같이 부정한 왕을 처치하고 내가 왕이 되는 것을 도와주지 않을래..? (화살표키와 엔터키로 선택) \n" +
+            "...:"+ playerScript.myName, //화자: 플레이어.
+            playerScript.myName + ", 나와 같이 부정한 왕을 처치하고 내가 왕이 되는 것을 도와주지 않을래..? (화살표키와 엔터키로 선택) \n" +
             "[1] 혼령의 말을 무시하고 포탈을 타고 ‘현재’로 가서, 일상으로 돌아간다. \n" +
             "[2] 혼령의 부탁을 수락하고, 포탈을 타고 ‘현재’의 왕을 처치하러 간다.:혼령:YesNo|1|0"
         });
@@ -175,15 +176,15 @@ public class TalkManager : MonoBehaviour
         // (1)을 선택한 경우 괴물이 플레이어에게. (310)
         talkData.Add(310, new string[] {
             "...:혼령",
-            "동굴로 가서 현재로 돌아가자..!:"+ player.GetComponent<Player>().myName
+            "동굴로 가서 현재로 돌아가자..!:"+ playerScript.myName
         });
 
         // (1)을 선택한 경우. ((1)을 선택하여 플레이어가 포탈을 타고 난 후 엔딩 씬에서.) (350 ~ 352).
         talkData.Add(350, new string[] {
-            player.GetComponent<Player>().myName + "!! 우리 마을을 위해 괴물을 처치해주다니 정말 고맙다!:왕",
+            playerScript.myName + "!! 우리 마을을 위해 괴물을 처치해주다니 정말 고맙다!:왕",
             "우리 마을을 구해 준 공적으로 너를 우리 마을의 기사로 임명하겠다!:왕",
-            "(괴물이 했던 말이 조금 신경 쓰이기는 하지만...):"+ player.GetComponent<Player>().myName,
-            "(평범한 일상으로 돌아가고 기사가 된 것으로 만족하자.):"+ player.GetComponent<Player>().myName
+            "(괴물이 했던 말이 조금 신경 쓰이기는 하지만...):"+ playerScript.myName,
+            "(평범한 일상으로 돌아가고 기사가 된 것으로 만족하자.):"+ playerScript.myName
         });
 
         // (2)를 선택한 경우. 괴물이 플레이어에게. (370).
@@ -222,7 +223,7 @@ public class TalkManager : MonoBehaviour
 
         // 현재의 왕을 처치하고 나서 괴물로부터 듣는 사건의 전말. (600).
         talkData.Add(600, new string[] {
-            player.GetComponent<Player>().myName + "!! 드디어 왕을 처치했군!:왕",
+            playerScript.myName + "!! 드디어 왕을 처치했군!:왕",
             "우리가 해냈어!!!:왕",
         });
         talkData.Add(601, new string[] {
@@ -239,31 +240,31 @@ public class TalkManager : MonoBehaviour
 
         // 괴물(Re) 처치 후, 플레이어의 독백. (700).
         talkData.Add(700, new string[] {
-            "그런 음모를 꾸미고 있었다니...:"+ player.GetComponent<Player>().myName,
-            "내가 섬기던 왕은 내가 죽였고.. 어떻게 해야 할까...:"+ player.GetComponent<Player>().myName,
-            "괴물이 죽으면서 떨어뜨린 부적을 왕에게 붙이면 왕을 살려낼 수 있을까?:"+ player.GetComponent<Player>().myName
+            "그런 음모를 꾸미고 있었다니...:"+ playerScript.myName,
+            "내가 섬기던 왕은 내가 죽였고.. 어떻게 해야 할까...:"+ playerScript.myName,
+            "괴물이 죽으면서 떨어뜨린 부적을 왕에게 붙이면 왕을 살려낼 수 있을까?:"+ playerScript.myName
         });
 
         // 부적을 왕에게 붙이고 나서, 왕과 플레이어의 대화. (800).
         talkData.Add(800, new string[] {
-            "정신이 드십니까?:"+ player.GetComponent<Player>().myName,
+            "정신이 드십니까?:"+ playerScript.myName,
             "...:왕",
-            "정말 죄송합니다... 괴물이 그런 음모를 꾸몄을지는 정말 상상도 못했습니다:"+ player.GetComponent<Player>().myName,
-            "저를 용서해주십시오...:"+ player.GetComponent<Player>().myName,
+            "정말 죄송합니다... 괴물이 그런 음모를 꾸몄을지는 정말 상상도 못했습니다:"+ playerScript.myName,
+            "저를 용서해주십시오...:"+ playerScript.myName,
             "...:왕",
             "아니네.:왕",
             "저 괴물도 죽고 나도 죽은 상황에서 다른 선택을 했을 수도 있는데,:왕",
             "오히려 이번 일로 자네에 대한 신뢰가 생긴 것 같네.:왕",
             "게다가 마법을 쓰는 나를 상대로도 이기다니 자네의 실력도 몰라보게 출중해졌군.:왕",
             "자네, 우리 마을의 공식 기사가 되지 않겠나?:왕",
-            "....!:"+ player.GetComponent<Player>().myName,
+            "....!:"+ playerScript.myName,
             /*
              아직 수정 중입니다... 이 부분 대사에 대한 아이디어가 있으시다면 직접 수정해주셔도 좋습니다.
              */
         });
 
         talkData.Add(900, new string[] {
-            player.GetComponent<Player>().myName + "!! 우리 마을을 위해 괴물을 처치해주다니 정말 고맙다!:왕",
+            playerScript.myName + "!! 우리 마을을 위해 괴물을 처치해주다니 정말 고맙다!:왕",
             "우리 마을을 구해 준 공적으로 너를 우리 마을의 기사로 임명하겠다!:왕",
             "다시 한 번.. 우리 마을을 구해줘서 정말 고맙다..!:왕"
         });
@@ -669,7 +670,7 @@ public class TalkManager : MonoBehaviour
     public void OnTogglePanelGhostSuggestion()
     {
         isYesNoOn = true;
-        player.GetComponent<Player>().isYesNoOn = true;
+        playerScript.isYesNoOn = true;
 
         talkYesNoPanel.SetActive(true);
 
@@ -950,11 +951,11 @@ public class TalkManager : MonoBehaviour
     // Title Screen.
     public void ActivateBtStartGameWithNameInTitleScreen()
     {
-        Text InputFieldText = panelNewGame.transform.Find("InputField").transform.Find("Text").gameObject.GetComponent<Text>();
-        Button BtStartButton = panelNewGame.transform.Find("BtStart").gameObject.GetComponent<Button>();
-
         if (SceneManager.GetActiveScene().name == "TitleScreen")
         {
+            Text InputFieldText = panelNewGame.transform.Find("InputField").transform.Find("Text").gameObject.GetComponent<Text>();
+            Button BtStartButton = panelNewGame.transform.Find("BtStart").gameObject.GetComponent<Button>();
+
             if (InputFieldText.text.Length > 0 && InputFieldText.text.Length <= 6 && 
                 !(InputFieldText.text == "" || InputFieldText.text == " " || InputFieldText.text == "  " || InputFieldText.text == "   " || InputFieldText.text == "    " 
                 || InputFieldText.text == "     " || InputFieldText.text == "      " || InputFieldText.text == "       "))
