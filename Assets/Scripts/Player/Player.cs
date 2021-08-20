@@ -66,17 +66,17 @@ public class Player : MonoBehaviour
         isYesNoOn = false;
         isTalking = false;
 
-        hp = 100;
-    }
 
+        hp = 100;
+
+    }
     void Start()
     {
         //FindTalkManager();
         if (SceneManager.GetActiveScene().name == "Village_Present")
         {
-
+            
         }
-
         if (instance == null) // 씬 이동하면서 캐릭터 복사하지 않기 위해 static 선언 후 대입
         {
             DontDestroyOnLoad(this.gameObject);
@@ -89,9 +89,13 @@ public class Player : MonoBehaviour
 
             instance = this;
         }
+
         else
             Destroy(this.gameObject);
     }
+
+
+    
 
     private void Update()
     {
@@ -108,6 +112,7 @@ public class Player : MonoBehaviour
             }
         }
 
+
         if (Input.GetKeyDown(KeyCode.C))
         {
             if (!isDashDelay)
@@ -115,7 +120,9 @@ public class Player : MonoBehaviour
         }
         
         if (Input.GetKeyDown(KeyCode.X))
+        {
             isattack = true;
+        }
     }
 
     void OnCollisionEnter2D(Collision2D col)   // Ground tag에 닿으면 점프횟수 초기화 (다시 점프 가능하도록)
@@ -130,15 +137,19 @@ public class Player : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.gameObject.tag == "Water")
+        {
             hp = 0;
-
+        }
         if (collider.gameObject.tag == "SavePoint")
-            talkManager.Save(this);
-
+        {
+            talkManager.SaveGame();
+        }
         //Castle_BossRoom_BeforeCombat
         //StartTalk콜리더에 들어갈시 대사 이벤트 발생
         if(collider.gameObject.layer == 15 && collider.GetComponent<ObjTalkData>().talkId == 550)
+        {
             talkManager.TriggerTalks(scannedTalker);
+        }
     }
 
     bool once = false;
@@ -148,33 +159,30 @@ public class Player : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collider)
     {
-        ObjTalkData objTalkData = collider.GetComponent<ObjTalkData>();
         //Castle_BossRoom_AfterMagician
         //StartTalk콜리더에 들어갈시 대사 이벤트 발생
-        if (collider.gameObject.layer == 15 && objTalkData.talkId == 600 && once == false)
+        if (collider.gameObject.layer == 15 && collider.GetComponent<ObjTalkData>().talkId == 600 && once == false)
         {
             once = true;
             talkManager.TriggerTalks(scannedTalker);
         }
-
-        if (collider.gameObject.layer == 15 && objTalkData.talkId == 601 && once2 == false)
+        if (collider.gameObject.layer == 15 && collider.GetComponent<ObjTalkData>().talkId == 601 && once2 == false)
         {
             once2 = true;
             talkManager.TriggerTalks(scannedTalker);
         }
-
-        if (collider.gameObject.layer == 15 && objTalkData.talkId == 700 && once3 == false)
+        if (collider.gameObject.layer == 15 && collider.GetComponent<ObjTalkData>().talkId == 700 && once3 == false)
         {
             once3 = true;
             talkManager.TriggerTalks(scannedTalker);
         }
-
-        if (collider.gameObject.layer == 15 && objTalkData.talkId == 800 && once4 == false)
+        if (collider.gameObject.layer == 15 && collider.GetComponent<ObjTalkData>().talkId == 800 && once4 == false)
         {
             once4 = true;
             talkManager.TriggerTalks(scannedTalker);
         }
     }
+
 
     private void FixedUpdate()
     {
@@ -225,6 +233,8 @@ public class Player : MonoBehaviour
         rigid.AddForce(jumpVelocity, ForceMode2D.Impulse);
 
         isJumping = false;
+
+
     }
 
     void Dash() // 대쉬
@@ -270,9 +280,13 @@ public class Player : MonoBehaviour
     {
         // 플레이어가 발사하는 Ray의 벡터 조절.
         if (Input.GetAxisRaw("Horizontal") == 1)
+        {
             directionPlayerLooksAt = new Vector3(1, 0, 0);
+        }
         else if (Input.GetAxisRaw("Horizontal") == -1)
+        {
             directionPlayerLooksAt = new Vector3(-1, 0, 0);
+        }
 
         if (scannedTalker != null)
         {
@@ -284,6 +298,7 @@ public class Player : MonoBehaviour
                 ) && (isYesNoOn == false) && passedFirstTalkTriggerInFirstEnding == false)
             {
                 talkManager.TriggerTalks(scannedTalker);
+                
             }
             else if (
                 ( // npc에게 말 걸기.
@@ -305,30 +320,50 @@ public class Player : MonoBehaviour
         rayHit = Physics2D.Raycast(rigid.position, directionPlayerLooksAt, rayLenOfLooking, LayerMask.GetMask("Talker"));
 
         if (rayHit.collider != null)
+        {
             scannedTalker = rayHit.collider.gameObject;
+        }
         else if(rayHit.collider == null)
+        {
             scannedTalker = null;
+        }
+
     }
 
     void FindTalkManager()
     {
         if (talkManager == null)
+        {
+            Debug.Log("asdf");
             talkManager = GameObject.Find("TalkManager").GetComponent<TalkManager>();
+        }
     }
    
+
+
+
+
+
+
+
+
+
+
     // 스토리용 함수. 엔딩.
     void CheckIsInEnding()
     {
         if (SceneManager.GetActiveScene().name == "Village_FirstEnding" || SceneManager.GetActiveScene().name == "Village_SecondEnding")
         {
             if (alreadyTriggeredFirstEnding == false)
+            {
                 passedFirstTalkTriggerInFirstEnding = true;
-
+            }
             cameraInThisScene = GameObject.Find("Main Camera");
             
             isTalking = true;
             spriteRenderer.flipX = true;
         }
+
 
         if( (SceneManager.GetActiveScene().name == "Village_FirstEnding" || SceneManager.GetActiveScene().name == "Village_SecondEnding") && alreadyTriggeredFirstEnding == false && cameraInThisScene.transform.position.x <= 5.0f)
         {
@@ -336,7 +371,12 @@ public class Player : MonoBehaviour
             TriggerFirstEnding();
             alreadyTriggeredFirstEnding = true;
         }
+
+
+
     }
+
+
 
     // 스토리용 함수. 엔딩.
     void TriggerFirstEnding()
@@ -346,9 +386,14 @@ public class Player : MonoBehaviour
         rayHit = Physics2D.Raycast(rigid.position, directionPlayerLooksAt, rayLenOfLooking, LayerMask.GetMask("Talker"));
 
         if (rayHit.collider != null)
+        {
             scannedTalker = rayHit.collider.gameObject;
+        }
         else if (rayHit.collider == null)
+        {
             scannedTalker = null;
+        }
+
 
         talkManager.TriggerTalks(scannedTalker); // talkID 350의 대사가 실행되도록 하려는 의도입니다.
     }
