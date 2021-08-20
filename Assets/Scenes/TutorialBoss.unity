@@ -154,7 +154,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  spriteRenderer: {fileID: 0}
   talkPanel: {fileID: 1341083298}
   talkText: {fileID: 2136790443}
   talkerNamePanel: {fileID: 1924908384}
@@ -777,17 +776,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 0
   atkDamage: 0
-  atkSpeed: 1
   mapName: 
   myName: 
   moveSpeed: 4
   jumpSpeed: 6
-  dashSpeed: 4
+  dashSpeed: 80
   jumpCount: 1
   isJumping: 0
   isDash: 0
   isDashDelay: 0
-  isAttack: 0
+  isattack: 0
   isSave: 0
   isTalking: 0
   isBounce: 0
@@ -807,7 +805,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.05558616}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -818,7 +816,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2, y: 2.3888278}
+  m_Size: {x: 2, y: 2.5}
   m_EdgeRadius: 0
 --- !u!50 &344231516
 Rigidbody2D:

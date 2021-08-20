@@ -13,21 +13,20 @@ public class Player : MonoBehaviour
 
     public int hp; // 체력
     public int atkDamage; // player가 가하는 damage
-    public float atkSpeed = 1;
 
     public string mapName;
     public string myName; // player 이름 (만약 게임 시작시 입력받는다면)
 
     public float moveSpeed = 4f; // 이동속도
-    public float jumpSpeed = 6f; // 점프속도
-    public float dashSpeed = 6f; // 대쉬속도
+    public float jumpSpeed = 4f; // 점프속도
+    public float dashSpeed = 30f; // 대쉬속도
 
-    public int jumpCount = 2; // 점프 가능 횟수 
+    public int jumpCount = 1; // 점프 가능 횟수 
 
     public bool isJumping = false; // 점프상태
     public bool isDash; // 대쉬상태
     public bool isDashDelay;
-    public bool isAttack = false; // 공격상태
+    public bool isattack = false; // 공격상태
     public bool isSave;
     public bool isTalking = false;//대화중인가?
     public bool isBounce;
@@ -86,7 +85,7 @@ public class Player : MonoBehaviour
             animator = GetComponent<Animator>();
             spriteRenderer = GetComponent<SpriteRenderer>();
 
-            jumpCount = 2;
+            jumpCount = 1;
 
             instance = this;
         }
@@ -102,10 +101,10 @@ public class Player : MonoBehaviour
 
         if (Input.GetButtonDown("Jump"))
         {
-            if (jumpCount <= 2 && jumpCount >= 1)
+            if (jumpCount == 1)
             {
                 isJumping = true;
-                jumpCount--;
+                jumpCount = 0;
             }
         }
 
@@ -116,22 +115,13 @@ public class Player : MonoBehaviour
         }
         
         if (Input.GetKeyDown(KeyCode.X))
-        {
-            isAttack = true;
-            Debug.Log("isAttack");
-
-        }
-        
-
-
-        AnimationUpdate();
-
+            isattack = true;
     }
 
     void OnCollisionEnter2D(Collision2D col)   // Ground tag에 닿으면 점프횟수 초기화 (다시 점프 가능하도록)
     { 
         if (col.gameObject.CompareTag("Ground"))
-            jumpCount = 2;
+            jumpCount = 1;
     }
 
     void OnTriggerEnter2D(Collider2D collider)
@@ -243,39 +233,22 @@ public class Player : MonoBehaviour
         else
             Direction = Vector3.right;
 
-        rigid.AddForce(Direction * dashSpeed, ForceMode2D.Impulse);
+        transform.position += Direction * dashSpeed * Time.deltaTime;
+
+        animator.SetBool("isdash", true);
 
         isDash = false;
         StartCoroutine(DashDelay());
-
     }
 
     void Attack() // 공격
     {
-        if (!isAttack)
+        if (!isattack)
             return;
 
-        isAttack = false;
-    }
+        animator.SetBool("isattack", true);
 
-    void AnimationUpdate() // 애니메이션 실행 함수
-    {
-        if(isDash == true)
-        {
-            animator.SetBool("isDash", true);
-        }
-        else
-        {
-            animator.SetBool("isDash", false);
-        }
-        if(isAttack == true)
-        {
-            animator.SetBool("isAttack",true);
-        }
-        else
-        {
-            animator.SetBool("isAttack", false);
-        }
+        isattack = false;
     }
 
     public Transform GetTransform()
