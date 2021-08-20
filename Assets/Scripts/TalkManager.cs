@@ -83,7 +83,7 @@ public class TalkManager : MonoBehaviour
 
     private void Start()
     {
-        
+
 
 
     }
@@ -104,7 +104,7 @@ public class TalkManager : MonoBehaviour
 
         TextQuestInEscAndTriggerStoryEvent();
 
-        if (Input.GetKeyDown("escape") && playerIsDead == false && (lastTalkID != 350  && lastTalkID != 900))
+        if (Input.GetKeyDown("escape") && playerIsDead == false && (lastTalkID != 350 && lastTalkID != 900))
         {
             ActivateEscMenuPanel();
         }
@@ -328,16 +328,16 @@ public class TalkManager : MonoBehaviour
             talkString = null;
             talkerName = null;
         }
-        
 
 
-        if(talkString == null)
+
+        if (talkString == null)
         {
             Player.instance.isTalking = false;
             talkIndex = 0;
             talkIsActive = false;
 
-            
+
 
             return;
         }
@@ -352,10 +352,11 @@ public class TalkManager : MonoBehaviour
 
     public void TriggerTalks(GameObject ObjectTriggeringTalk)
     {
-        if(!( SceneManager.GetActiveScene().name == "Village_FirstEnding" || SceneManager.GetActiveScene().name == "Village_SecondEnding" )){
+        if (!(SceneManager.GetActiveScene().name == "Village_FirstEnding" || SceneManager.GetActiveScene().name == "Village_SecondEnding"))
+        {
             Player.instance.isTalking = true;
         }
-        
+
         ObjectForTalkId = ObjectTriggeringTalk;
         ObjTalkData objTalkData = ObjectForTalkId.GetComponent<ObjTalkData>();
 
@@ -368,16 +369,16 @@ public class TalkManager : MonoBehaviour
             talkPanel.SetActive(talkIsActive);
             talkerNamePanel.SetActive(talkIsActive);
         }
-        
+
     }
 
-    
+
 
 
 
     public void ActivateEscMenuPanel()
     {
-        if(escMenuPanelIsActive == false)
+        if (escMenuPanelIsActive == false)
         {
             Time.timeScale = 0;
             escMenuPanelIsActive = true;
@@ -393,10 +394,10 @@ public class TalkManager : MonoBehaviour
 
     }
 
-    
+
     private void SetLastTalkID(int id)
     {
-        if(id > lastTalkID)
+        if (id > lastTalkID)
         {
             lastTalkID = id;
         }
@@ -404,43 +405,43 @@ public class TalkManager : MonoBehaviour
     }
 
 
-   // ESC 메뉴 화면에 나타난 '현재 목표'의 텍스트를, 가장 마지막 대화에 따라 변경해주는 함수입니다.
+    // ESC 메뉴 화면에 나타난 '현재 목표'의 텍스트를, 가장 마지막 대화에 따라 변경해주는 함수입니다.
     private void TextQuestInEscAndTriggerStoryEvent()
     {
-        if(lastTalkID == 0)
+        if (lastTalkID == 0)
         {
             if (nextQuestText != null)
             {
                 nextQuestText.text = "";
             }
         }
-        else if(lastTalkID == 100)
+        else if (lastTalkID == 100)
         {
             nextQuestText.text = "마을 서쪽에 나타난 괴물을 처치하자!";
         }
-        else if(lastTalkID == 200)
+        else if (lastTalkID == 200)
         {
             nextQuestText.text = "마을 동쪽의 동굴을 통해 과거로 가서, 괴물의 원한을 잠재우자!";
             RemoveCaveBarricadeAndActivatePortalToPast();
         }
-        else if(lastTalkID == 250)
+        else if (lastTalkID == 250)
         {
             nextQuestText.text = "괴물에게 왕에 대한 이야기를 물어보자.";
         }
-        else if(lastTalkID == 310)
+        else if (lastTalkID == 310)
         {
             nextQuestText.text = "포탈을 타고 현재로 돌아가자!";
             ActivatePortalVillageToFirstEnding();
         }
-    // lastTalkID == 350: FirstEnding 관련 애니메이션 발동.
-        else if(lastTalkID == 350)
+        // lastTalkID == 350: FirstEnding 관련 애니메이션 발동.
+        else if (lastTalkID == 350)
         {
-            if(talkIndex == 2)
+            if (talkIndex == 2)
             {
                 Medal.SetBool("onMedalGiving", true);
                 alreadyFireworked = true;
             }
-            if(talkIndex == 0 && alreadyFireworked == true)
+            if (talkIndex == 0 && alreadyFireworked == true)
             {
                 GameObject firstEndingTrigger1 = GameObject.Find("FirstEndingTrigger");
                 firstEndingTrigger1.GetComponent<ObjTalkData>().talkId = 0;
@@ -450,12 +451,12 @@ public class TalkManager : MonoBehaviour
                 Firework3.SetBool("onFirework", true);
             }
         }
-        else if(lastTalkID == 370)
+        else if (lastTalkID == 370)
         {
             ActivatePortalVillageToSorcerer();
             nextQuestText.text = "포탈을 타고 숲으로 가서 주술사로부터 부적을 받자.";
         }
-        else if(lastTalkID == 400)
+        else if (lastTalkID == 400)
         {
             nextQuestText.text = "혼령에게 말을 걸고, 성으로 가자!";
             Amulet.SetBool("onAmuletUp", true);
@@ -471,14 +472,14 @@ public class TalkManager : MonoBehaviour
             //BCSorcerer1.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 0);
 
         }
-        else if(lastTalkID == 500)
+        else if (lastTalkID == 500)
         {
             nextQuestText.text = "성으로 가서 부정한 왕을 처치하자!";
             ActivatePortalSorcererToCastleOutside();
         }
-        else if(lastTalkID == 550)
+        else if (lastTalkID == 550)
         {
-            if(talkIndex == 0)
+            if (talkIndex == 0)
             {
                 SceneManager.LoadScene("Boss_Magician");
             }
@@ -486,7 +487,7 @@ public class TalkManager : MonoBehaviour
         else if (lastTalkID == 600)
         {
             nextQuestText.text = "드디어 부정한 왕을 처치했다.. ";
-            if(talkIndex == 0)
+            if (talkIndex == 0)
             {
                 GameObject talkStart1 = GameObject.Find("TalkParent").transform.Find("TalkStart1").gameObject;
                 talkStart1.SetActive(false);
@@ -548,7 +549,7 @@ public class TalkManager : MonoBehaviour
     {
         if (lastTalkID == 350)
         {
-            
+
             if (talkIndex == 0 && alreadyFireworked == true)
             {
 
@@ -556,7 +557,7 @@ public class TalkManager : MonoBehaviour
                 cameraInThisScene.transform.position += new Vector3(0, 0.01f, 0);
 
 
-                if(cameraInThisScene.transform.position.y >= 1.4f)
+                if (cameraInThisScene.transform.position.y >= 1.4f)
                 {
                     GameObject blackPanelFadeOut = GameObject.Find("BlackPanelFadeOut");
                     blackPanelFadeOut.GetComponent<Image>().color += new Color(0, 0, 0, 0.01f);
@@ -618,7 +619,7 @@ public class TalkManager : MonoBehaviour
                     SetEndingCleared();
                     SceneManager.LoadScene("UI_AfterClear");
                 }
-                
+
 
             }
         }
@@ -650,7 +651,7 @@ public class TalkManager : MonoBehaviour
     {
 
         Load(player.GetComponent<Player>());
-        
+
     }
 
 
@@ -675,7 +676,7 @@ public class TalkManager : MonoBehaviour
     // 스토리용 함수 :: FirstEnding으로 가는 포탈 활성화.
     public void ActivatePortalVillageToFirstEnding()
     {
-        if(SceneManager.GetActiveScene().name == "Village_Past_AfterCombat")
+        if (SceneManager.GetActiveScene().name == "Village_Past_AfterCombat")
         {
             GameObject portalVillageToFirstEnding = GameObject.Find("PortalParent").transform.Find("Village>FirstEnding").gameObject;
             portalVillageToFirstEnding.SetActive(true);
@@ -716,7 +717,7 @@ public class TalkManager : MonoBehaviour
         talkText.text = "이 부적을 붙이면 다시 인간으로 살아날 수 있다.";
         talkerNameText.text = "주술사";
 
-        while(eventTalkIndex == 0)
+        while (eventTalkIndex == 0)
         {
             print("While문 실행 중");
             if (IsPressedNPCNextText())
@@ -725,7 +726,7 @@ public class TalkManager : MonoBehaviour
                 break;
             }
 
-            
+
         }
 
         //talkerNamePanel.SetActive(false);
@@ -744,7 +745,7 @@ public class TalkManager : MonoBehaviour
 
     public bool IsPressedNPCNextText()
     {
-        if(Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))
+        if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))
         {
             while (true)
             {
@@ -752,7 +753,7 @@ public class TalkManager : MonoBehaviour
                 {
                     break;
                 }
-                
+
             }
             return true;
         }
@@ -810,19 +811,19 @@ public class TalkManager : MonoBehaviour
     // (스토리용 UI 함수) 1번 또는 2번 선택지에 따라 혼령의 talkID가 바뀌고, 그 id의 대사를 새로 시작시킵니다.
     public void AnswerOneOrTwoToGhost(int toggleOneOrTwo)
     {
-        
+
         talkYesNoPanel.SetActive(false);
 
         // if문: 선택한 번호 보내기.
         GameObject ghost = GameObject.Find("Ghost(DoNotChangeItsName)");
 
-        if(toggleOneOrTwo == 1)
+        if (toggleOneOrTwo == 1)
         {
             ghost.GetComponent<ObjTalkData>().talkId = 310;
             TriggerTalks(player.GetComponent<Player>().scannedTalker);
 
         }
-        else if(toggleOneOrTwo == 2)
+        else if (toggleOneOrTwo == 2)
         {
             ghost.GetComponent<ObjTalkData>().talkId = 370;
             TriggerTalks(player.GetComponent<Player>().scannedTalker);
@@ -917,11 +918,11 @@ public class TalkManager : MonoBehaviour
             panelPrefsNull.SetActive(true);
             panelPrefsNull.GetComponent<Image>().color = new Color(1, 1, 1, 1);
             panelPrefsNullText.GetComponent<Text>().color = new Color(0.7215f, 0.7215f, 0.7215f, 1);
-            
+
             Time.timeScale = 1;
             Invoke("PrefsNullPanelHide", 0.8f);
             print("게임 데이터 없음");
-            
+
         }
         player.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
     }
@@ -939,18 +940,18 @@ public class TalkManager : MonoBehaviour
         {
             panelPrefsNull = GameObject.Find("Canvas").transform.Find("PanelPrefsNull").gameObject;
 
-            if(panelPrefsNull.transform.Find("PanelPrefsNullText").gameObject != null)
+            if (panelPrefsNull.transform.Find("PanelPrefsNullText").gameObject != null)
             {
                 panelPrefsNullText = panelPrefsNull.transform.Find("PanelPrefsNullText").gameObject;
             }
         }
 
-        
+
     }
 
     public void SetEndingCleared()
     {
-        if(SceneManager.GetActiveScene().name == "Village_FirstEnding")
+        if (SceneManager.GetActiveScene().name == "Village_FirstEnding")
         {
             PlayerPrefs.SetInt("ClearedNormalEnding", 1);
         }
@@ -963,7 +964,7 @@ public class TalkManager : MonoBehaviour
 
     void ShowMedalClearsInUI_AfterClear()
     {
-        if(SceneManager.GetActiveScene().name == "UI_AfterClear")
+        if (SceneManager.GetActiveScene().name == "UI_AfterClear")
         {
             GameObject medalNormal = GameObject.Find("MedalNormal");
             GameObject medalHappy = GameObject.Find("MedalHappy");
@@ -975,7 +976,7 @@ public class TalkManager : MonoBehaviour
 
             if (PlayerPrefs.HasKey("ClearedNormalEnding") == true)
             {
-                if(PlayerPrefs.GetInt("ClearedNormalEnding") == 1)
+                if (PlayerPrefs.GetInt("ClearedNormalEnding") == 1)
                 {
                     medalNormal.GetComponent<Image>().color = new Color(1, 1, 1, 1);
                     textMedalNormal.GetComponent<Text>().color += new Color(0, 0, 0, 1);
@@ -1008,14 +1009,14 @@ public class TalkManager : MonoBehaviour
 
         }
 
-        
+
 
 
     }
 
     public void ShowMedalClears()
     {
-        if(escMenuPanelIsActive == true)
+        if (escMenuPanelIsActive == true)
         {
             if (PlayerPrefs.HasKey("ClearedNormalEnding") == true && PlayerPrefs.GetInt("ClearedNormalEnding") == 1)
             {
@@ -1107,13 +1108,13 @@ public class TalkManager : MonoBehaviour
     public void BtNewGame()
     {
         panelNewGame.SetActive(true);
-        
+
     }
 
     public void BtStartGameWithName()
     {
         panelNewGame.SetActive(false);
-        if(panelNewGame.transform.Find("InputField").transform.Find("Text").gameObject.GetComponent<Text>().text == "" ||
+        if (panelNewGame.transform.Find("InputField").transform.Find("Text").gameObject.GetComponent<Text>().text == "" ||
             panelNewGame.transform.Find("InputField").transform.Find("Text").gameObject.GetComponent<Text>().text == " " ||
             panelNewGame.transform.Find("InputField").transform.Find("Text").gameObject.GetComponent<Text>().text == "  " ||
             panelNewGame.transform.Find("InputField").transform.Find("Text").gameObject.GetComponent<Text>().text == "   " ||
@@ -1133,20 +1134,21 @@ public class TalkManager : MonoBehaviour
         player.GetComponent<SpriteRenderer>().flipX = false;
         player.GetComponent<Player>().isTalking = false;
         player.transform.position = new Vector3(17.836f, -1.324f, 0);
-        
+        SceneManager.LoadScene("Village_Present");
+
         Time.timeScale = 1;
 
 
         SceneManager.LoadScene("Village_Present");
     }
 
-    
+
 
     public void BtCloseNewGamePanel()
     {
         panelNewGame.SetActive(false);
     }
-    
+
     public void BtLoadGame()
     {
         player.GetComponent<Player>().isTalking = false;
@@ -1176,11 +1178,11 @@ public class TalkManager : MonoBehaviour
 
     public void BtExitGame()
     {
-        #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-        #else
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
             Application.Quit();
-        #endif
+#endif
     }
 
     public void BtGoToTitle()
@@ -1199,7 +1201,7 @@ public class TalkManager : MonoBehaviour
         SceneManager.LoadScene("Village_Past_AfterCombat");
     }
 
-    
+
 
 
 }
