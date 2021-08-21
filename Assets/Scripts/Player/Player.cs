@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
 
     public int hp; // 체력
     public int atkDamage; // player가 가하는 damage
-    public float atkSpeed = 1;
+    public float atkSpeed = 0.5f;
 
     public string mapName;
     public string myName; // player 이름 (만약 게임 시작시 입력받는다면)
@@ -28,6 +28,7 @@ public class Player : MonoBehaviour
     public bool isDash; // 대쉬상태
     public bool isDashDelay;
     public bool isAttack = false; // 공격상태
+    public bool isAttackDelay;
     public bool isSave;
     public bool isTalking = false;//대화중인가?
     public bool isBounce;
@@ -113,7 +114,6 @@ public class Player : MonoBehaviour
             }
         }
 
-
         if (Input.GetKeyDown(KeyCode.C))
         {
             if (!isDashDelay)
@@ -122,10 +122,18 @@ public class Player : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.X))
         {
-            isAttack = true;
-            Debug.Log("isAttack");
+            if (!isAttackDelay)
+            {
+                Attack();
+                StartCoroutine(AttackDelay());
+
+                Debug.Log("isAttack");
+            }
         }
         AnimationUpdate();
+
+        if (isAttack)
+            CompleteAttack();
     }
 
     void OnCollisionEnter2D(Collision2D col)   // Ground tag에 닿으면 점프횟수 초기화 (다시 점프 가능하도록)
@@ -179,7 +187,6 @@ public class Player : MonoBehaviour
         }
     }
 
-
     private void FixedUpdate()
     {
         if (isTalking == false)
@@ -192,9 +199,8 @@ public class Player : MonoBehaviour
 
             if (isBounce)
                 Bounce();
-
-            Attack();
         }
+
         TalkerFinderInAwakeAndFixedUpdate();
     }
 
@@ -249,16 +255,28 @@ public class Player : MonoBehaviour
 
     void Attack() // 공격
     {
-        if (!isAttack)
-            return;
+        isAttack = true;
 
+        GameObject Sword = this.gameObject.transform.GetChild(1).gameObject;
+        Sword.SetActive(true);
+
+        if (spriteRenderer.flipX)
+            Sword.GetComponent<BoxCollider2D>().offset = new Vector2(0,0);
+        else
+            Sword.GetComponent<BoxCollider2D>().offset = new Vector2(-1.5f,0);
+    }
+
+    void CompleteAttack()
+    {
         isAttack = false;
     }
+
     void AnimationUpdate() // 애니메이션 실행 함수
     {
         animator.SetBool("isDash", isDash);
         animator.SetBool("isAttack", isAttack);
     }
+
     public Transform GetTransform()
     {
         return this.gameObject.transform;
@@ -416,5 +434,15 @@ public class Player : MonoBehaviour
 
         this.gameObject.layer = 3;
         spriteRenderer.color = new Color(1, 1, 1, 1);
+    }
+
+    IEnumerator AttackDelay()
+    {
+        isAttackDelay = true;
+
+        yield return new WaitForSecondsRealtime(atkSpeed);
+
+        this.gameObject.transform.GetChild(1).gameObject.SetActive(false);
+        isAttackDelay = false;
     }
 }

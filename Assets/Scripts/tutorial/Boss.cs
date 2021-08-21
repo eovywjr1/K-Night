@@ -9,7 +9,7 @@ public class Boss : TutorialMonsterBase
 
     bool isjunorcallDelay = true;
     bool isdashToplayerDelay = true;
-    bool isattack = false;
+    public bool isattack;
 
     public GameObject junior;
     GameObject childBoxCollider;
@@ -59,9 +59,6 @@ public class Boss : TutorialMonsterBase
 
     void Dash()
     {
-        //자식 오브젝트 레이어 변경
-        childBoxCollider.layer = 9;
-
         //위치까지 속도 추가
         if ((direction == Vector2.right && playerPosition.x > this.gameObject.transform.position.x) || (direction == Vector2.left && playerPosition.x < this.gameObject.transform.position.x))
             Move(10, dashSpeed);
@@ -73,8 +70,7 @@ public class Boss : TutorialMonsterBase
             rigidBody.velocity = new Vector2(0, 0);
 
             //레이어 초기화
-            this.gameObject.layer = 7;
-            childBoxCollider.layer = 11;
+            childBoxCollider.layer = 6;
 
             //딜레이, 공격 플래그 초기화
             isdashToplayerDelay = true;
@@ -115,7 +111,8 @@ public class Boss : TutorialMonsterBase
             case 2:
                 PlayerPositionSave();
 
-                this.gameObject.layer = 9;
+                //자식 오브젝트 레이어 변경
+                childBoxCollider.layer = 9;
 
                 isdashToplayerDelay = false;
 
