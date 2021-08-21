@@ -95,4 +95,17 @@ public class Boss_Spider: Boss_form
             player.HpDecrease(damage_Touch);
         }
     }
+
+    //데미지 받기
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Sword"))
+        {
+            if (player.isAttack)
+            {
+                OnDamage(player.atkDamage);
+                player.isAttack = false;
+            }
+        }
+    }
 }

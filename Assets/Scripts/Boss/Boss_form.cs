@@ -17,7 +17,12 @@ public class Boss_form : LivingEntity
     private SpriteRenderer spriteRenderer; //좌우 뒤집기 위해 // 임시
     private new Transform transform; //보스의 위치
 
+
+    //플레이어 위치(방향)
     public Vector3 direction;
+
+    //상태
+    private bool isUnBeatTime;
 
     private float floatRnd; //실수형 난수
     private Vector3 pos;
@@ -39,14 +44,14 @@ public class Boss_form : LivingEntity
     protected bool doDash; //대쉬중인가?
 
     //메테오 관련 변수들
-    public int meteoPosY;
-    public int meteoPosX_min;
-    public int meteoPosX_max;
-    public int numOfMeteo;
+    protected int meteoPosY;
+    protected int meteoPosX_min;
+    protected int meteoPosX_max;
+    protected int numOfMeteo;
 
     //범위
-    public float RangeDistance; //범위 거리
-    public bool inRange; //범위 안 or 밖?
+    protected float RangeDistance; //범위 거리
+    protected bool inRange; //범위 안 or 밖?
 
     //보스 특징 관련
     public int numOfTorchOff;
@@ -65,6 +70,7 @@ public class Boss_form : LivingEntity
         rigid = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         transform = gameObject.GetComponent<Transform>();
+        isUnBeatTime = false;
     }
     public void FindPlayer() //플레이어의 위치 파악 (좌, 우)
     {
@@ -110,6 +116,48 @@ public class Boss_form : LivingEntity
     protected float CalculateDistance(Vector2 pos1, Vector2 pos2)
     {
         return Vector2.Distance(pos1, pos2);
+    }
+    /////////////////////////////////////////////
+    /////////////플레이어에 의한 피격////////////
+    /////////////////////////////////////////////
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Sword"))
+        {
+            if (player.isAttack && !isUnBeatTime)
+            {
+                OnDamage(player.atkDamage);
+                player.isAttack = false;
+
+                if (health > 1)
+                {
+                    isUnBeatTime = true;
+                    StartCoroutine("UnBeatTime");
+                }
+            }
+        }
+    }
+    IEnumerator UnBeatTime()
+    {
+        int countTime = 0;
+        while (countTime < 6)
+        {
+            //Alpha Effect
+            if (countTime % 2 == 0)
+                spriteRenderer.color = new Color32(255, 255, 255, 90);
+            else
+                spriteRenderer.color = new Color32(255, 255, 255, 180);
+            //Wait Update Frame
+            yield return new WaitForSeconds(0.2f);
+
+            countTime++;
+        }
+        //Alpha Effect End
+        spriteRenderer.color = new Color32(255, 255, 255, 255);
+        //UnBeatTime Off
+        isUnBeatTime = false;
+
+        yield return null;
     }
 }
 

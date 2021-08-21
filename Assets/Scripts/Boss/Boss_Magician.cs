@@ -29,7 +29,7 @@ public class Boss_Magician : Boss_form
 
     void Start()
     {
-        dead = true;
+        //dead = true;
         isStaff = false;
         playerCanAttack = false;
         numOfTorchOff = 0;

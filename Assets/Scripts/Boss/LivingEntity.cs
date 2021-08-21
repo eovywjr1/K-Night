@@ -9,8 +9,8 @@ using UnityEngine;
 public class LivingEntity : MonoBehaviour
 {
     public float startingHealth; //시작 체력
-    public float health { get; protected set; } //현재 체력
-    public bool dead { get; protected set; } //사망 상태
+    public float health;//현재 체력
+    public bool dead;//사망 상태
 
     //생명체가 활성화될 떄 상태를 리셋
     protected virtual void OnEnable()
