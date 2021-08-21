@@ -13,8 +13,9 @@ public class Boss_Spider: Boss_form
     private float lastAttackTime_Throw; //마지막 공격 시점
 
     Vector3 startPoint;
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         //dead = true;
         inRange = false;
         lastAttackTime_Throw = 0f;

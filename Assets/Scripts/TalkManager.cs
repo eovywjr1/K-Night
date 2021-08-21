@@ -500,7 +500,8 @@ public class TalkManager : MonoBehaviour
             nextQuestText.text = "왕이 된 괴물을 처지하자..!";
             if (talkIndex == 0)
             {
-                SceneManager.LoadScene("Boss_Spider_Reprise");
+                if(SceneManager.GetActiveScene().name != "Boss_Spider_Reprise")
+                    SceneManager.LoadScene("Boss_Spider_Reprise");
             }
         }
         else if (lastTalkID == 700)

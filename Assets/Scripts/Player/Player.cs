@@ -343,7 +343,6 @@ public class Player : MonoBehaviour
     {
         if (talkManager == null)
         {
-            Debug.Log("asdf");
             talkManager = GameObject.Find("TalkManager").GetComponent<TalkManager>();
         }
     }

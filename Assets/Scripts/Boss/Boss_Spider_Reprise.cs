@@ -20,9 +20,10 @@ public class Boss_Spider_Reprise : Boss_form
 
     private int rnd;
 
-    void Start()
+    protected override void Start()
     {
-        dead = true;
+        base.Start();
+        //dead = true;
         FindPlayer(); // 플레이어가 왼쪽에 있는지 오른쪽에 있는지 확인
         doDash = true;
         Dash(dashSpeed); // 대쉬
@@ -30,6 +31,7 @@ public class Boss_Spider_Reprise : Boss_form
         inRange = true;
         limitMagicSkills = false;
         numOfTorchOff = 0;
+        numOfMeteo = 10;
         Skills();
     }
     ///////////////

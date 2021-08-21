@@ -27,12 +27,14 @@ public class Boss_Magician : Boss_form
 
     public bool isStaff;
 
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         //dead = true;
         isStaff = false;
         playerCanAttack = false;
         numOfTorchOff = 0;
+        numOfMeteo = 6;
         Skills();
     }
 
@@ -42,6 +44,7 @@ public class Boss_Magician : Boss_form
     private int rnd;
     void Skills(){ // 스킬 사용
         rnd = Random.Range(1, 3);
+        Debug.Log(rnd);
         switch (rnd){
         case 1:
             FindPlayer();//좌우 확인
@@ -77,7 +80,8 @@ public class Boss_Magician : Boss_form
         }
     }
     // 메테오 위치 설정
-    void makeVec(){
+    void makeVec()
+    {
         GetRandomInt(numOfMeteo, meteoPosX_min/3, meteoPosX_max/3);
         for (int i = 0; i < numOfMeteo; i++){
             posList[i] = new Vector3(xList[i]*3, meteoPosY, -1);
@@ -85,7 +89,8 @@ public class Boss_Magician : Boss_form
     }
 
     //중복없는 난수 생성
-    public void GetRandomInt(int length, int min, int max){
+    public void GetRandomInt(int length, int min, int max)
+    {
         bool isSame;
         for (int i = 0; i < length; ++i){
             while (true){
@@ -156,8 +161,8 @@ public class Boss_Magician : Boss_form
         //////////////피격 관련//////////////
         /////////////////////////////////////
         //playerCnaAttack == true 일 동안에만 피격가능
-        if(playerCanAttack == true)
-            GetComponent<BoxCollider2D>().enabled = true;
-        else GetComponent<BoxCollider2D>().enabled = false;
+        if (playerCanAttack == true)
+            transform.Find("Collider").gameObject.SetActive(true);
+        else transform.Find("Collider").gameObject.SetActive(false);
     }
 }
