@@ -16,6 +16,10 @@ public class Boss_Spider_Reprise : Boss_form
     private Vector3[] posList = new Vector3[10]; //numOfMeteo
     private Vector3 endPoint;
 
+    //sprite
+    public Sprite King;
+    public Sprite Ghost;
+
     private bool limitMagicSkills;// 보스가 마법공격 못함!
 
     private int rnd;
@@ -44,6 +48,7 @@ public class Boss_Spider_Reprise : Boss_form
         //범위 확인
         if (!inRange){ // 범위 안에 없다면
             doDash = true;
+            spriteRenderer.sprite = Ghost;
             Dash(dashSpeed); // 대쉬
         }
         else if (inRange){ // 범위 안에 있다면
@@ -145,6 +150,13 @@ public class Boss_Spider_Reprise : Boss_form
                 limitMagicSkills = false;
             }
         }
+
+        //sprite변경
+        if (rigid.velocity == Vector2.zero)
+            spriteRenderer.sprite = King;
+        if (direction == Vector3.left)
+            spriteRenderer.flipX = false;
+        else spriteRenderer.flipX = true;
     }
     /////////////////////////////////////
     //////////////피격 관련//////////////

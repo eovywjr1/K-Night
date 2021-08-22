@@ -11096,6 +11096,8 @@ MonoBehaviour:
   Timer: {fileID: 1706895787}
   refill: 0
   attackDelay: 5
+  King: {fileID: 21300000, guid: 5072f4f87d417bd4a948e27e3ab1c926, type: 3}
+  Ghost: {fileID: 21300000, guid: 7ec8167f93271ca46911c8b4e3b3c5cc, type: 3}
 --- !u!50 &1272977221
 Rigidbody2D:
   serializedVersion: 4
