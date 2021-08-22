@@ -11,28 +11,22 @@ public class GameManager : MonoBehaviour
 
     public Boss_Spider bossSpider;
 
+    public Player player;
     float x;
     float y;
 
     void Start()
     {
-        //플레이어가 튜토리얼 보스 씬으로 이동 시 보스 생성
-        if (boss != null && SceneManager.GetActiveScene().name == "TutorialBoss")
-            boss.SetActive(true);
+        player = FindObjectOfType<Player>();
     }
 
     void Update()
     {
+        if (player.isSave)
+            Save(player);
+
         //aftertutorial에서 beforecombet 씬으로 이동하는 오브젝트 활성화
         if (barricade != null && barricade.activeSelf == false)
-            mapTransfer.SetActive(true);
-
-        //보스가 죽었을 때 오브젝트 활성화
-        if(boss != null && boss.activeSelf == false)
-            mapTransfer.SetActive(true);
-
-        //spider 보스가 죽었을 때 오브젝트 활성화
-        if (bossSpider != null && !bossSpider.gameObject.activeSelf && bossSpider.dead)
             mapTransfer.SetActive(true);
     }
 

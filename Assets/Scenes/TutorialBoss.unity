@@ -195,6 +195,7 @@ MonoBehaviour:
   barricade: {fileID: 0}
   mapTransfer: {fileID: 0}
   bossSpider: {fileID: 0}
+  player: {fileID: 0}
 --- !u!4 &3875843
 Transform:
   m_ObjectHideFlags: 0
@@ -1029,10 +1030,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 447bbb237d250fb4faadb21d9409925e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boss: {fileID: 1451925175}
+  boss: {fileID: 0}
   barricade: {fileID: 0}
   mapTransfer: {fileID: 800657900}
   bossSpider: {fileID: 0}
+  player: {fileID: 0}
 --- !u!4 &393383748
 Transform:
   m_ObjectHideFlags: 0
@@ -1867,7 +1869,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &800657901
 Transform:
   m_ObjectHideFlags: 0
@@ -2965,6 +2967,7 @@ MonoBehaviour:
   barricade: {fileID: 0}
   mapTransfer: {fileID: 0}
   bossSpider: {fileID: 0}
+  player: {fileID: 344231514}
   startPointName: 
   player: {fileID: 344231514}
 --- !u!1 &1260863344
@@ -10062,7 +10065,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1451925176
 MonoBehaviour:
   m_ObjectHideFlags: 0
