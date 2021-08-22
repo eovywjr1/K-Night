@@ -79,6 +79,8 @@ public class Boss_form : LivingEntity
     public void FindPlayer() //플레이어의 위치 파악 (좌, 우)
     {
         direction = player.transform.position.x <= transform.position.x ? Vector3.left : Vector3.right;
+        if (direction == Vector3.left) spriteRenderer.flipX = false;
+        else spriteRenderer.flipX = true;
     }
     /////////////////////////////////////
     ////////////////SKILLS///////////////
