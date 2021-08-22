@@ -30,7 +30,7 @@ public class Boss_Magician : Boss_form
     protected override void Start()
     {
         base.Start();
-        //dead = true;
+        dead = true;
         isStaff = false;
         playerCanAttack = false;
         numOfTorchOff = 0;
@@ -163,7 +163,14 @@ public class Boss_Magician : Boss_form
         /////////////////////////////////////
         //playerCnaAttack == true 일 동안에만 피격가능
         if (playerCanAttack == true)
+        {
             transform.Find("Collider").gameObject.SetActive(true);
-        else transform.Find("Collider").gameObject.SetActive(false);
+            spriteRenderer.color = new Color(1, 1, 1, 1);
+        }
+        else
+        {
+            transform.Find("Collider").gameObject.SetActive(false);
+            spriteRenderer.color = new Color(1, 1, 1, 150/255f);
+        }
     }
 }

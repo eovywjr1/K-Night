@@ -14,7 +14,7 @@ public class Boss_form : LivingEntity
     public GameObject meteoWarningPrefab; //스킬(메테오 경고)
 
     protected Rigidbody2D rigid; //보스 리지드바디
-    private SpriteRenderer spriteRenderer; //좌우 뒤집기 위해 // 임시
+    protected SpriteRenderer spriteRenderer; //좌우 뒤집기 위해 // 임시
     private new Transform transform; //보스의 위치
 
 

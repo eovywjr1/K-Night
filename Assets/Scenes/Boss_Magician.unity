@@ -1033,6 +1033,7 @@ MonoBehaviour:
   barricade: {fileID: 0}
   mapTransfer: {fileID: 581717973}
   bossSpider: {fileID: 0}
+  player: {fileID: 0}
 --- !u!4 &136220104
 Transform:
   m_ObjectHideFlags: 0
@@ -13441,7 +13442,7 @@ SpriteRenderer:
   m_SortingLayerID: -1194618107
   m_SortingLayer: 8
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 5d22d92dc496b20449c60db76da186a8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 254bbca72f9bf4f40ad2de2377781e75, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -13460,8 +13461,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1643261839}
   m_LocalRotation: {x: 0, y: -0, z: 0.008726839, w: -0.9999619}
-  m_LocalPosition: {x: 0.6, y: -3.678, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.565, y: -3.643, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
@@ -13601,8 +13602,7 @@ SpriteRenderer:
   m_SortingLayerID: -1194618107
   m_SortingLayer: 8
   m_SortingOrder: 0
-  m_Sprite: {fileID: -6598946016331564889, guid: 23748c298f885bf4c89671f6d30f562b,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: 44a04ee9e45a8c64d88610a6fd730d4f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -13622,7 +13622,7 @@ Transform:
   m_GameObject: {fileID: 1653532895}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -2.6, z: -4}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 351815584}
   m_Father: {fileID: 0}
@@ -17528,6 +17528,7 @@ MonoBehaviour:
   barricade: {fileID: 0}
   mapTransfer: {fileID: 0}
   bossSpider: {fileID: 0}
+  player: {fileID: 0}
   startPointName: 
   player: {fileID: 0}
 --- !u!4 &2021444504

@@ -5827,6 +5827,7 @@ MonoBehaviour:
   barricade: {fileID: 0}
   mapTransfer: {fileID: 1993162338}
   bossSpider: {fileID: 0}
+  player: {fileID: 0}
 --- !u!4 &569097085
 Transform:
   m_ObjectHideFlags: 0
@@ -6040,6 +6041,7 @@ MonoBehaviour:
   barricade: {fileID: 0}
   mapTransfer: {fileID: 0}
   bossSpider: {fileID: 0}
+  player: {fileID: 0}
   startPointName: 
   player: {fileID: 0}
 --- !u!4 &618477526
@@ -11051,7 +11053,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.6, y: 1}
+  m_Size: {x: 3, y: 4}
   m_Direction: 0
 --- !u!114 &1272977220
 MonoBehaviour:
@@ -11155,9 +11157,8 @@ SpriteRenderer:
   m_SortingLayerID: -1194618107
   m_SortingLayer: 8
   m_SortingOrder: 1
-  m_Sprite: {fileID: -6388338761078672736, guid: 23748c298f885bf4c89671f6d30f562b,
-    type: 3}
-  m_Color: {r: 0.48126557, g: 0.6258368, b: 0.9716981, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 5072f4f87d417bd4a948e27e3ab1c926, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -11176,7 +11177,7 @@ Transform:
   m_GameObject: {fileID: 1272977218}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -2.5, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 1868679448}
   - {fileID: 859929230}
@@ -13928,11 +13929,10 @@ SpriteRenderer:
   m_SortingLayerID: -1194618107
   m_SortingLayer: 8
   m_SortingOrder: 0
-  m_Sprite: {fileID: -6598946016331564889, guid: 23748c298f885bf4c89671f6d30f562b,
-    type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 5c0e225709247d048a1ae80a6ffe4346, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.5882353}
   m_FlipX: 0
-  m_FlipY: 0
+  m_FlipY: 1
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
@@ -13949,7 +13949,7 @@ Transform:
   m_GameObject: {fileID: 1527413909}
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: -3, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -16621,8 +16621,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.18, y: 0.16}
-  m_Direction: 1
+  m_Size: {x: 3, y: 4}
+  m_Direction: 0
 --- !u!114 &1868679450
 MonoBehaviour:
   m_ObjectHideFlags: 0
