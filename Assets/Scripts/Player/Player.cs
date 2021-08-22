@@ -293,9 +293,9 @@ public class Player : MonoBehaviour
     void TalkerFinder()
     {
         // 플레이어가 발사하는 Ray의 벡터 조절.
-        if (Input.GetAxisRaw("Horizontal") == 1)
+        if (Input.GetAxisRaw("Horizontal") == 1 && isTalking == false)
             directionPlayerLooksAt = new Vector3(1, 0, 0);
-        else if (Input.GetAxisRaw("Horizontal") == -1)
+        else if (Input.GetAxisRaw("Horizontal") == -1 && isTalking == false)
             directionPlayerLooksAt = new Vector3(-1, 0, 0);
 
         if (scannedTalker != null)

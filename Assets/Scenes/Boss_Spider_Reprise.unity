@@ -7520,7 +7520,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 9306428}
         m_TargetAssemblyTypeName: TalkManager, Assembly-CSharp
         m_MethodName: BtGoToTitle
         m_Mode: 1
@@ -11977,7 +11977,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 9306428}
         m_TargetAssemblyTypeName: TalkManager, Assembly-CSharp
         m_MethodName: ActivateEscMenuPanel
         m_Mode: 1
@@ -13658,7 +13658,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 9306428}
         m_TargetAssemblyTypeName: TalkManager, Assembly-CSharp
         m_MethodName: LoadGame
         m_Mode: 1
@@ -14917,7 +14917,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 9306428}
         m_TargetAssemblyTypeName: TalkManager, Assembly-CSharp
         m_MethodName: ActivateEscMenuPanel
         m_Mode: 1
@@ -15747,7 +15747,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 9306428}
         m_TargetAssemblyTypeName: TalkManager, Assembly-CSharp
         m_MethodName: LoadGame
         m_Mode: 1
@@ -18038,7 +18038,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 9306428}
         m_TargetAssemblyTypeName: TalkManager, Assembly-CSharp
         m_MethodName: BtGoToTitle
         m_Mode: 1
