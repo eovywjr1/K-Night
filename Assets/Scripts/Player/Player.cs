@@ -261,9 +261,9 @@ public class Player : MonoBehaviour
         Sword.SetActive(true);
 
         if (spriteRenderer.flipX)
-            Sword.GetComponent<BoxCollider2D>().offset = new Vector2(0,0);
+            Sword.GetComponent<BoxCollider2D>().offset = new Vector2(0.5f,0);
         else
-            Sword.GetComponent<BoxCollider2D>().offset = new Vector2(-1.5f,0);
+            Sword.GetComponent<BoxCollider2D>().offset = new Vector2(-2.5f,0);
     }
 
     void CompleteAttack()
