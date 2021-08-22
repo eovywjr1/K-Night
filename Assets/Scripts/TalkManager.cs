@@ -57,6 +57,9 @@ public class TalkManager : MonoBehaviour
     private GameObject HPBar;
     private GameObject HPBarRed;
 
+    // 체력바가 씬 처음 시작 시에는 플레이어의 머리 위로 순간이동되도록하는 bool.
+    private bool onceHPBarMoved = false;
+
     // 엔딩 관련.
     public bool alreadyFireworked = false;
     public GameObject panelClearMedal;
@@ -872,11 +875,14 @@ public class TalkManager : MonoBehaviour
     {
         HPBar = GameObject.Find("HPBar");
         HPBarRed = GameObject.Find("HPBarRed");
+
+        
+
     }
 
     private void ShowingHPBar()
     {
-        if (HPBar != null && HPBarRed != null)
+        if (onceHPBarMoved == false && HPBar != null && HPBarRed != null)
         {
             if (SceneManager.GetActiveScene().name == "TutorialBoss") // 튜토리얼 보스 씬에서 체력바 위치가 이상함.
             {
@@ -886,6 +892,7 @@ public class TalkManager : MonoBehaviour
                 HPBar.transform.position = HPBarAnchor;
 
                 HPBarRed.GetComponent<Image>().fillAmount = player.GetComponent<Player>().hp / 100.0f;
+                onceHPBarMoved = true;
             }
             else
             {
@@ -894,6 +901,32 @@ public class TalkManager : MonoBehaviour
                 HPBarAnchor = Camera.main.WorldToScreenPoint(player.transform.position) + toControlVector;
 
                 HPBar.transform.position = HPBarAnchor;
+
+                HPBarRed.GetComponent<Image>().fillAmount = player.GetComponent<Player>().hp / 100.0f;
+                onceHPBarMoved = true;
+            }
+            
+
+        }
+
+        if (onceHPBarMoved == true && HPBar != null && HPBarRed != null)
+        {
+            if (SceneManager.GetActiveScene().name == "TutorialBoss") // 튜토리얼 보스 씬에서 체력바 위치가 이상함.
+            {
+                Vector3 toControlVector = new Vector3(0, Screen.height / 11.7f, 0);
+                HPBarAnchor = Camera.main.WorldToScreenPoint(player.transform.position) + toControlVector;
+
+                HPBar.transform.position = Vector3.MoveTowards(HPBar.transform.position, HPBarAnchor, 1.95f);
+
+                HPBarRed.GetComponent<Image>().fillAmount = player.GetComponent<Player>().hp / 100.0f;
+            }
+            else
+            {
+
+                Vector3 toControlVector = new Vector3(2.5f, Screen.height / 9.8f, 0);
+                HPBarAnchor = Camera.main.WorldToScreenPoint(player.transform.position) + toControlVector;
+
+                HPBar.transform.position = Vector3.MoveTowards(HPBar.transform.position, HPBarAnchor, 1.95f);
 
                 HPBarRed.GetComponent<Image>().fillAmount = player.GetComponent<Player>().hp / 100.0f;
 
