@@ -78,6 +78,9 @@ public class TalkManager : MonoBehaviour
         talkData = new Dictionary<int, string[]>();
         GenerateTalkData();
 
+        // player의 엔딩이 이미 시작되었는지에 대한 bool 변수 초기화 (UI_AfterClear에서).
+        ResetAlreadyTriggeredEnding();
+
         // For nextQuest.
     }
 
@@ -93,6 +96,8 @@ public class TalkManager : MonoBehaviour
         ActivateBtStartGameWithNameInTitleScreen();
 
         ShowMedalClearsInUI_AfterClear();
+
+        
 
         CheckPlayerIsDead();
 
@@ -929,6 +934,17 @@ public class TalkManager : MonoBehaviour
 
         }
         player.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+    }
+
+    // UI_AfterClear 씬에서 
+    public void ResetAlreadyTriggeredEnding()
+    {
+        if(SceneManager.GetActiveScene().name == "UI_AfterClear")
+        {
+            player.GetComponent<Player>().alreadyTriggeredFirstEnding = false;
+            player.GetComponent<Player>().passedFirstTalkTriggerInFirstEnding = false;
+        }
+
     }
 
     void PrefsNullPanelHide()

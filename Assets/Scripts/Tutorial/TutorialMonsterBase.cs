@@ -61,4 +61,10 @@ public class TutorialMonsterBase : MonoBehaviour
         if ((direction == Vector2.right && rigidBody.velocity.x < maxSpeed) || (direction == Vector2.left && rigidBody.velocity.x > maxSpeed * (-1)))
             rigidBody.AddForce(direction * speed * Time.deltaTime, ForceMode2D.Impulse);
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Sword"))
+            Ondamaged(player.atkDamage);
+    }
 }
