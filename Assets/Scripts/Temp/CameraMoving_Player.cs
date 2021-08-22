@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CameraMoving_Player : MonoBehaviour
 {
@@ -12,7 +13,15 @@ public class CameraMoving_Player : MonoBehaviour
 
     private void Awake()
     {
-        moveSpeed = 1000;
+        if (SceneManager.GetActiveScene().name == "Village_FirstEnding" || SceneManager.GetActiveScene().name == "Village_SecondEnding")
+        {
+            // 엔딩 장면 진입이 딱딱한 느낌이 있어서, 엔딩 장면에서는 카메라의 속도를 이전처럼 4로 설정했습니다.
+            moveSpeed = 4;
+        }
+        else
+        {
+            moveSpeed = 1000;
+        }
     }
 
     void Update()

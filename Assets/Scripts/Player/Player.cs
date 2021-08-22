@@ -59,9 +59,9 @@ public class Player : MonoBehaviour
     GameObject savePoint;
 
     // 엔딩 관련 변수.
-    bool alreadyTriggeredFirstEnding = false;
+    public bool alreadyTriggeredFirstEnding = false;
     private GameObject cameraInThisScene;
-    private bool passedFirstTalkTriggerInFirstEnding = false;
+    public  bool passedFirstTalkTriggerInFirstEnding = false;
 
     private void Awake()
     {
