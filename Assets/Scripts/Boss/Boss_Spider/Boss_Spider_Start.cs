@@ -25,8 +25,8 @@ public class Boss_Spider_Start : MonoBehaviour
         //¶¥(Ground¿Í Á¢ÃË½Ã)
         if (collision.CompareTag("Ground"))
         {
-            this.gameObject.SetActive(false);
             realboss.SetActive(true);
+            this.gameObject.SetActive(false);
         }
     }
 }

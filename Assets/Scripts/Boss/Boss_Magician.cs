@@ -142,6 +142,7 @@ public class Boss_Magician : Boss_form
         ///////////////////////////////////////
         if(dead == true)
         {
+            rnd = 0;
             GameObject staff = GameObject.Find("Staff");
             if (staff.transform.eulerAngles.z >= 270f)
             {

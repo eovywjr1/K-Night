@@ -107,7 +107,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetButtonDown("Jump"))
         {
-            if (jumpCount == 2 && jumpCount >= 1)
+            if (jumpCount >= 1)
             {
                 isJumping = true;
                 jumpCount--;
