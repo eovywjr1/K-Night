@@ -20,7 +20,7 @@ public class CameraMoving_Player : MonoBehaviour
         }
         else
         {
-            moveSpeed = 1000;
+            moveSpeed = 200; //
         }
     }
 

@@ -72,8 +72,8 @@ public class TalkManager : MonoBehaviour
     private void Awake()
     {
         FindSomePanels();
-        FindHpbar();
         PlayerTracker();
+        FindHpbar();
 
         isYesNoOn = false;
         talkIsActive = false;
@@ -89,7 +89,7 @@ public class TalkManager : MonoBehaviour
 
     private void Start()
     {
-
+        
 
 
     }
@@ -876,7 +876,7 @@ public class TalkManager : MonoBehaviour
         HPBar = GameObject.Find("HPBar");
         HPBarRed = GameObject.Find("HPBarRed");
 
-        
+
 
     }
 
@@ -916,7 +916,7 @@ public class TalkManager : MonoBehaviour
                 Vector3 toControlVector = new Vector3(0, Screen.height / 11.7f, 0);
                 HPBarAnchor = Camera.main.WorldToScreenPoint(player.transform.position) + toControlVector;
 
-                HPBar.transform.position = Vector3.MoveTowards(HPBar.transform.position, HPBarAnchor, 1.95f);
+                HPBar.transform.position = Vector3.Lerp(HPBar.transform.position, HPBarAnchor, 0.17f);
 
                 HPBarRed.GetComponent<Image>().fillAmount = player.GetComponent<Player>().hp / 100.0f;
             }
@@ -926,7 +926,8 @@ public class TalkManager : MonoBehaviour
                 Vector3 toControlVector = new Vector3(2.5f, Screen.height / 9.8f, 0);
                 HPBarAnchor = Camera.main.WorldToScreenPoint(player.transform.position) + toControlVector;
 
-                HPBar.transform.position = Vector3.MoveTowards(HPBar.transform.position, HPBarAnchor, 1.95f);
+                Vector3 refVelocity = new Vector3(3, 3, 0);
+                HPBar.transform.position = Vector3.Lerp(HPBar.transform.position, HPBarAnchor, 0.17f);
 
                 HPBarRed.GetComponent<Image>().fillAmount = player.GetComponent<Player>().hp / 100.0f;
 
