@@ -13499,7 +13499,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9874a08e2854bd446adc5206b5faa39b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 100
+  startingHealth: 60
   health: 0
   dead: 0
   stonePrefab: {fileID: 0}

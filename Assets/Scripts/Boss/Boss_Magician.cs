@@ -30,7 +30,7 @@ public class Boss_Magician : Boss_form
     protected override void Start()
     {
         base.Start();
-        dead = true;
+        //dead = true;
         isStaff = false;
         playerCanAttack = false;
         numOfTorchOff = 0;
