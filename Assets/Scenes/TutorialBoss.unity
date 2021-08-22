@@ -773,6 +773,8 @@ MonoBehaviour:
   scannedTalker: {fileID: 0}
   talkManager: {fileID: 0}
   isYesNoOn: 0
+  alreadyTriggeredFirstEnding: 0
+  passedFirstTalkTriggerInFirstEnding: 0
 --- !u!61 &344231515
 BoxCollider2D:
   m_ObjectHideFlags: 0

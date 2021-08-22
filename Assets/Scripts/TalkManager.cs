@@ -176,7 +176,7 @@ public class TalkManager : MonoBehaviour
             "그 주술사한테서 부활의 부적을 받을 수 있어.:혼령",
             "부적을 받으면 난 사람으로 되살아날 수 있고 더 강력한 스킬도 사용할 수 있게 돼.:혼령",
             "...:"+ player.GetComponent<Player>().myName, //화자: 플레이어.
-            player.GetComponent<Player>().myName + ", 나와 같이 부정한 왕을 처치하고 내가 왕이 되는 것을 도와주지 않을래..? (화살표키와 엔터키로 선택) \n" +
+            player.GetComponent<Player>().myName + ", 부정한 왕을 처치하고 내가 왕이 되는 것을 도와주지 않을래..? (엔터키로 선택) \n" +
             "[1] 혼령의 말을 무시하고 포탈을 타고 ‘현재’로 가서, 일상으로 돌아간다. \n" +
             "[2] 혼령의 부탁을 수락하고, 포탈을 타고 ‘현재’의 왕을 처치하러 간다.:혼령:YesNo|1|0"
         });
@@ -350,6 +350,16 @@ public class TalkManager : MonoBehaviour
 
         talkText.text = talkString;
         talkerNameText.text = talkerName;
+        if(lastTalkID == 300 && talkIndex == 8)
+        {
+            talkText.fontSize = 28;
+        }
+        if (lastTalkID == 310 || lastTalkID == 370)
+        {
+            talkText.fontSize = 38;
+        }
+
+
 
         talkIsActive = true;
         talkIndex += 1;
@@ -916,6 +926,7 @@ public class TalkManager : MonoBehaviour
 
             SceneManager.LoadScene(PlayerPrefs.GetString("sceneName"));
             Time.timeScale = 1;
+            player.GetComponent<Player>().isTalking = false;
             print("게임 로드 성공");
         }
         else
@@ -1153,7 +1164,7 @@ public class TalkManager : MonoBehaviour
         player.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
         player.GetComponent<SpriteRenderer>().flipX = false;
         player.GetComponent<Player>().isTalking = false;
-        player.transform.position = new Vector3(17.836f, -1.324f, 0);
+        player.transform.position = new Vector3(36f, -1.324f, 0);
         SceneManager.LoadScene("Village_Present");
 
         Time.timeScale = 1;
