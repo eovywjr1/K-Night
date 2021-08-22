@@ -11079,15 +11079,15 @@ MonoBehaviour:
   direction: {x: 0, y: 0, z: 0}
   damage_EnergyBall: 10
   damage_Meteo: 20
-  damage_Dash: 10
+  damage_Dash: 3
   damage_Stone: 10
-  damage_Touch: 5
-  dashSpeed: 35
+  damage_Touch: 0
+  dashSpeed: 22
   throwSpeed: 20
   energyBallSpeed: 20
   meteoGravity: 8
   warningTime: 1
-  RangeDistance: 35
+  RangeDistance: 20
   inRange: 0
   numOfTorchOff: 0
   timerStartTime: 15

@@ -25,8 +25,6 @@ public class Boss_Spider_Reprise : Boss_form
         base.Start();
         //dead = true;
         FindPlayer(); // 플레이어가 왼쪽에 있는지 오른쪽에 있는지 확인
-        doDash = true;
-        Dash(dashSpeed); // 대쉬
 
         inRange = true;
         limitMagicSkills = false;
@@ -162,11 +160,6 @@ public class Boss_Spider_Reprise : Boss_form
         {
             Debug.Log("대쉬 맞음");
             player.HpDecrease(damage_Dash);
-        }
-        else if (collision.gameObject.CompareTag("Player") && !doDash)
-        {
-            Debug.Log("몸빵 맞음");
-            player.HpDecrease(damage_Touch);
         }
     }
 }

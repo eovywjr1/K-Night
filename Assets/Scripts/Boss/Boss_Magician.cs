@@ -63,7 +63,7 @@ public class Boss_Magician : Boss_form
             Invoke(nameof(Skills), tempDelay);
         //시간이 지날수록 스킬 딜레이 감소
         if(attackDelay >= 0.5f)
-            attackDelay -= 0.1f;
+            attackDelay -= 0.03f;
     }
     //메테오
     private void UseMeteo(){

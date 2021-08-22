@@ -3305,7 +3305,8 @@ GameObject:
   m_Component:
   - component: {fileID: 351815584}
   - component: {fileID: 351815585}
-  m_Layer: 7
+  - component: {fileID: 351815586}
+  m_Layer: 11
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3352,6 +3353,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &351815586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 351815583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f14972a88f6d7dd4ba2b82c6ad50d251, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &388443004
 GameObject:
   m_ObjectHideFlags: 0
@@ -3561,7 +3574,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.5655337, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -3572,7 +3585,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.1310678, y: 1}
   m_EdgeRadius: 0
 --- !u!1 &424109637
 GameObject:
@@ -13496,8 +13509,8 @@ MonoBehaviour:
   meteoWarningPrefab: {fileID: 456783621436642918, guid: 8421239d8e7d77a41a8e4b09ba39250c,
     type: 3}
   direction: {x: 0, y: 0, z: 0}
-  damage_EnergyBall: 0
-  damage_Meteo: 0
+  damage_EnergyBall: 10
+  damage_Meteo: 20
   damage_Dash: 0
   damage_Stone: 0
   damage_Touch: 0
