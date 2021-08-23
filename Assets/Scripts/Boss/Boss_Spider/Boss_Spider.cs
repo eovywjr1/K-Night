@@ -26,7 +26,8 @@ public class Boss_Spider: Boss_form
             StartCoroutine(UseDash());
         }
         else if (!inRange)
-        {
+        {   //좌우 확인
+            FindPlayer();
             ThrowStones();
             Invoke(nameof(ThrowStones), 0.5f);
             Invoke(nameof(ThrowStones), 1f);
@@ -40,6 +41,7 @@ public class Boss_Spider: Boss_form
         yield return new WaitForSeconds(3f);
         doDash = true;
         Dash(dashSpeed);
+        yield return new WaitForSeconds(2f);
         Skills();
     }
     IEnumerator AttackEnd(float time)
@@ -83,18 +85,5 @@ public class Boss_Spider: Boss_form
             Debug.Log("몸빵 맞음");
             player.HpDecrease(damage_Touch);
         }*/
-    }
-
-    //데미지 받기
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Sword"))
-        {
-            if (player.isAttack)
-            {
-                OnDamage(player.atkDamage);
-                player.isAttack = false;
-            }
-        }
     }
 }

@@ -62,9 +62,12 @@ public class TutorialMonsterBase : MonoBehaviour
             rigidBody.AddForce(direction * speed * Time.deltaTime, ForceMode2D.Impulse);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("Sword"))
+        if (collision.CompareTag("Sword") && player.attackOnce)
+        {
             Ondamaged(player.atkDamage);
+            player.attackOnce = false;
+        }
     }
 }

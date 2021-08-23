@@ -32,6 +32,7 @@ public class Player : MonoBehaviour
     public bool isSave;
     public bool isTalking = false;//대화중인가?
     public bool isBounce;
+    public bool attackOnce = false;
 
     public Rigidbody2D rigid;
     SpriteRenderer spriteRenderer;
@@ -256,14 +257,15 @@ public class Player : MonoBehaviour
     void Attack() // 공격
     {
         isAttack = true;
+        attackOnce = true;
 
         GameObject Sword = this.gameObject.transform.GetChild(1).gameObject;
         Sword.SetActive(true);
 
         if (spriteRenderer.flipX)
-            Sword.GetComponent<BoxCollider2D>().offset = new Vector2(0.5f,0);
+            Sword.GetComponent<BoxCollider2D>().offset = new Vector2(1f,0);
         else
-            Sword.GetComponent<BoxCollider2D>().offset = new Vector2(-2.5f,0);
+            Sword.GetComponent<BoxCollider2D>().offset = new Vector2(-1f,0);
     }
 
     void CompleteAttack()

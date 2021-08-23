@@ -93,7 +93,7 @@ public class Boss_form : LivingEntity
     protected void ThrowStones()
     {
         floatRnd = Random.Range(-1f, 1.1f);
-        pos = transform.position + Vector3.up * (4 + floatRnd) + Vector3.right * floatRnd;
+        pos = transform.position + Vector3.up * (5 + floatRnd) + Vector3.right * floatRnd;
         GameObject stoneClone = Instantiate(stonePrefab, pos, base.transform.rotation);
     }
     protected void EnergyBall()
