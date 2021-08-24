@@ -52,14 +52,6 @@ public class TalkManager : MonoBehaviour
     private bool isYesNoOn;
     public int toggleOneOrTwo;
 
-    // 체력바 관련.
-    private Vector3 HPBarAnchor;
-    private GameObject HPBar;
-    private GameObject HPBarRed;
-
-    // 체력바가 씬 처음 시작 시에는 플레이어의 머리 위로 순간이동되도록하는 bool.
-    private bool onceHPBarMoved = false;
-
     // 엔딩 관련.
     public bool alreadyFireworked = false;
     public GameObject panelClearMedal;
@@ -73,7 +65,6 @@ public class TalkManager : MonoBehaviour
     {
         FindSomePanels();
         PlayerTracker();
-        FindHpbar();
 
         isYesNoOn = false;
         talkIsActive = false;
@@ -99,12 +90,7 @@ public class TalkManager : MonoBehaviour
         ActivateBtStartGameWithNameInTitleScreen();
 
         ShowMedalClearsInUI_AfterClear();
-
-        
-
         CheckPlayerIsDead();
-
-        ShowingHPBar();
 
         PlayerTracker();
 
@@ -849,9 +835,6 @@ public class TalkManager : MonoBehaviour
             ghost.GetComponent<ObjTalkData>().talkId = 370;
             TriggerTalks(player.GetComponent<Player>().scannedTalker);
         }
-
-
-
     }
 
     private void PlayerTracker()
@@ -865,78 +848,7 @@ public class TalkManager : MonoBehaviour
             player = null;
         }
     }
-
-
-
-
-
-
-    private void FindHpbar()
-    {
-        HPBar = GameObject.Find("HPBar");
-        HPBarRed = GameObject.Find("HPBarRed");
-
-
-
-    }
-
-    private void ShowingHPBar()
-    {
-        if (onceHPBarMoved == false && HPBar != null && HPBarRed != null)
-        {
-            if (SceneManager.GetActiveScene().name == "TutorialBoss") // 튜토리얼 보스 씬에서 체력바 위치가 이상함.
-            {
-                Vector3 toControlVector = new Vector3(0, Screen.height / 11.7f, 0);
-                HPBarAnchor = Camera.main.WorldToScreenPoint(player.transform.position) + toControlVector;
-
-                HPBar.transform.position = HPBarAnchor;
-
-                HPBarRed.GetComponent<Image>().fillAmount = player.GetComponent<Player>().hp / 100.0f;
-                onceHPBarMoved = true;
-            }
-            else
-            {
-
-                Vector3 toControlVector = new Vector3(2.5f, Screen.height / 9.8f, 0);
-                HPBarAnchor = Camera.main.WorldToScreenPoint(player.transform.position) + toControlVector;
-
-                HPBar.transform.position = HPBarAnchor;
-
-                HPBarRed.GetComponent<Image>().fillAmount = player.GetComponent<Player>().hp / 100.0f;
-                onceHPBarMoved = true;
-            }
-            
-
-        }
-
-        if (onceHPBarMoved == true && HPBar != null && HPBarRed != null)
-        {
-            if (SceneManager.GetActiveScene().name == "TutorialBoss") // 튜토리얼 보스 씬에서 체력바 위치가 이상함.
-            {
-                Vector3 toControlVector = new Vector3(0, Screen.height / 11.7f, 0);
-                HPBarAnchor = Camera.main.WorldToScreenPoint(player.transform.position) + toControlVector;
-
-                HPBar.transform.position = Vector3.Lerp(HPBar.transform.position, HPBarAnchor, 0.17f);
-
-                HPBarRed.GetComponent<Image>().fillAmount = player.GetComponent<Player>().hp / 100.0f;
-            }
-            else
-            {
-
-                Vector3 toControlVector = new Vector3(2.5f, Screen.height / 9.8f, 0);
-                HPBarAnchor = Camera.main.WorldToScreenPoint(player.transform.position) + toControlVector;
-
-                Vector3 refVelocity = new Vector3(3, 3, 0);
-                HPBar.transform.position = Vector3.Lerp(HPBar.transform.position, HPBarAnchor, 0.17f);
-
-                HPBarRed.GetComponent<Image>().fillAmount = player.GetComponent<Player>().hp / 100.0f;
-
-            }
-
-        }
-    }
-
-
+   
     //저장
     public void Save(Player player)
     {
@@ -1001,11 +913,11 @@ public class TalkManager : MonoBehaviour
 
     void FindSomePanels()
     {
-        if (GameObject.Find("Canvas").transform.Find("PanelPrefsNull").gameObject != null)
+        if (GameObject.Find("Canvas").transform.Find("PanelPrefsNull") != null)
         {
             panelPrefsNull = GameObject.Find("Canvas").transform.Find("PanelPrefsNull").gameObject;
 
-            if (panelPrefsNull.transform.Find("PanelPrefsNullText").gameObject != null)
+            if (panelPrefsNull.transform.Find("PanelPrefsNullText") != null)
             {
                 panelPrefsNullText = panelPrefsNull.transform.Find("PanelPrefsNullText").gameObject;
             }

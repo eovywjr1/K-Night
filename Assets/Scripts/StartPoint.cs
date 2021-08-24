@@ -6,8 +6,6 @@ public class StartPoint : GameManager
 {
     public string startPointName;
 
-    public Player player;
-
     void Awake()
     {
         startPointName = this.gameObject.name;
