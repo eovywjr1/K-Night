@@ -18,13 +18,9 @@ public class CameraMoving_Player : MonoBehaviour
             // 엔딩 장면 진입이 딱딱한 느낌이 있어서, 엔딩 장면에서는 카메라의 속도를 이전처럼 4로 설정했습니다.
             moveSpeed = 4;
         }
-        else
-        {
-            moveSpeed = 200; //
-        }
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (GameObject.Find("Player") != null)
         {
@@ -46,8 +42,7 @@ public class CameraMoving_Player : MonoBehaviour
                 targetPosition.x = rightEnd;
 
             // vectorA -> B까지 T의 속도로 이동
-                this.transform.position = Vector3.Lerp(this.transform.position, targetPosition, moveSpeed * Time.deltaTime);
-            
+            this.transform.position = Vector3.Lerp(this.transform.position, targetPosition, moveSpeed * Time.deltaTime);
         }
     }
 }

@@ -4844,7 +4844,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  moveSpeed: 2
+  moveSpeed: 4
   leftEnd: 0
   rightEnd: 14
 --- !u!1 &947234952
