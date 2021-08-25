@@ -12,6 +12,18 @@ public class LivingEntity : MonoBehaviour
     public float health;//현재 체력
     public bool dead;//사망 상태
 
+    protected SpriteRenderer spriteRenderer;
+    protected Rigidbody2D rigid; //보스 리지드바디
+
+    //플레이어 위치(방향)
+    public Vector3 direction;
+
+    protected virtual void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        rigid = GetComponent<Rigidbody2D>();
+    }
+
     //생명체가 활성화될 떄 상태를 리셋
     protected virtual void OnEnable()
     {
@@ -31,8 +43,24 @@ public class LivingEntity : MonoBehaviour
         {
             Die();
         }
+        else // 안죽었을경우
+        {
+            rigid.AddForce(direction * -0.5f, ForceMode2D.Impulse);
+            StopCoroutine(blink());
+            StartCoroutine(blink());
+        }
     }
-
+    IEnumerator blink()
+    {
+        yield return new WaitForSeconds(0.1f);
+        spriteRenderer.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        spriteRenderer.color = Color.white; 
+        yield return new WaitForSeconds(0.1f);
+        spriteRenderer.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        spriteRenderer.color = Color.white;
+    }
     //사망 처리
     public virtual void Die()
     {

@@ -36,6 +36,23 @@ public class TutorialMonsterBase : MonoBehaviour
 
         if (hp <= 0)//죽었을 때
             this.gameObject.SetActive(false);
+        else // 안죽었을경우
+        {
+            rigidBody.AddForce(direction * -1, ForceMode2D.Impulse);
+            StopCoroutine(blink());
+            StartCoroutine(blink());
+        }
+    }
+    IEnumerator blink()
+    {
+        yield return new WaitForSeconds(0.1f);
+        spriteRenderer.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        spriteRenderer.color = Color.white;
+        yield return new WaitForSeconds(0.1f);
+        spriteRenderer.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        spriteRenderer.color = Color.white;
     }
 
     //플레이어 위치 저장 및 방향 설정

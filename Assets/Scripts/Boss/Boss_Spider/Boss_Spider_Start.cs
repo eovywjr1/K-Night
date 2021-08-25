@@ -8,6 +8,7 @@ public class Boss_Spider_Start : MonoBehaviour
     private float flyingSpeed;
     private Rigidbody2D rigid;
     public GameObject realboss;
+    public GameObject HpBar;
     public int damage_Stone;
 
     private void Awake()
@@ -26,6 +27,7 @@ public class Boss_Spider_Start : MonoBehaviour
         if (collision.CompareTag("Ground"))
         {
             realboss.SetActive(true);
+            HpBar.SetActive(true);
             this.gameObject.SetActive(false);
         }
     }

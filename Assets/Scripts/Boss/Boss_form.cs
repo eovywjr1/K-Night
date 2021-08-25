@@ -13,13 +13,7 @@ public class Boss_form : LivingEntity
     public GameObject meteoPrefab; //스킬(메테오)
     public GameObject meteoWarningPrefab; //스킬(메테오 경고)
 
-    protected Rigidbody2D rigid; //보스 리지드바디
-    protected SpriteRenderer spriteRenderer; //좌우 뒤집기 위해 // 임시
-    private new Transform transform; //보스의 위치
-
-
-    //플레이어 위치(방향)
-    public Vector3 direction;
+    private Transform transform; //보스의 위치
 
     private float floatRnd; //실수형 난수
     private Vector3 pos;
@@ -61,11 +55,10 @@ public class Boss_form : LivingEntity
     /////////////////////////////////////
     ////////////////SETTING//////////////
     /////////////////////////////////////
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         player = FindObjectOfType<Player>();
-        rigid = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
         transform = gameObject.GetComponent<Transform>();
     }
     protected virtual void Start()
@@ -79,6 +72,7 @@ public class Boss_form : LivingEntity
     public void FindPlayer() //플레이어의 위치 파악 (좌, 우)
     {
         direction = player.transform.position.x <= transform.position.x ? Vector3.left : Vector3.right;
+        Debug.Log(direction);
         if (direction == Vector3.left) spriteRenderer.flipX = false;
         else spriteRenderer.flipX = true;
     }

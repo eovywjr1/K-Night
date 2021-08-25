@@ -15,14 +15,6 @@ public class BossCollider : MonoBehaviour
     /////////////////////////////////////////////
     /////////////플레이어에 의한 피격////////////
     /////////////////////////////////////////////
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Sword") && player.attackOnce)
-        {
-            bossForm.OnDamage(player.atkDamage);
-            player.attackOnce = false;
-        }
-    }
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Sword") && player.attackOnce)

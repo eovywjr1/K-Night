@@ -145,6 +145,11 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 2.3
       objectReference: {fileID: 0}
+    - target: {fileID: 1409870695416877768, guid: e54310c55d4447f4d9ff6baf2ec71bbf,
+        type: 3}
+      propertyPath: atkDamage
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1409870695416877769, guid: e54310c55d4447f4d9ff6baf2ec71bbf,
         type: 3}
       propertyPath: m_Size.x
@@ -224,6 +229,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3536536587579431332, guid: e54310c55d4447f4d9ff6baf2ec71bbf,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: -2036706379
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e54310c55d4447f4d9ff6baf2ec71bbf, type: 3}

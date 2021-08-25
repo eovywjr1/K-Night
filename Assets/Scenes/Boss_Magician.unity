@@ -13181,6 +13181,7 @@ MonoBehaviour:
   startingHealth: 60
   health: 0
   dead: 0
+  direction: {x: 0, y: 0, z: 0}
   stonePrefab: {fileID: 0}
   energyBallPrefab: {fileID: 5877183353914233476, guid: 7732b5584dd80314ca7fc44600d73c41,
     type: 3}
@@ -13188,7 +13189,6 @@ MonoBehaviour:
     type: 3}
   meteoWarningPrefab: {fileID: 456783621436642918, guid: 8421239d8e7d77a41a8e4b09ba39250c,
     type: 3}
-  direction: {x: 0, y: 0, z: 0}
   damage_EnergyBall: 10
   damage_Meteo: 20
   damage_Dash: 0
@@ -13240,7 +13240,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 4
+  m_Constraints: 7
 --- !u!212 &1653532900
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -19,13 +19,6 @@ public class BossHPBar_KimKH : MonoBehaviour
             
             bossHpBarRed = bossHpBar.transform.Find("RedHPBar").gameObject;
             initialBossHp = bossInThisScene.GetComponent<LivingEntity>().startingHealth;
-            
-            
-
-
-
-
-
         }
     }
 
@@ -34,18 +27,7 @@ public class BossHPBar_KimKH : MonoBehaviour
     {
         if (bossInThisScene != null && bossHpBar != null)
         {
-
-            
             bossHpBarRed.GetComponent<Image>().fillAmount = bossInThisScene.GetComponent<LivingEntity>().health / initialBossHp;
-            
-
-
-
-
-
-
-
-
         }
     }
 }
