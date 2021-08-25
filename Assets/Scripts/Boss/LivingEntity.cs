@@ -14,6 +14,7 @@ public class LivingEntity : MonoBehaviour
 
     protected SpriteRenderer spriteRenderer;
     protected Rigidbody2D rigid; //보스 리지드바디
+    protected Transform transform; //보스의 위치
 
     //플레이어 위치(방향)
     public Vector3 direction;
@@ -22,6 +23,7 @@ public class LivingEntity : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         rigid = GetComponent<Rigidbody2D>();
+        transform = GetComponent<Transform>();
     }
 
     //생명체가 활성화될 떄 상태를 리셋
@@ -45,7 +47,8 @@ public class LivingEntity : MonoBehaviour
         }
         else // 안죽었을경우
         {
-            rigid.AddForce(direction * -0.5f, ForceMode2D.Impulse);
+            transform.position += direction*-0.1f;
+            //rigid.AddForce(direction * -0.5f, ForceMode2D.Impulse);
             StopCoroutine(blink());
             StartCoroutine(blink());
         }

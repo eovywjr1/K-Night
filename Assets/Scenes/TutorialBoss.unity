@@ -9658,14 +9658,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 40
-  power: 2
-  moveSpeed: 2
+  power: 5
+  moveSpeed: 3
   isMoveDelay: 1
   player: {fileID: 0}
   rigidBody: {fileID: 0}
   spriteRenderer: {fileID: 0}
   direction: {x: 0, y: 0}
   playerPosition: {x: 0, y: 0}
+  dashSpeed: 15
+  skillDelaytime: 2
   isattack: 0
   junior: {fileID: 5134403815998400744, guid: 29ebc5ebb2cca1d45b6fd9fc5f70a70d, type: 3}
 --- !u!212 &1451925177
@@ -9732,7 +9734,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.02}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -9743,7 +9745,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.2, y: 0.15}
+  m_Size: {x: 0.25, y: 0.2}
   m_EdgeRadius: 0
 --- !u!50 &1451925179
 Rigidbody2D:
@@ -9774,7 +9776,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1451925175}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.36, y: 0.6049815, z: 0}
+  m_LocalPosition: {x: -13.417, y: 0.674, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_Children:
   - {fileID: 1674702237}
@@ -10144,7 +10146,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.02}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -10155,7 +10157,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.2, y: 0.15}
+  m_Size: {x: 0.25, y: 0.2}
   m_EdgeRadius: 0
 --- !u!114 &1674702240
 MonoBehaviour:

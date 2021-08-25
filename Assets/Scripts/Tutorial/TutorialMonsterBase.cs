@@ -14,6 +14,7 @@ public class TutorialMonsterBase : MonoBehaviour
 
     public Rigidbody2D rigidBody;
     public SpriteRenderer spriteRenderer;
+    protected Transform transform; //보스의 위치
 
     public Vector2 direction;
     public Vector2 playerPosition;
@@ -27,6 +28,7 @@ public class TutorialMonsterBase : MonoBehaviour
 
         rigidBody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        transform = GetComponent<Transform>();
     }
 
     //피격 받았을 때 피 감소
@@ -71,7 +73,19 @@ public class TutorialMonsterBase : MonoBehaviour
             spriteRenderer.flipX = false;
         }
     }
-
+    public void FindPlayer()
+    {
+        if (player.transform.position.x > this.gameObject.transform.position.x)
+        {
+            direction = Vector2.right;
+            spriteRenderer.flipX = true;
+        }
+        else
+        {
+            direction = Vector2.left;
+            spriteRenderer.flipX = false;
+        }
+    }
     //최대속도까지 추가
     public void Move(int speed, int maxSpeed)
     {

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Boss : TutorialMonsterBase
 {
-    int dashSpeed = 3;
-    int skillDelaytime = 5;
+    public int dashSpeed;
+    public int skillDelaytime;
 
     bool isjunorcallDelay = true;
     bool isdashToplayerDelay = true;
@@ -34,6 +34,7 @@ public class Boss : TutorialMonsterBase
 
     void FixedUpdate()
     {
+        FindPlayer();
         if (!isMoveDelay)
             RandomMove();
 
@@ -110,7 +111,6 @@ public class Boss : TutorialMonsterBase
             //대쉬
             case 2:
                 PlayerPositionSave();
-
                 //자식 오브젝트 레이어 변경
                 childBoxCollider.layer = 9;
 

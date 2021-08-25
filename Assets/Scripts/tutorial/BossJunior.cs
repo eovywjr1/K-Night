@@ -13,6 +13,7 @@ public class BossJunior : TutorialMonsterBase
 
     void FixedUpdate()
     {
+        FindPlayer();
         //플레이어로 이동
         if (!isMoveDelay)
             MoveToPlayer();

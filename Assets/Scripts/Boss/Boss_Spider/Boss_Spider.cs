@@ -41,7 +41,7 @@ public class Boss_Spider: Boss_form
         yield return new WaitForSeconds(3f);
         doDash = true;
         Dash(dashSpeed);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         Skills();
     }
     IEnumerator AttackEnd(float time)

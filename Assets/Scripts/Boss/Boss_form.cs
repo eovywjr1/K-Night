@@ -13,8 +13,6 @@ public class Boss_form : LivingEntity
     public GameObject meteoPrefab; //스킬(메테오)
     public GameObject meteoWarningPrefab; //스킬(메테오 경고)
 
-    private Transform transform; //보스의 위치
-
     private float floatRnd; //실수형 난수
     private Vector3 pos;
 
@@ -59,7 +57,6 @@ public class Boss_form : LivingEntity
     {
         base.Awake();
         player = FindObjectOfType<Player>();
-        transform = gameObject.GetComponent<Transform>();
     }
     protected virtual void Start()
     {

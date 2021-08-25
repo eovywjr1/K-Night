@@ -260,12 +260,23 @@ public class Player : MonoBehaviour
         attackOnce = true;
 
         GameObject Sword = this.gameObject.transform.GetChild(1).gameObject;
+        GameObject SwordForce = this.gameObject.transform.GetChild(2).gameObject;
+
         Sword.SetActive(true);
+        SwordForce.SetActive(true);
 
         if (spriteRenderer.flipX)
-            Sword.GetComponent<BoxCollider2D>().offset = new Vector2(1f,0);
+        {
+            Sword.GetComponent<BoxCollider2D>().offset = new Vector2(1f, 0);
+            SwordForce.GetComponent<Transform>().localPosition = new Vector3(1.42f, 0, 0);
+            SwordForce.GetComponent<SpriteRenderer>().flipX = true;
+        }
         else
-            Sword.GetComponent<BoxCollider2D>().offset = new Vector2(-1f,0);
+        {
+            Sword.GetComponent<BoxCollider2D>().offset = new Vector2(-1f, 0);
+            SwordForce.GetComponent<Transform>().localPosition = new Vector3(-1.42f, 0, 0);
+            SwordForce.GetComponent<SpriteRenderer>().flipX = false;
+        }
     }
 
     void CompleteAttack()
@@ -444,6 +455,8 @@ public class Player : MonoBehaviour
         yield return new WaitForSecondsRealtime(atkSpeed);
 
         this.gameObject.transform.GetChild(1).gameObject.SetActive(false);
+        this.gameObject.transform.GetChild(2).gameObject.SetActive(false);
+
         isAttackDelay = false;
     }
 }
