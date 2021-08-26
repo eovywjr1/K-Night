@@ -28,7 +28,6 @@ public class Boss_Spider_Reprise : Boss_form
     {
         base.Start();
         //dead = true;
-        FindPlayer(); // 플레이어가 왼쪽에 있는지 오른쪽에 있는지 확인
 
         inRange = true;
         limitMagicSkills = false;
@@ -40,10 +39,8 @@ public class Boss_Spider_Reprise : Boss_form
     ///스킬 사용///
     ///////////////
     void Skills(){
-        if (!limitMagicSkills){ // 마법스킬 사용이 가능하면
-            Meteo(); // 메테오 사용
-        }
-        FindPlayer(); // 플레이어가 왼쪽에 있는지 오른쪽에 있는지 확인
+        if (!limitMagicSkills)// 마법스킬 사용이 가능하면
+            StartCoroutine(CoMeteo(warningTime)); // 메테오 사용
 
         //범위 확인
         if (!inRange){ // 범위 안에 없다면
@@ -67,12 +64,6 @@ public class Boss_Spider_Reprise : Boss_form
     ////////////////
     /////메테오/////
     ////////////////
-    void Meteo(){
-        UseMeteo();
-    }
-    private void UseMeteo(){
-        StartCoroutine(CoMeteo(warningTime));
-    }
     IEnumerator CoMeteo(float warningTime){
         makeVec();
         for (int i = 0; i < numOfMeteo; i++) {
@@ -91,7 +82,7 @@ public class Boss_Spider_Reprise : Boss_form
         }
     }
     //중복없는 난수 생성
-    public void GetRandomInt(int length, int min, int max){
+    void GetRandomInt(int length, int min, int max){
         bool isSame;
 
         for (int i = 0; i < length; ++i){
@@ -110,7 +101,9 @@ public class Boss_Spider_Reprise : Boss_form
         }
     }
 
-    private void FixedUpdate(){
+    private void FixedUpdate()
+    {
+        FindPlayer();
         InRange(); // 범위 확인
         Debug.DrawRay(transform.position + Vector3.left * RangeDistance, Vector3.right *2 * RangeDistance, Color.red);
         if(rigid.velocity == Vector2.zero)

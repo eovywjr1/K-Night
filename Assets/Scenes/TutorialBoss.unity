@@ -9667,7 +9667,7 @@ MonoBehaviour:
   direction: {x: 0, y: 0}
   playerPosition: {x: 0, y: 0}
   dashSpeed: 15
-  skillDelaytime: 2
+  skillDelaytime: 1
   isattack: 0
   junior: {fileID: 5134403815998400744, guid: 29ebc5ebb2cca1d45b6fd9fc5f70a70d, type: 3}
 --- !u!212 &1451925177

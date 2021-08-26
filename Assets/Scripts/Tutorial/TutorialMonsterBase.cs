@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,14 +14,14 @@ public class TutorialMonsterBase : MonoBehaviour
 
     public Rigidbody2D rigidBody;
     public SpriteRenderer spriteRenderer;
-    protected Transform transform; //º¸½ºÀÇ À§Ä¡
+    protected Transform transform; //ë³´ìŠ¤ì˜ ìœ„ì¹˜
 
     public Vector2 direction;
     public Vector2 playerPosition;
 
     public RaycastHit2D raycastHit;
 
-    //ÇÊ¿äÇÑ º¯¼ö ÀúÀå
+    //í•„ìš”í•œ ë³€ìˆ˜ ì €ì¥
     public void Initial()
     {
         player = FindObjectOfType<Player>();
@@ -31,14 +31,14 @@ public class TutorialMonsterBase : MonoBehaviour
         transform = GetComponent<Transform>();
     }
 
-    //ÇÇ°İ ¹Ş¾ÒÀ» ¶§ ÇÇ °¨¼Ò
+    //í”¼ê²© ë°›ì•˜ì„ ë•Œ í”¼ ê°ì†Œ
     public void Ondamaged(int power)
     {
         hp -= power;
 
-        if (hp <= 0)//Á×¾úÀ» ¶§
+        if (hp <= 0)//ì£½ì—ˆì„ ë•Œ
             this.gameObject.SetActive(false);
-        else // ¾ÈÁ×¾úÀ»°æ¿ì
+        else // ì•ˆì£½ì—ˆì„ê²½ìš°
         {
             rigidBody.AddForce(direction * -1, ForceMode2D.Impulse);
             StopCoroutine(blink());
@@ -57,7 +57,7 @@ public class TutorialMonsterBase : MonoBehaviour
         spriteRenderer.color = Color.white;
     }
 
-    //ÇÃ·¹ÀÌ¾î À§Ä¡ ÀúÀå ¹× ¹æÇâ ¼³Á¤
+    //í”Œë ˆì´ì–´ ìœ„ì¹˜ ì €ì¥ ë° ë°©í–¥ ì„¤ì •
     public void PlayerPositionSave()
     {
         playerPosition = player.GetTransform().position;
@@ -86,7 +86,7 @@ public class TutorialMonsterBase : MonoBehaviour
             spriteRenderer.flipX = false;
         }
     }
-    //ÃÖ´ë¼Óµµ±îÁö Ãß°¡
+    //ìµœëŒ€ì†ë„ê¹Œì§€ ì¶”ê°€
     public void Move(int speed, int maxSpeed)
     {
         if ((direction == Vector2.right && rigidBody.velocity.x < maxSpeed) || (direction == Vector2.left && rigidBody.velocity.x > maxSpeed * (-1)))

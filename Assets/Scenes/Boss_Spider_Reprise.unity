@@ -10860,6 +10860,7 @@ MonoBehaviour:
   startingHealth: 100
   health: 0
   dead: 0
+  direction: {x: 0, y: 0, z: 0}
   stonePrefab: {fileID: 8028114399661856254, guid: 668681b333ac98c4cac4d118ff90e399,
     type: 3}
   energyBallPrefab: {fileID: 5877183353914233476, guid: 7732b5584dd80314ca7fc44600d73c41,
@@ -10868,10 +10869,9 @@ MonoBehaviour:
     type: 3}
   meteoWarningPrefab: {fileID: 456783621436642918, guid: 8421239d8e7d77a41a8e4b09ba39250c,
     type: 3}
-  direction: {x: 0, y: 0, z: 0}
   damage_EnergyBall: 10
   damage_Meteo: 20
-  damage_Dash: 3
+  damage_Dash: 10
   damage_Stone: 10
   damage_Touch: 0
   dashSpeed: 22

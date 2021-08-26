@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 //생명체로 동작할 게임 오브젝트들의 뼈대를 제공
 //체력, 피해받음, 사망 기능, 사망 이벤트 제공
@@ -47,21 +48,21 @@ public class LivingEntity : MonoBehaviour
         }
         else // 안죽었을경우
         {
-            transform.position += direction*-0.1f;
-            //rigid.AddForce(direction * -0.5f, ForceMode2D.Impulse);
-            StopCoroutine(blink());
+            if (SceneManager.GetActiveScene().name != "Boss_Magician")
+                KnockBack();
             StartCoroutine(blink());
         }
     }
+    void KnockBack()
+    {
+        transform.position += direction * -0.1f;
+        //rigid.AddForce(direction * -0.5f, ForceMode2D.Impulse);
+    }
     IEnumerator blink()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.7f);
         spriteRenderer.color = Color.red;
-        yield return new WaitForSeconds(0.1f);
-        spriteRenderer.color = Color.white; 
-        yield return new WaitForSeconds(0.1f);
-        spriteRenderer.color = Color.red;
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.7f);
         spriteRenderer.color = Color.white;
     }
     //사망 처리

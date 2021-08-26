@@ -70,7 +70,7 @@ public class Player : MonoBehaviour
         isTalking = false;
 
 
-        hp = 100;
+        hp = 150;
 
     }
     void Start()
@@ -151,24 +151,28 @@ public class Player : MonoBehaviour
         if (collider.gameObject.tag == "SavePoint")
             talkManager.SaveGame();
 
-        //Castle_BossRoom_BeforeCombat
-        //StartTalk콜리더에 들어갈시 대사 이벤트 발생
-        if(collider.gameObject.layer == 15 && collider.GetComponent<ObjTalkData>().talkId == 550)
-            talkManager.TriggerTalks(scannedTalker);
+        
     }
-
     bool once = false;
+    bool once1 = false;
     bool once2 = false;
     bool once3 = false;
     bool once4 = false;
+    
 
     private void OnTriggerStay2D(Collider2D collider)
     {
-        //Castle_BossRoom_AfterMagician
+        //Castle_BossRoom_BeforeCombat
         //StartTalk콜리더에 들어갈시 대사 이벤트 발생
-        if (collider.gameObject.layer == 15 && collider.GetComponent<ObjTalkData>().talkId == 600 && once == false)
+        if (collider.gameObject.layer == 15 && collider.GetComponent<ObjTalkData>().talkId == 550 && once == false)
         {
             once = true;
+            talkManager.TriggerTalks(scannedTalker);
+        }
+        //Castle_BossRoom_AfterMagician
+        if (collider.gameObject.layer == 15 && collider.GetComponent<ObjTalkData>().talkId == 600 && once1 == false)
+        {
+            once1 = true;
             talkManager.TriggerTalks(scannedTalker);
         }
         if (collider.gameObject.layer == 15 && collider.GetComponent<ObjTalkData>().talkId == 601 && once2 == false)

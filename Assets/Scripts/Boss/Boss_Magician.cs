@@ -47,7 +47,6 @@ public class Boss_Magician : Boss_form
         Debug.Log(rnd);
         switch (rnd){
         case 1:
-            FindPlayer();//좌우 확인
             EnergyBall();
             break;
         case 2:
@@ -112,6 +111,7 @@ public class Boss_Magician : Boss_form
     /////////////////////////////////////
     private void Update()
     {
+        FindPlayer();
         //torch 여부
         if (numOfTorchOff == 6)
         {
